@@ -15,8 +15,8 @@ for ($j=0; $j<count($user); $j++) {
 	$result = oci_execute($stid);
 	for ($data=array(); $row=oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS); $data[]=$row);
 	oci_free_statement($stid);
-	$body ="<html><h3>Текущие задачи на ".date("d.m.Y")."</h3>";
-	$body.= "<h4>Шаблоны [Date: ".date('d.m.Y')." 01:00]";
+	$body ="<html><h3>РўРµРєСѓС‰РёРµ Р·Р°РґР°С‡Рё РЅР° ".date("d.m.Y")."</h3>";
+	$body.= "<h4>РЁР°Р±Р»РѕРЅС‹ [Date: ".date('d.m.Y')." 01:00]";
 	$body.= "&nbsp;[Date: ".date('d.m.Y')." 02:00]";
 	$body.= "&nbsp;[Date: ".date('d.m.Y')." 04:00]";
 	$body.= "&nbsp;[Date: ".date('d.m.Y')." 08:00]</h4>";
@@ -30,11 +30,11 @@ for ($j=0; $j<count($user); $j++) {
 	$body .="</table></html>";
 	$sender = "tasknotify@recnredit.ru";
 	$email = $user[$j]."@rencredit.ru";
-	$str = "Отметится в Jire";
+	$str = "РћС‚РјРµС‚РёС‚СЃСЏ РІ Jire";
 	$headers = "From: ".$sender . "\n".
 	            "Content-Type: text/html; charset=windows-1251\n".
 	            "X-Mailer: PHP/" . phpversion();
-	mail($email, "[jira]Отметиться в Jira ".date("d.m.Y"), $body, $headers);
+	mail($email, "[jira]РћС‚РјРµС‚РёС‚СЊСЃСЏ РІ Jira ".date("d.m.Y"), $body, $headers);
 	echo $body;
 }
 oci_close($conn);

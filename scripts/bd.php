@@ -10,6 +10,6 @@ $str = iconv  ("utf-8", "windows-1251", $str);
 $headers = "From: ".$sender . "\n".
             "Content-Type: text/html; charset=windows-1251\n".
             "X-Mailer: PHP/" . phpversion();
-mail($email, "Äíè ðîæäåíèÿ ñîòðóäíèêîâ ".date("d.m.Y"), $str, $headers);
+mail($email, "Ð”Ð½Ð¸ Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ ÑÐ¾Ñ‚Ñ€ÑƒÐ´Ð½Ð¸ÐºÐ¾Ð² ".date("d.m.Y"), $str, $headers);
 echo "ok";
 ?>
