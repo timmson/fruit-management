@@ -1,11 +1,17 @@
 # Fruit Management
-
 Custom issue tracker
 
 ## Requirements
 
-  * docker
-  * docker-compose
+### As "classis"
+    * Apache >= 2.2
+    * PHP >= 5.3
+    * MySQL >= 5
+
+### As Docker container
+    * Ansible
+    * Docker
+    * pip, docker-py
 
 ## Installation
 
