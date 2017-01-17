@@ -1,6 +1,4 @@
 <?
-error_reporting(E_ALL);
-
 require_once('./lib/acclib.inc.php');
 require_once('./lib/corelib.inc.php');
 
@@ -8,7 +6,7 @@ $siteconfig = './config/site.ini';
 
 $CORE = new Core(parse_ini_file($siteconfig, true));
 $VIEW = $CORE->smarty;
-set_error_handler(array($CORE, 'customErrorHandler'));
+//set_error_handler(array($CORE, 'customErrorHandler'));
 
 /* * * Login block ** */
 $is_out = ($_GET['login'] == 'logout');
