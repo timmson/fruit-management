@@ -219,7 +219,110 @@ DELIMITER ;;
 /*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `i_update_timesheet` AFTER INSERT ON `fm_work_log` FOR EACH ROW BEGIN
     if new.fm_spent_hour > 0 then
         call prc_timesheet(week(new.fm_date), year(new.fm_date), new.fm_user);
-``
+    END If;
+END */;;
+
+/*!50003 SET SESSION SQL_MODE="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" */;;
+/*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `d_update_timesheet` AFTER DELETE ON `fm_work_log` FOR EACH ROW BEGIN
+	if old.fm_spent_hour > 0 then
+		call prc_timesheet(week(old.fm_date), year(old.fm_date), old.fm_user);
+	END if;
+END */;;
+
+DELIMITER ;
+/*!50003 SET SESSION SQL_MODE=@SAVE_SQL_MODE*/;
+
+--
+-- Temporary table structure for view `v_task_all`
+--
+
+DROP TABLE IF EXISTS `v_task_all`;
+/*!50001 DROP VIEW IF EXISTS `v_task_all`*/;
+/*!50001 CREATE TABLE `v_task_all` (
+  `id` int(11),
+  `fm_project_id` int(11),
+  `fm_project` varchar(100),
+  `fm_project_descr` varchar(255),
+  `fm_manager` varchar(255),
+  `fm_name` varchar(104),
+  `fm_code` varchar(100),
+  `fm_descr` varchar(255),
+  `fm_state` varchar(255),
+  `fm_state_name` varchar(100),
+  `fm_next_state_id` int(11),
+  `fm_priority` int(11),
+  `fm_priority_name` varchar(100),
+  `fm_priority_descr` varchar(255),
+  `fm_week_hour` double,
+  `fm_all_hour` double,
+  `fm_plan_hour` int(11),
+  `fm_last_comment` varchar(255),
+  `fm_user` varchar(25)
+) */;
+
+--
+-- Temporary table structure for view `v_task_in_progress`
+--
+
+DROP TABLE IF EXISTS `v_task_in_progress`;
+/*!50001 DROP VIEW IF EXISTS `v_task_in_progress`*/;
+/*!50001 CREATE TABLE `v_task_in_progress` (
+  `id` int(11),
+  `fm_project_id` int(11),
+  `fm_project` varchar(100),
+  `fm_project_descr` varchar(255),
+  `fm_manager` varchar(255),
+  `fm_name` varchar(104),
+  `fm_code` varchar(100),
+  `fm_descr` varchar(255),
+  `fm_state` varchar(255),
+  `fm_state_name` varchar(100),
+  `fm_priority` int(11),
+  `fm_priority_name` varchar(100),
+  `fm_priority_descr` varchar(255),
+  `fm_week_hour` double,
+  `fm_all_hour` double,
+  `fm_plan_hour` int(11),
+  `fm_last_comment` varchar(255),
+  `fm_user` varchar(25)
+) */;
+
+--
+-- Dumping routines for database 'tm'
+--
+DELIMITER ;;
+/*!50003 DROP FUNCTION IF EXISTS `func_full_project_descr` */;;
+/*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `func_full_project_descr`(project INT) RETURNS varchar(100) CHARSET cp1251
+RETURN (select fm_name from fm_project where id = project) */;;
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
+/*!50003 DROP FUNCTION IF EXISTS `func_hour_day` */;;
+/*!50003 SET SESSION SQL_MODE="NO_AUTO_CREATE_USER"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 FUNCTION `func_hour_day`(task INT, daynum INT, weeknum INT, weekyear INT, username VARCHAR(25)) RETURNS int(11)
+RETURN coalesce((select sum(fm_spent_hour) from fm_work_log where fm_task = task and dayofweek(fm_date) = daynum and week(fm_date) = weeknum and year(fm_date) = weekyear and fm_user = username), 0) */;;
+/*!50003 SET SESSION SQL_MODE=@OLD_SQL_MODE*/;;
+/*!50003 DROP PROCEDURE IF EXISTS `prc_timesheet` */;;
+/*!50003 SET SESSION SQL_MODE="NO_AUTO_CREATE_USER"*/;;
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `prc_timesheet`(IN weeknum INT, IN weekyear INT, IN username VARCHAR(25))
+BEGIN
+        delete from fm_timesheet where work_week = weeknum and work_year = weekyear and work_user = username;
+        insert into fm_timesheet
+        select
+            t.id,
+            t.fm_name,
+            t.fm_descr,
+            s.fm_descr,
+            p.fm_name,
+            func_hour_day(t.id, 2, weeknum, weekyear, username),
+            func_hour_day(t.id, 3, weeknum, weekyear, username),
+            func_hour_day(t.id, 4, weeknum, weekyear, username),
+            func_hour_day(t.id, 5, weeknum, weekyear, username),
+            func_hour_day(t.id, 6, weeknum, weekyear, username),
+            weeknum,
+            weekyear,
+            username
+            from
+                fm_task t,
                 fm_project p,
                 fm_state s
             where 
