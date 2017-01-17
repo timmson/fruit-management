@@ -1,6 +1,6 @@
 -- MySQL dump 10.11
 --
--- Host: localhost    Database: tm
+-- Host: localhost    Database: fruit
 -- ------------------------------------------------------
 -- Server version	5.0.51b-community-nt-log
 
@@ -142,14 +142,14 @@ DELIMITER ;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" */;;
 /*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `i_add_work_log` AFTER INSERT ON `fm_task` FOR EACH ROW BEGIN
 	INSERT INTO fm_work_log
-    SELECT  null, new.id, 1, curdate(), now(), 0, concat(s.fm_descr), new.fm_user   
+    SELECT  null, new.id, 1, curdate(), now(), 0, concat(s.fm_descr), new.fm_user
     FROM fm_state s WHERE new.fm_state = s.id;
 END */;;
 
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" */;;
 /*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `u_add_work_log` AFTER UPDATE ON `fm_task` FOR EACH ROW BEGIN
     IF new.fm_state <> old.fm_state THEN
-        INSERT INTO fm_work_log 
+        INSERT INTO fm_work_log
         SELECT  null, new.id, 1, curdate(), now(), 0, concat(s.fm_descr), new.fm_user
         FROM fm_state s WHERE new.fm_state = s.id;
      END IF;
@@ -320,15 +320,15 @@ BEGIN
             weekyear,
             username
             from 
-                fm_task t, 
+                fm_task t,
                 fm_project p,
                 fm_state s
             where 
                 t.id  in 
-                        (select distinct fm_task 
-                                from fm_work_log 
-                                where fm_spent_hour > 0 
-                                    and fm_user = username 
+                        (select distinct fm_task
+                                from fm_work_log
+                                where fm_spent_hour > 0
+                                    and fm_user = username
                                     and week(fm_date) = weeknum
                                     and year(fm_date) = weekyear) and
                 t.fm_project  = p.id and
