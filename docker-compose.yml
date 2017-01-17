@@ -17,6 +17,8 @@ services:
        dockerfile: web.docker
      depends_on:
        - fm-db
+     ports:
+       - "8000:80"
      container_name: fm-web
      restart: always
      environment:
