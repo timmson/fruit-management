@@ -282,38 +282,6 @@
 </table>
 </form>
 
-<h3>Изменения кодовой базы</h3>
-<table class="container" id="worklog" style="font-size:9pt;">
-   <tr>
-	<th>Дата</th>
-	<th>Изменения</th>
-	<th>Пользователь</th>
-   </tr>
-   {section name=i loop=$task.vcslog}
-   <tr >
-	<td style="vertical-align:top;">
-		{$task.vcslog[i].date|date_format:$const.global.dateformat}<br/>{$task.vcslog[i].rev}
-	</td>
-	<td style="text-align:left;">
-		{assign var=changes value=$task.vcslog[i].changes}
-		{section name=j loop=$changes}
-			 {assign var=type value=$changes[j]|substr:3:1}
-			 {assign var=color value=#009}
-			 {if $type eq 'A'}
-			 	{assign var=color value=#090}
-			 {elseif $type eq 'D'}
-			 	{assign var=color value=#999}
-			 {/if}
-			<a href="{$const.global.svnUrl}{$changes[j]|substr:5}" style="color:{$color};">{$changes[j]|substr:5}</a><br/>
-		{/section}
-	</td>
-	<td style="vertical-align:top;">
-		{$task.vcslog[i].user}
-	</td>
-   </tr>
-   {/section}
-</table>
-
 <div style="display:none;" id="inputPopupPromt" title="Изменить значение поля">
 	Введите новое значение:&nbsp;<input type="text" class="corp_text" size="25" name="inputFieldValue" id="inputFieldValue" value=""/>
 	<p><div id="inputFieldError" class="ui-state-error ui-corner-all" style="display:none;"></div></p>

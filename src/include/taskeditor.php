@@ -158,9 +158,6 @@ if (strlen($_REQUEST['task'])>0) {
 	
 	$task['fm_descr_full'] = file_get_contents("./attachement/".$taskid);
 
-	$svnClient = new SvnClient();
-	$task['vcslog'] = $svnClient->getSVNHistory($task['fm_name']);
-
 	$query = "select * from fm_cat_log order by id";
 	$task['worklog_cat'] = $CORE->executeQuery($conn, $query);
 
