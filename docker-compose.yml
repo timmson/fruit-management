@@ -1,7 +1,9 @@
 version: '2'
 services:
    fm-db:
-     dockerfile: db.docker
+     build:
+       context: .
+       dockerfile: db.docker
      container_name: fm-db
      restart: always
      environment:
@@ -10,7 +12,9 @@ services:
        MYSQL_USER: ${DB_USER}
        MYSQL_PASSWORD: ${DB_PASSWORD}
    fm-web:
-     dockerfile: web.docker
+     build:
+       context: .
+       dockerfile: web.docker
      depends-on:
        - fm-db
      container_name: fm-web
