@@ -1,6 +1,5 @@
 <?
 require_once('./lib/tasklib.php');
-require_once('./lib/svnclient.php');
 
 $url_prefix = $CORE->configuration['global']['site']."?dep=task&task=";
 
