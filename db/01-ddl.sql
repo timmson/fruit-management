@@ -19,7 +19,7 @@
 -- Current Database: `fruit`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `fruit` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `fruit` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 GRANT ALL PRIVILEGES ON fruit.* TO 'fruit'@'%' WITH GRANT OPTION;
 
@@ -34,10 +34,10 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `fm_cat_log` (
   `id` int(11) NOT NULL auto_increment,
-  `fm_name` varchar(100) collate utf8 NOT NULL,
-  `fm_descr` varchar(255) collate utf8 NOT NULL,
+  `fm_name` varchar(100) NOT NULL,
+  `fm_descr` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -49,10 +49,10 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `fm_priority` (
   `id` int(11) NOT NULL auto_increment,
-  `fm_name` varchar(100) collate utf8 NOT NULL,
-  `fm_descr` varchar(255) collate utf8 NOT NULL,
+  `fm_name` varchar(100) NOT NULL,
+  `fm_descr` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -64,12 +64,12 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `fm_project` (
   `id` int(11) NOT NULL auto_increment,
-  `fm_name` varchar(100) collate utf8 NOT NULL,
-  `fm_descr` varchar(255) collate utf8 NOT NULL,
-  `fm_manager` varchar(255) collate utf8 NOT NULL,
+  `fm_name` varchar(100) NOT NULL,
+  `fm_descr` varchar(255) NOT NULL,
+  `fm_manager` varchar(255) NOT NULL,
   `fm_parent` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `fm_relation` (
   `fm_parent` int(11) NOT NULL,
   `fm_child` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -96,11 +96,11 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `fm_state` (
   `id` int(11) NOT NULL auto_increment,
-  `fm_name` varchar(100) collate utf8 NOT NULL,
-  `fm_descr` varchar(255) collate utf8 NOT NULL,
+  `fm_name` varchar(100) NOT NULL,
+  `fm_descr` varchar(255) NOT NULL,
   `fm_next_state` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -113,9 +113,9 @@ SET character_set_client = utf8;
 CREATE TABLE `fm_subscribe` (
   `id` int(11) NOT NULL auto_increment,
   `fm_task` int(11) NOT NULL,
-  `fm_user` varchar(25) collate utf8 NOT NULL,
+  `fm_user` varchar(25) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -127,15 +127,15 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `fm_task` (
   `id` int(11) NOT NULL auto_increment,
-  `fm_name` varchar(100) collate utf8 NOT NULL,
-  `fm_descr` varchar(255) collate utf8 default NULL,
+  `fm_name` varchar(100) NOT NULL,
+  `fm_descr` varchar(255) default NULL,
   `fm_project` int(11) NOT NULL,
   `fm_state` int(11) NOT NULL,
   `fm_priority` int(11) NOT NULL default '2',
   `fm_plan` int(11) NOT NULL default '0',
-  `fm_user` varchar(25) collate utf8 NOT NULL,
+  `fm_user` varchar(25) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 /*!50003 SET @SAVE_SQL_MODE=@@SQL_MODE*/;
@@ -174,10 +174,10 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `fm_timesheet` (
   `task_id` int(11) default NULL,
-  `task_name` varchar(25) collate utf8 default NULL,
-  `task_descr` varchar(255) collate utf8 default NULL,
-  `task_state` varchar(25) collate utf8 default NULL,
-  `project_name` varchar(25) collate utf8 default NULL,
+  `task_name` varchar(25) default NULL,
+  `task_descr` varchar(255) default NULL,
+  `task_state` varchar(25) default NULL,
+  `project_name` varchar(25) default NULL,
   `task_spent_mon` int(11) default NULL,
   `task_spent_tue` int(11) default NULL,
   `task_spent_wen` int(11) default NULL,
@@ -185,9 +185,9 @@ CREATE TABLE `fm_timesheet` (
   `task_spent_fr` int(11) default NULL,
   `work_week` int(11) default NULL,
   `work_year` int(11) default NULL,
-  `work_user` varchar(25) collate utf8 default NULL,
+  `work_user` varchar(25) default NULL,
   KEY `fm_timesheet_work_user` USING BTREE (`work_user`,`work_week`,`work_year`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -204,12 +204,12 @@ CREATE TABLE `fm_work_log` (
   `fm_date` datetime NOT NULL,
   `fm_date_actual` datetime default NULL,
   `fm_spent_hour` double NOT NULL,
-  `fm_comment` varchar(255) collate utf8 default NULL,
-  `fm_user` varchar(25) collate utf8 default NULL,
+  `fm_comment` varchar(255) default NULL,
+  `fm_user` varchar(25) default NULL,
   PRIMARY KEY  (`id`),
   KEY `fm_work_log_fm_user` (`fm_user`),
   KEY `fm_work_log_fm_task` (`fm_task`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 /*!50003 SET @SAVE_SQL_MODE=@@SQL_MODE*/;
