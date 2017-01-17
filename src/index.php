@@ -1,4 +1,5 @@
 <?
+error_reporting(E_ALL);
 
 require_once('./lib/acclib.inc.php');
 require_once('./lib/corelib.inc.php');
