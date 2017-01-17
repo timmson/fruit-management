@@ -21,9 +21,8 @@ git clone https://github.com/timmson/fruit-management.git
 ```
 
 ### Startup
-
 ```
-docker run -d -p 80:80 -p 3306:3306 tutum/lamp
+docker-compose docker-compose.yml
 ```
 
 
