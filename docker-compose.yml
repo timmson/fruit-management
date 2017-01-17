@@ -15,8 +15,6 @@ services:
      build:
        context: .
        dockerfile: web.docker
-     depends_on:
-       - fm-db
      container_name: fm-web
      restart: always
      environment:
