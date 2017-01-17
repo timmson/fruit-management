@@ -2,7 +2,7 @@ version: '2'
 services:
    fm-db:
      dockerfile: db.docker
-     container-name: fm-mysql
+     container_name: fm-db
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -13,7 +13,7 @@ services:
      dockerfile: web.docker
      depends-on:
        - fm-db
-     container-name: fm-web
+     container_name: fm-web
      restart: always
      environment:
        MYSQL_HOST: fm-db:3306
