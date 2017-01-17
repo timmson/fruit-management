@@ -9,24 +9,17 @@ Custom issue tracker
     * MySQL >= 5
 
 ### As Docker container
-    * Ansible
-    * Docker
-    * pip, docker-py
+    * Docker Compose
 
 ## Installation
 
 ### Get last sources
 ```
-git clone https://github.com/timmson/fruit-management.git
+git clone https://github.com/timmson/fruit-management.git 
 ```
 
-### Startup
+### Run
 ```
-docker-compose run -d docker-compose.yml
-```
-
-
-### Upload sources
-```
-
+cd fruit-management/
+docker-compose run -d
 ```
