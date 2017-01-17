@@ -1,4 +1,4 @@
 <?
-$root_name = 'root';
-$root_pass = '278b51588a10bfb1cba82e67a07894d1';
+$root_name = 'fruit';
+$root_pass = 'e0deff349b2c61f5f796ccaa344a4930';
 ?>
