@@ -22,7 +22,7 @@ git clone https://github.com/timmson/fruit-management.git
 
 ### Startup
 ```
-docker-compose docker-compose.yml
+docker-compose run -d docker-compose.yml
 ```
 
 
