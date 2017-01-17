@@ -9,13 +9,13 @@ services:
        MYSQL_DATABASE: ${DB_DATABASE}
        MYSQL_USER: ${DB_USER}
        MYSQL_PASSWORD: ${DB_PASSWORD}
-  fm-web:
-    dockerfile: web.docker
-    depends-on:
-      - fm-db
-    container-name: fm-web
-    restart: always
-    environment:
+   fm-web:
+     dockerfile: web.docker
+     depends-on:
+       - fm-db
+     container-name: fm-web
+     restart: always
+     environment:
        MYSQL_HOST: fm-db:3306
        MYSQL_DATABASE: ${DB_DATABASE}
        MYSQL_USER: ${DB_USER}
