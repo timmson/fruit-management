@@ -15,6 +15,13 @@ INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(4, 'decline
 INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(5, 'test', 'Testing', 6);
 INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(6, 'done', 'Done', NULL);
 
+-- fm_cat_log
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(1, 'log', 'Logging');
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(2, 'cmnt', 'Comments');
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(3, 'url', 'Link');
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(4, 'est', 'Estimation');
+
+
 -- projects
 INSERT INTO `fm_project` VALUES (1, 'SAMPLE', 'Some new project', 'manager', NULL);
 
