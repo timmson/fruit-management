@@ -1,6 +1,9 @@
 # Fruit Management
 Custom issue tracker
 
+## Video review
+[![Fruit Management ](http://img.youtube.com/vi/LGGKk6gk4lM/0.jpg)](https://www.youtube.com/watch?v=LGGKk6gk4lM "Fruit Management ")
+
 ## Requirements
 
 ### As "classis"
