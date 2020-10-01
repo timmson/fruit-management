@@ -24,5 +24,5 @@ git clone https://github.com/timmson/fruit-management.git
 ### Run
 ```
 cd fruit-management/
-docker-compose run -d
+docker-compose up -d
 ```
