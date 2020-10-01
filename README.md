@@ -26,3 +26,10 @@ git clone https://github.com/timmson/fruit-management.git
 cd fruit-management/
 docker-compose up -d
 ```
+
+### Open in browser
+```
+http://localhost:8080
+```
+
+Access: fruit fruit
