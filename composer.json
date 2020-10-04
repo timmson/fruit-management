@@ -1,0 +1,13 @@
+{
+    "name": "timmson/fruit-management",
+    "description": "Custom issue tracker",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "timmson",
+            "email": "timmson666@mail.ru"
+        }
+    ],
+    "require": {}
+}
