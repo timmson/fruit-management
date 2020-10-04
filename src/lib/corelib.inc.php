@@ -49,8 +49,9 @@ class Core {
 
     public function getConnection($props) {
         $timeout = microtime();
-        $conn = mysql_connect($props['dbhost'].':'.$props['dbport'], $props['dbuser'], $props['dbpass']);
-		mysql_select_db($props['dbname'],$conn);
+        //$conn = mysql_connect($props['dbhost'].':'.$props['dbport'], $props['dbuser'], $props['dbpass']);
+        $conn = mysql_connect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD']);
+		mysql_select_db($_ENV['MYSQL_DATABASE'],$conn);
 		mysql_set_charset('utf8', $conn);
         $this->debugTimeout('MY CONNECT', $timeout, 5);
         return $conn;

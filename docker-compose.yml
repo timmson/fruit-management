@@ -24,7 +24,7 @@ services:
      container_name: fm-web
      restart: on-failure
      environment:
-       - MYSQL_HOST="fm-db:3306"
+       - MYSQL_HOST=fm-db:3306
        - MYSQL_DATABASE=${DB_NAME}
        - MYSQL_USER=${DB_USER}
        - MYSQL_PASSWORD=${DB_PASSWORD}
