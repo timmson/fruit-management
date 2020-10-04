@@ -9,7 +9,7 @@ Custom issue tracker
 
 ## Requirements
 
-### As "classis"
+### As "classic"
     * Apache >= 2.2
     * PHP >= 5.3
     * MySQL >= 5
@@ -27,7 +27,7 @@ git clone https://github.com/timmson/fruit-management.git
 ### Run
 ```
 cd fruit-management/
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ### Open in browser

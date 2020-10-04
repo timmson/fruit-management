@@ -1,4 +1,4 @@
-<?
+<?php
 require_once('./lib/acclib.inc.php');
 require_once('./lib/corelib.inc.php');
 

@@ -1,16 +1,18 @@
-version: '2'
+version: '3.8'
 services:
    fm-db:
      build:
        context: .
        dockerfile: db.docker
      container_name: fm-db
-     restart: always
+     restart: on-failure
+     ports:
+       - "3306:3306"
      environment:
-       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-       MYSQL_DATABASE: ${DB_DATABASE}
-       MYSQL_USER: ${DB_USER}
-       MYSQL_PASSWORD: ${DB_PASSWORD}
+       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+       - MYSQL_DATABASE=${DB_NAME}
+       - MYSQL_USER=${DB_USER}
+       - MYSQL_PASSWORD=${DB_PASSWORD}
    fm-web:
      build:
        context: .
@@ -18,11 +20,11 @@ services:
      depends_on:
        - fm-db
      ports:
-       - "8000:80"
+       - "8080:80"
      container_name: fm-web
-     restart: always
+     restart: on-failure
      environment:
-       MYSQL_HOST: fm-db:3306
-       MYSQL_DATABASE: ${DB_DATABASE}
-       MYSQL_USER: ${DB_USER}
-       MYSQL_PASSWORD: ${DB_PASSWORD}
+       - MYSQL_HOST="fm-db:3306"
+       - MYSQL_DATABASE=${DB_NAME}
+       - MYSQL_USER=${DB_USER}
+       - MYSQL_PASSWORD=${DB_PASSWORD}
