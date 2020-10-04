@@ -22,11 +22,14 @@ INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(3, 'url', 'Link');
 INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(4, 'est', 'Estimation');
 
 
--- fm_relation
-INSERT INTO `fm_relation` VALUES (1, 0, 0);
-
 -- fm_projects
-INSERT INTO `fm_project` VALUES (1, 'SAMPLE', 'Some new project', 'manager', NULL);
+INSERT INTO `fm_project` VALUES (1, 'REL', 'Release project', 'manager', NULL);
+INSERT INTO `fm_project` VALUES (2, 'SAMPLE', 'Some new project', 'manager', NULL);
 
 -- fm_tasks
-INSERT INTO `fm_task` VALUES (1, 'Test', 'Test', 1, 1, 2, 100, 'fruit');
+INSERT INTO `fm_task` VALUES (1, 'RFC', 'Release 1', 1, 3, 2, 100, 'fruit');
+INSERT INTO `fm_task` VALUES (2, 'Some', 'work', 2, 3, 2, 100, 'fruit');
+
+-- fm_relation
+INSERT INTO `fm_relation` VALUES (1, 0, 0);
+INSERT INTO `fm_relation` VALUES (2, 1, 2);
