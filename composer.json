@@ -9,5 +9,7 @@
             "email": "timmson666@mail.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "phpunit/phpunit": "^9.4"
+    }
 }

@@ -262,7 +262,7 @@
 	<td style="text-align:left;">
 	   <select name="fm_cat">
 	   		{section name=i loop=$task.worklog_cat}
-	   		<option value="{$task.worklog_cat[i].id}"{if $task.worklog_cat[i].fm_name eq 'cmnt'}selected="selected"{/if}>{$task.worklog_cat[i].fm_descr}</value>
+				<option value="{$task.worklog_cat[i].id}"{if $task.worklog_cat[i].fm_name eq 'cmnt'}selected="selected"{/if}>{$task.worklog_cat[i].fm_descr}</option>
 	   		{/section}
 	   </select>
 	</td>
