@@ -9,7 +9,7 @@ Custom issue tracker
 
 ### As "classic"
     * Apache >= 2.2
-    * PHP >= 5.3
+    * PHP >= 7.4
     * MySQL >= 5
 
 ### As Docker container
