@@ -19,6 +19,7 @@ jobs:
 
     - name: Validate composer.json and composer.lock
       run: composer validate
+      working-directory: ${{env.working-directory}}
 
     - name: Cache Composer packages
       id: composer-cache
@@ -28,10 +29,13 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
+      working-directory: ${{env.working-directory}}
 
     - name: Install dependencies
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
+      working-directory: ${{env.working-directory}}
 
     - name: Run test suite
-      run: composer run-script test
+      run: composer test
+      working-directory: ${{env.working-directory}}
