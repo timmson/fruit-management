@@ -8,14 +8,14 @@ if  ((strlen($_REQUEST['email'])>0)&&((strlen($_REQUEST['name'])>0)))
 {
     $user = new UserIndex($docid, $_REQUEST['lng']);
     $password = $user->saverequest(fromutf($_POST['name']) , fromutf($_POST['email']));
-    $message = "Óâàæàåìûé ".fromutf($_POST['name'])."!\n".
-        "Áëàãîäàðèì Âàñ çà èíòåðåñ ê íàøåìó ðåñóðñó\n".
-        "Âàø ëîãèí -".fromutf($_POST['email'])." , ïàðîëü - ".$password."\n".
-        "Âîïðîñû è ïðåäëîæåíèÿ Âû ìîæåòå ïðèñûëàòü íà webmaster@timmson.ru \n";
-    sendmail($_POST['email'], "Áëàãîäàðèì Âàñ çà ïîäïèñêó", $message);
-    sendmail("webmaster@timmson.ru", "Ïîäïèñàí íîâûé ïîëüçîâàòåëü - ".fromutf($_POST['name']), "");
-    echo "Âàøà çàâÿêà ïðèíÿòà. Ñïàñèáî!";
+    $message = "Ð£Ð²Ð°Ð¶Ð°ÐµÐ¼Ñ‹Ð¹ ".fromutf($_POST['name'])."!\n".
+        "Ð‘Ð»Ð°Ð³Ð¾Ð´Ð°Ñ€Ð¸Ð¼ Ð’Ð°Ñ Ð·Ð° Ð¸Ð½Ñ‚ÐµÑ€ÐµÑ Ðº Ð½Ð°ÑˆÐµÐ¼Ñƒ Ñ€ÐµÑÑƒÑ€ÑÑƒ\n".
+        "Ð’Ð°Ñˆ Ð»Ð¾Ð³Ð¸Ð½ -".fromutf($_POST['email'])." , Ð¿Ð°Ñ€Ð¾Ð»ÑŒ - ".$password."\n".
+        "Ð’Ð¾Ð¿Ñ€Ð¾ÑÑ‹ Ð¸ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð’Ñ‹ Ð¼Ð¾Ð¶ÐµÑ‚Ðµ Ð¿Ñ€Ð¸ÑÑ‹Ð»Ð°Ñ‚ÑŒ Ð½Ð° webmaster@timmson.ru \n";
+    sendmail($_POST['email'], "Ð‘Ð»Ð°Ð³Ð¾Ð´Ð°Ñ€Ð¸Ð¼ Ð’Ð°Ñ Ð·Ð° Ð¿Ð¾Ð´Ð¿Ð¸ÑÐºÑƒ", $message);
+    sendmail("webmaster@timmson.ru", "ÐŸÐ¾Ð´Ð¿Ð¸ÑÐ°Ð½ Ð½Ð¾Ð²Ñ‹Ð¹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ - ".fromutf($_POST['name']), "");
+    echo "Ð’Ð°ÑˆÐ° Ð·Ð°Ð²ÑÐºÐ° Ð¿Ñ€Ð¸Ð½ÑÑ‚Ð°. Ð¡Ð¿Ð°ÑÐ¸Ð±Ð¾!";
 } else {
-    echo "Âàøà çàâÿêà íå ïðèíÿòà. Ñïàñèáî!";
+    echo "Ð’Ð°ÑˆÐ° Ð·Ð°Ð²ÑÐºÐ° Ð½Ðµ Ð¿Ñ€Ð¸Ð½ÑÑ‚Ð°. Ð¡Ð¿Ð°ÑÐ¸Ð±Ð¾!";
 }*/
 ?>
