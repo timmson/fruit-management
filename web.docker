@@ -4,7 +4,7 @@ RUN apt update && apt dist-upgrade -y && apt install zlibc zlib1g zlib1g-dev lib
 
 RUN docker-php-ext-install mysqli calendar gd
 
-COPY src/ /var/www/html/
+COPY web/ /var/www/html/
 
 RUN chown www-data:www-data -R /var/www/html && chmod 744 -R /var/www/html
 
