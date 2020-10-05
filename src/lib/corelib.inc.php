@@ -49,25 +49,22 @@ class Core {
 
     public function getConnection($props) {
         $timeout = microtime();
-        //$conn = mysql_connect($props['dbhost'].':'.$props['dbport'], $props['dbuser'], $props['dbpass']);
-        $conn = mysql_connect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD']);
-		mysql_select_db($_ENV['MYSQL_DATABASE'],$conn);
-		mysql_set_charset('utf8', $conn);
+        $conn =  mysqli_connect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
         $this->debugTimeout('MY CONNECT', $timeout, 5);
         return $conn;
     }
 
     public function executeQuery($conn, $query, $debug=0) {
         $timeout = microtime();
-        $result = mysql_query($query, $conn);
-		for ($data = array(); $row = mysql_fetch_array($result); $data[] = $row);
+        $result = mysqli_query($conn, $query);
+        for ($data = array(); $row = $result->fetch_assoc(); $data[] = $row) ;
         $this->debugTimeout('EXECUTE', $timeout, 5);
         $this->debugQuery($query, $data, $debug);
         return $data;
     }
 
     public function closeConnection($conn) {
-        mysql_close($conn);
+        mysqli_close($conn);
     }
 
     private function debugTimeout($descr, $timeout, $limit) {
@@ -213,7 +210,7 @@ class Core {
                 "X-Mailer: PHP/" . phpversion();
         echo mail($email, $subject, $body, $headers);
     }
-    */ 
+    */
 
     function fromutf($str) {
         return iconv('UTF-8', $this->configuration['global']['encoding'], $str);
@@ -230,7 +227,7 @@ class Core {
             $ret = $this->root_role;
             $_SESSION['user']['fio'] = $login;
             $_SESSION['user']['mail'] = $_SERVER['SERVER_ADMIN'];
-	    $_SESSION['user']['samaccountname'] = $login;	
+	    $_SESSION['user']['samaccountname'] = $login;
         } else if ((strlen($login) > 0) && (strlen($pass) > 0)) {
             $adauth = $this->configuration['adauth'];
             $ldap = ldap_connect($adauth['adhost'], $adauth['adport']);
@@ -277,7 +274,7 @@ class Core {
     private function parseAdInfoMulti($adinfo) {
         $retinfos = array();
         for ($j = 0; $j< $adinfo['count']; $j++) {
-        	$info = $adinfo[$j]; 
+        	$info = $adinfo[$j];
 		    for ($i = 0; $i < $info['count']; $i++) {
 		        $retinfo[$info[$i]] = $info[$info[$i]][0];
 		    }
