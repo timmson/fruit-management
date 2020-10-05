@@ -17,5 +17,8 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit test"
+  },
+  "require": {
+    "smarty/smarty": "2.6.31"
   }
 }
