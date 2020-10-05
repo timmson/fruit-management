@@ -5,8 +5,6 @@ namespace ru\timmson\FruitMamangement\util;
 use DateTime;
 use \PHPUnit\Framework\TestCase;
 
-require_once(__DIR__ . "/../src/lib/calendar.inc.php");
-
 class CalendarTest extends TestCase
 {
     public function testGetTaskEndInTheCurrentDay()

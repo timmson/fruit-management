@@ -14,6 +14,7 @@
   },
   "autoload": {
     "files": [
+      "lib/calendar.inc.php",
       "lib/corelib.inc.php"
     ]
   },

@@ -1,6 +1,4 @@
 <?
-require_once('./lib/calendar.inc.php');
-
 $conn = $CORE->getConnection($currentdep['props']);
 
 $query = "select * from v_task_in_progress where fm_project  = 'REL' order by id desc";

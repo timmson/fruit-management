@@ -1,6 +1,4 @@
 <?
-require_once('./lib/calendar.inc.php');
-
 $conn = $CORE->getConnection($currentdep['props']);
 
 $user = $_SESSION['user']['samaccountname']; 
