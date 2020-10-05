@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__FILE__)."/../src/lib/CalendarLib.php");
+namespace ru\timmson\FruitMamangement\lib;
 
 use \PHPUnit\Framework\TestCase;
 

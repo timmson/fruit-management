@@ -9,7 +9,12 @@
             "email": "timmson666@mail.ru"
         }
     ],
-    "require": {
+    "require-dev": {
         "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "ru\\timmson\\FruitMamangement\\" : "src"
+        }
     }
 }
