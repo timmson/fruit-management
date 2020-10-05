@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"/>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset={$const.global.encodingHTML}" />
         <link href="{$factory->stylesheet_dir}index.css" rel="stylesheet" type="text/css" />
@@ -32,13 +31,13 @@
             </tr>
         </table>
 	<br/>
-        <center>
+        <div style="text-align: center; width: 100%">
             <img alt="powered by xhtml" src="{$factory->img_admin_dir}xhtml.png"/>
             <img alt="powered by css" src="{$factory->img_admin_dir}css.png"/>
             <img alt="powered by php" src="{$factory->img_admin_dir}php.png"/>
             <img alt="powered by smarty" src="{$factory->img_admin_dir}smarty.png"/>
             <img alt="powered by ajax" src="{$factory->img_admin_dir}ajax.png"/>
             <img alt="powered by natali" src="{$factory->img_admin_dir}natali.png"/>
-        </center>
+        </div>
     </body>
 </html>

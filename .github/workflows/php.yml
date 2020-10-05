@@ -11,11 +11,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      working-directory: web
+
     steps:
     - uses: actions/checkout@v2
-
-    - name: Step into src dir
-      run: cd web
 
     - name: Validate composer.json and composer.lock
       run: composer validate

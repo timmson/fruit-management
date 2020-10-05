@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"/>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset={$const.global.encodingHTML}"/>
     <meta http-equiv="Pragma" content="no-cache"/>
@@ -22,7 +21,7 @@
     	[Выход]
     </a>
     <div style="float:right;">
-		<a href="http://10.243.31.162/wiki/">Информационный портал<sup style="color:red">new</sup></a>
+		<a href="https://ru.wikipedia.org">Информационный портал<sup style="color:red">new</sup></a>
 	</div>
     <div style="display:table; border:1px solid #ccc; margin-bottom: 10px; width:100%;" class="ui-corner-all">
 		<div class="ui-corner-left" style="display:table-cell; text-align:center; vertical-align:middle; min-width:350px; cursor:pointer" onclick="window.location='?dep=home';">
