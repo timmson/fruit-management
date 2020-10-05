@@ -94,7 +94,7 @@ if (strlen($_REQUEST['task'])>0) {
 			$query .= "select null, fm_name, fm_descr, fm_project, ";
 			$query .= "1, fm_priority, 0, '".$_SESSION['user']['samaccountname']."' from fm_task where id = ".$taskid;
 			$CORE->executeQuery($conn, $query);	
-			$taskid = mysql_insert_id($conn);
+			$taskid = mysqli_insert_id($conn);
 			toggleSubscribe($CORE, $conn, $taskid, $_SESSION['user']['samaccountname'], "off");
 			header("Location: ?task=".$taskid);
 			break;

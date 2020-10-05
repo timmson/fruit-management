@@ -21,7 +21,7 @@ class TaskDAO {
 		$query .= $task['fm_plan'].",";
 		$query .= "'".$task['fm_user']."')";
 		$this->core->executeQuery($this->conn, $query);	
-		$task['id'] = mysql_insert_id($this->conn);
+		$task['id'] = mysqli_insert_id($this->conn);
 		return $task;
 	}
 
