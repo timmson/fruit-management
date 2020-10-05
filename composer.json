@@ -5,7 +5,7 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "timmson",
+      "name": "Krotov Artem",
       "email": "timmson666@mail.ru"
     }
   ],
@@ -14,5 +14,8 @@
   },
   "autoload": {
 
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit test"
   }
 }
