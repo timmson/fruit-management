@@ -29,6 +29,7 @@ INSERT INTO `fm_project` VALUES (2, 'SAMPLE', 'Some new project', 'manager', NUL
 -- fm_tasks
 INSERT INTO `fm_task` VALUES (1, 'RFC', 'Release 1', 1, 3, 2, 100, 'fruit');
 INSERT INTO `fm_task` VALUES (2, 'Some', 'work', 2, 3, 2, 100, 'fruit');
+INSERT INTO `fm_task` VALUES (3, 'Some', 'work', 2, 3, 2, 100, 'vegetble');
 
 -- fm_relation
 INSERT INTO `fm_relation` VALUES (1, 0, 0);

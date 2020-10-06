@@ -57,7 +57,13 @@ class Core {
     public function executeQuery($conn, $query, $debug=0) {
         $timeout = microtime();
         $result = mysqli_query($conn, $query);
-        for ($data = array(); $row = $result->fetch_assoc(); $data[] = $row) ;
+
+        if ($result instanceof mysqli_result) {
+            for ($data = array(); $row = $result->fetch_assoc(); $data[] = $row);
+        } else {
+            $data = $result;
+        }
+
         $this->debugTimeout('EXECUTE', $timeout, 5);
         $this->debugQuery($query, $data, $debug);
         return $data;
