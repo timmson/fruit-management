@@ -20,7 +20,7 @@ class mysqli_wrapper
     public function query($query): ?object
     {
         if (!array_key_exists($query, $this->queries)) {
-            throw new \Exception("Query is not expected");
+            throw new \Exception("Query [" . $query . "] is not expected. Expected queries: [" . json_encode($this->queries) . "]");
         }
         return $this->queries[$query];
     }

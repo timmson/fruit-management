@@ -23,22 +23,20 @@ abstract class AbstractDAO
     }
 
     /**
-     * @param $query
-     * @param $filter
      * @return array
      */
-    final function executeQuery($query, $filter = [])
+    abstract function getColumns(): array;
+
+    /**
+     * @param string $query
+     * @param array $filter
+     * @param array $order
+     * @return array
+     */
+    final function executeQuery(string $query, array $filter, array $order)
     {
 
-        if (count($filter) > 0 ) {
-            $query.= " where";
-        }
-
-        $columns = $this->getColumns();
-
-        foreach ($filter as $name => $value) {
-            $query .= " " . $name . " = " . (array_key_exists($name, $columns) && $columns[$name] == "string" ? "'" . $value . "'" : $value);
-        }
+        $query = $this->buildQuery($query, $filter, $order);
 
         $result = $this->mysqli->query($query);
 
@@ -52,8 +50,34 @@ abstract class AbstractDAO
     }
 
     /**
-     * @return array
+     * @param string $query
+     * @param array $filter
+     * @param array $order
+     * @return string
      */
-    abstract function getColumns(): array;
+    private function buildQuery(string $query, array $filter = [], array $order = []): string
+    {
+
+        $columns = $this->getColumns();
+
+        if (count($filter) > 0) {
+
+            $filterQuery = [];
+            foreach ($filter as $name => $value) {
+                $filterQuery [] = " " . $name . " = " . (array_key_exists($name, $columns) && $columns[$name] == "string" ? "'" . $value . "'" : $value);
+            }
+            $query .= " where" . implode(" and ", $filterQuery);
+        }
+
+        if (count($order) > 0) {
+            $orderQuery = [];
+            foreach ($order as $name => $value) {
+                $orderQuery[] = " " . $name . (strlen($value) > 0 ? " " . $value : "");
+            }
+            $query .= " order by" . implode(",", $orderQuery);
+        }
+
+        return $query;
+    }
 
 }

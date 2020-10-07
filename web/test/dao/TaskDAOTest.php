@@ -35,13 +35,14 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
-    public function testGetAllTasksWithFilter()
+    public function testGetAllTasksWithFilterAndOrder()
     {
         $arrange = [["name" => "0"]];
         $filter = ["fm_user" => "dummy"];
+        $order = ["fm_priority" => "", "id" => ""];
 
-        $this->mysqli->addQueryAndResult("select * from v_task_all where fm_user = 'dummy'", $arrange);
-        $result = $this->dao->getAllTasks($filter);
+        $this->mysqli->addQueryAndResult("select * from v_task_all where fm_user = 'dummy' order by fm_priority, id", $arrange);
+        $result = $this->dao->getAllTasks($filter, $order);
 
         $this->assertEquals($arrange, $result);
     }

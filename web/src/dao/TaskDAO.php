@@ -12,13 +12,14 @@ class TaskDAO extends AbstractDAO
 
     /**
      * @param array $filter
+     * @param array $order
      * @return array
      */
-    public function getAllTasks($filter = []): array
+    public function getAllTasks(array $filter = [], array $order = []): array
     {
         $query = "select * from v_task_all";
 
-        return $this->executeQuery($query, $filter);
+        return $this->executeQuery($query, $filter, $order);
     }
 
     /**
@@ -26,7 +27,9 @@ class TaskDAO extends AbstractDAO
      */
     public function getTasksInProgress(): array
     {
-        return $this->executeQuery("select * from v_task_in_progress");
+        $query = "select * from v_task_in_progress";
+
+        return $this->executeQuery($query, [], []);
     }
 
     /**
