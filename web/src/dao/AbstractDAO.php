@@ -24,10 +24,22 @@ abstract class AbstractDAO
 
     /**
      * @param $query
+     * @param $filter
      * @return array
      */
-    final function executeQuery($query)
+    final function executeQuery($query, $filter = [])
     {
+
+        if (count($filter) > 0 ) {
+            $query.= " where";
+        }
+
+        $columns = $this->getColumns();
+
+        foreach ($filter as $name => $value) {
+            $query .= " " . $name . " = " . (array_key_exists($name, $columns) && $columns[$name] == "string" ? "'" . $value . "'" : $value);
+        }
+
         $result = $this->mysqli->query($query);
 
         $data = array();
@@ -38,5 +50,10 @@ abstract class AbstractDAO
 
         return $data;
     }
+
+    /**
+     * @return array
+     */
+    abstract function getColumns(): array;
 
 }

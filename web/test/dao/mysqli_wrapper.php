@@ -15,9 +15,13 @@ class mysqli_wrapper
     /**
      * @param $query
      * @return object|bool
+     * @throws \Exception
      */
     public function query($query): ?object
     {
+        if (!array_key_exists($query, $this->queries)) {
+            throw new \Exception("Query is not expected");
+        }
         return $this->queries[$query];
     }
 

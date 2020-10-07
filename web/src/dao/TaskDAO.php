@@ -9,19 +9,31 @@ namespace ru\timmson\FruitMamangement\dao;
  */
 class TaskDAO extends AbstractDAO
 {
+
     /**
+     * @param array $filter
      * @return array
      */
-    public function getAllTasks()
+    public function getAllTasks($filter = []): array
     {
-        return $this->executeQuery("select * from v_task_all");
+        $query = "select * from v_task_all";
+
+        return $this->executeQuery($query, $filter);
     }
 
     /**
      * @return array
      */
-    public function getTasksInProgress()
+    public function getTasksInProgress(): array
     {
         return $this->executeQuery("select * from v_task_in_progress");
+    }
+
+    /**
+     * @return array
+     */
+    function getColumns(): array
+    {
+        return ["fm_user" => "string"];
     }
 }
