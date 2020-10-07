@@ -47,7 +47,7 @@ class Core {
         $this->configuration['admin']['copyright'] = $this->configuration['admin']['copyright'] . '-' . date("Y");
     }
 
-    public function getConnection($props) {
+    public function getConnection() {
         $timeout = microtime();
         $conn =  mysqli_connect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
         $this->debugTimeout('MY CONNECT', $timeout, 5);

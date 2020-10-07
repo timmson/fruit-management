@@ -57,4 +57,27 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    public function testGetInProgressWithFilterAndOrder()
+    {
+        $arrange = [["name" => "0"]];
+        $filter = ["fm_user" => "dummy"];
+        $order = ["fm_priority" => "", "id" => ""];
+
+        $this->mysqli->addQueryAndResult("select * from v_task_in_progress where fm_user = 'dummy' order by fm_priority, id", $arrange);
+        $result = $this->dao->getTasksInProgress($filter, $order);
+
+        $this->assertEquals($arrange, $result);
+    }
+
+    public function testGetSubscribedTaskByUser()
+    {
+        $user = "dummy";
+        $arrange = [["name" => "0"]];
+
+        $this->mysqli->addQueryAndResult("select t.* from v_task_all t, fm_subscribe s where s.fm_task = t.id and s.fm_user = 'dummy'", $arrange);
+        $result = $this->dao->getSubscribedTaskByUser($user);
+
+        $this->assertEquals($arrange, $result);
+    }
+
 }

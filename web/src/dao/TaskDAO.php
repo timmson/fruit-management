@@ -11,6 +11,14 @@ class TaskDAO extends AbstractDAO
 {
 
     /**
+     * @return array
+     */
+    function getColumns(): array
+    {
+        return ["fm_user" => "string"];
+    }
+
+    /**
      * @param array $filter
      * @param array $order
      * @return array
@@ -23,20 +31,21 @@ class TaskDAO extends AbstractDAO
     }
 
     /**
+     * @param array $filter
+     * @param array $order
      * @return array
      */
-    public function getTasksInProgress(): array
+    public function getTasksInProgress(array $filter = [], array $order = []): array
     {
         $query = "select * from v_task_in_progress";
 
-        return $this->executeQuery($query, [], []);
+        return $this->executeQuery($query, $filter, $order);
     }
 
-    /**
-     * @return array
-     */
-    function getColumns(): array
+    public function getSubscribedTaskByUser(string $user)
     {
-        return ["fm_user" => "string"];
+        $query = "select t.* from v_task_all t, fm_subscribe s where s.fm_task = t.id and s.fm_user = '$user'";
+
+        return $this->executeQuery($query, [], []);
     }
 }

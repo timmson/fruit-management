@@ -1,7 +1,7 @@
 <?
-$conn = $CORE->getConnection($currentdep['props']);
+$conn = $CORE->getConnection();
 
-$user = $_SESSION['user']['samaccountname']; 
+$user = $_SESSION['user']['samaccountname'];
 
 if ($_REQUEST['mode']=='async') {
 
@@ -12,18 +12,17 @@ if ($_REQUEST['mode']=='async') {
 	$VIEW->assign("activity", $activity);
 
 } else {
-	
-	$week = strlen($_REQUEST['week'])>0?$_REQUEST['week']:date('W');
 	$timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAO($conn);
+	$taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAO($conn);
+
+	$week = strlen($_REQUEST['week'])>0?$_REQUEST['week']:date('W');
 	$timesheet = $timesheetDAO->getCurrentWeekTimesheetByUser($user);
 	$VIEW->assign("timesheet", $timesheet);
 
-	$query = 'select * from v_task_in_progress where fm_user = \''.$user.'\' order by fm_priority, id';
-	$tasks = $CORE->executeQuery($conn, $query);
-	$VIEW->assign("tasks", $tasks);
+    $tasks = $taskDAO -> getTasksInProgress(["fm_user" => $user], ["fm_priority" => "", "id" => ""]);
+    $VIEW->assign("tasks", $tasks);
 
-	$query = 'select t.* from v_task_all t, fm_subscribe s where s.fm_task = t.id and s.fm_user = \''.$user.'\'';
-	$subcribe_tasks = $CORE->executeQuery($conn, $query);
+	$subcribe_tasks = $taskDAO ->getSubscribedTaskByUser($user);
 	$VIEW->assign("subcribe_tasks", $subcribe_tasks);
 
 	$border = time();
@@ -37,7 +36,7 @@ if ($_REQUEST['mode']=='async') {
 	for ($i=0; $i<count($tasks); $i++) {
 		$length = $tasks[$i]['fm_plan_hour']-$tasks[$i]['fm_all_hour'];
 		if ($length>0) {
-	
+
 			$borderstart = $border;
 			$borderend = getTaskEnd($border, $length);
 			$border = $borderend;
@@ -55,7 +54,7 @@ if ($_REQUEST['mode']=='async') {
 					$tasks[$i]['fm_plan_start'] = 1;
 					$tasks[$i]['fm_plan_end'] = date("d", $borderend);
 					$plantasks[$j++] = $tasks[$i];
-				} 
+				}
 			}
 		}
 	}

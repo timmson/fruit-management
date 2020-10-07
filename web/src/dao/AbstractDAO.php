@@ -72,7 +72,7 @@ abstract class AbstractDAO
         if (count($order) > 0) {
             $orderQuery = [];
             foreach ($order as $name => $value) {
-                $orderQuery[] = " " . $name . (strlen($value) > 0 ? " " . $value : "");
+                $orderQuery[] = " " . $name . ((strlen($value) > 0) ? " " . $value : "");
             }
             $query .= " order by" . implode(",", $orderQuery);
         }

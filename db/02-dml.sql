@@ -54,6 +54,10 @@ VALUES (1, 0, 0);
 INSERT INTO `fm_relation` (id, fm_parent, fm_child)
 VALUES (2, 1, 2);
 
+-- fm_subscribe
+INSERT INTO `fm_subscribe` (id, fm_task, fm_user)
+VALUES (1, 3, 'fruit');
+
 -- fm_timesheet
 INSERT INTO `fm_timesheet` (task_id, task_name, task_descr, task_state, project_name, task_spent_mon, task_spent_tue, task_spent_wen, task_spent_th,
                             task_spent_fr, work_week, work_year, work_user)
