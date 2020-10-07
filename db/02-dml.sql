@@ -54,14 +54,12 @@ VALUES (1, 0, 0);
 INSERT INTO `fm_relation` (id, fm_parent, fm_child)
 VALUES (2, 1, 2);
 
+-- fm_work_log
+INSERT INTO `fm_work_log` (fm_task, fm_cat, fm_date, fm_date_actual, fm_spent_hour, fm_comment, fm_user)
+VALUES (2, 4, date(now()), now(), 8, 'Work', 'fruit');
+INSERT INTO `fm_work_log` (fm_task, fm_cat, fm_date, fm_date_actual, fm_spent_hour, fm_comment, fm_user)
+VALUES (2, 1, date(now()), now(), 8, 'Work', 'vegetable');
+
 -- fm_subscribe
 INSERT INTO `fm_subscribe` (id, fm_task, fm_user)
 VALUES (1, 3, 'fruit');
-
--- fm_timesheet
-INSERT INTO `fm_timesheet` (task_id, task_name, task_descr, task_state, project_name, task_spent_mon, task_spent_tue, task_spent_wen, task_spent_th,
-                            task_spent_fr, work_week, work_year, work_user)
-VALUES (2, 'Some', 'work', 'In progress', 'SAMPLE', 0, 8, 0, 0, 0, week(now()), year(now()), 'fruit');
-INSERT INTO `fm_timesheet` (task_id, task_name, task_descr, task_state, project_name, task_spent_mon, task_spent_tue, task_spent_wen, task_spent_th,
-                            task_spent_fr, work_week, work_year, work_user)
-VALUES (2, 'Some', 'work', 'In progress', 'SAMPLE', 0, 8, 0, 0, 0, week(now()), year(now()), 'vegetable');
