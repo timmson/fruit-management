@@ -17,8 +17,8 @@ if ($_REQUEST['mode'] == 'async') {
 	$conn = $CORE->getConnection($currentdep['props']);
 
 	$week = strlen($_REQUEST['week'])>0?$_REQUEST['week']:date('W');
-	$query = 'select * from fm_timesheet where work_user = \''.$user.'\' and  work_week = week(now()) and work_year = year(now()) ';
-	$timesheet = $CORE->executeQuery($conn, $query);
+	$timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAO($conn);
+	$timesheet = $timesheetDAO->getCurrentWeekTimesheetByUser($user);
 	$VIEW->assign("timesheet", $timesheet);
 
 

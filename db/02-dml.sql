@@ -3,34 +3,61 @@ USE `fruit`;
 -- Dictionaries
 
 -- fm_priority --
-INSERT INTO `fm_priority` (id, fm_name, fm_descr) VALUES(1, 'high', 'High');
-INSERT INTO `fm_priority` (id, fm_name, fm_descr) VALUES(2, 'medium', 'Medium');
-INSERT INTO `fm_priority` (id, fm_name, fm_descr) VALUES(3, 'low', 'Low');
+INSERT INTO `fm_priority` (id, fm_name, fm_descr)
+VALUES (1, 'high', 'High');
+INSERT INTO `fm_priority` (id, fm_name, fm_descr)
+VALUES (2, 'medium', 'Medium');
+INSERT INTO `fm_priority` (id, fm_name, fm_descr)
+VALUES (3, 'low', 'Low');
 
 -- fm_state --
-INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(1, 'new', 'New', 2);
-INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(2, 'planned', 'Planned', 3);
-INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(3, 'in_progress', 'In progress', 5);
-INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(4, 'decline', 'Decline', NULL);
-INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(5, 'test', 'Testing', 6);
-INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state) VALUES(6, 'done', 'Done', NULL);
+INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state)
+VALUES (1, 'new', 'New', 2);
+INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state)
+VALUES (2, 'planned', 'Planned', 3);
+INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state)
+VALUES (3, 'in_progress', 'In progress', 5);
+INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state)
+VALUES (4, 'decline', 'Decline', NULL);
+INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state)
+VALUES (5, 'test', 'Testing', 6);
+INSERT INTO `fm_state` (id, fm_name, fm_descr, fm_next_state)
+VALUES (6, 'done', 'Done', NULL);
 
 -- fm_cat_log
-INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(1, 'log', 'Logging');
-INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(2, 'cmnt', 'Comments');
-INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(3, 'url', 'Link');
-INSERT INTO `fm_cat_log` (id, fm_name, fm_descr) VALUES(4, 'est', 'Estimation');
-
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr)
+VALUES (1, 'log', 'Logging');
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr)
+VALUES (2, 'cmnt', 'Comments');
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr)
+VALUES (3, 'url', 'Link');
+INSERT INTO `fm_cat_log` (id, fm_name, fm_descr)
+VALUES (4, 'est', 'Estimation');
 
 -- fm_projects
-INSERT INTO `fm_project` VALUES (1, 'REL', 'Release project', 'manager', NULL);
-INSERT INTO `fm_project` VALUES (2, 'SAMPLE', 'Some new project', 'manager', NULL);
+INSERT INTO `fm_project` (id, fm_name, fm_descr, fm_manager, fm_parent)
+VALUES (1, 'REL', 'Release project', 'manager', NULL);
+INSERT INTO `fm_project` (id, fm_name, fm_descr, fm_manager, fm_parent)
+VALUES (2, 'SAMPLE', 'Some new project', 'manager', NULL);
 
 -- fm_tasks
-INSERT INTO `fm_task` VALUES (1, 'RFC', 'Release 1', 1, 3, 2, 100, 'fruit');
-INSERT INTO `fm_task` VALUES (2, 'Some', 'work', 2, 3, 2, 100, 'fruit');
-INSERT INTO `fm_task` VALUES (3, 'Some', 'work', 2, 3, 2, 100, 'vegetble');
+INSERT INTO `fm_task` (id, fm_name, fm_descr, fm_project, fm_state, fm_priority, fm_plan, fm_user)
+VALUES (1, 'RFC', 'Release 1', 1, 3, 2, 100, 'fruit');
+INSERT INTO `fm_task` (id, fm_name, fm_descr, fm_project, fm_state, fm_priority, fm_plan, fm_user)
+VALUES (2, 'Some', 'work', 2, 3, 2, 100, 'fruit');
+INSERT INTO `fm_task` (id, fm_name, fm_descr, fm_project, fm_state, fm_priority, fm_plan, fm_user)
+VALUES (3, 'Some', 'work', 2, 3, 2, 100, 'vegetable');
 
 -- fm_relation
-INSERT INTO `fm_relation` VALUES (1, 0, 0);
-INSERT INTO `fm_relation` VALUES (2, 1, 2);
+INSERT INTO `fm_relation` (id, fm_parent, fm_child)
+VALUES (1, 0, 0);
+INSERT INTO `fm_relation` (id, fm_parent, fm_child)
+VALUES (2, 1, 2);
+
+-- fm_timesheet
+INSERT INTO `fm_timesheet` (task_id, task_name, task_descr, task_state, project_name, task_spent_mon, task_spent_tue, task_spent_wen, task_spent_th,
+                            task_spent_fr, work_week, work_year, work_user)
+VALUES (2, 'Some', 'work', 'In progress', 'SAMPLE', 0, 8, 0, 0, 0, week(now()), year(now()), 'fruit');
+INSERT INTO `fm_timesheet` (task_id, task_name, task_descr, task_state, project_name, task_spent_mon, task_spent_tue, task_spent_wen, task_spent_th,
+                            task_spent_fr, work_week, work_year, work_user)
+VALUES (2, 'Some', 'work', 'In progress', 'SAMPLE', 0, 8, 0, 0, 0, week(now()), year(now()), 'vegetable');
