@@ -26,11 +26,11 @@ class mysqli_wrapper
     }
 
     /**
-     * @param $query
+     * @param string $query
      * @param $result
      * @return void
      */
-    public function addQueryAndResult($query, $result): void
+    public function addQueryAndResult(string $query, array $result): void
     {
         $this->queries[$query] = new mysqli_result_wrapper($result);
     }

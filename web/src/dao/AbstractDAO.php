@@ -25,7 +25,7 @@ abstract class AbstractDAO
     /**
      * @return array
      */
-    abstract function getColumns(): array;
+    abstract protected function getColumns(): array;
 
     /**
      * @param string $query

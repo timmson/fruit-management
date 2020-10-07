@@ -3,7 +3,9 @@ require_once('./lib/tasklib.php');
 
 $url_prefix = $CORE->configuration['global']['site']."?dep=task&task=";
 
-$conn = $CORE->getConnection($currentdep['props']);
+$conn = $CORE->getConnection();
+
+$subscriberDAO = new \ru\timmson\FruitMamangement\dao\SubscriberDAO($conn);
 
 if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 	$taskid = $_REQUEST['task'];
@@ -31,7 +33,7 @@ if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 						);
 					}
 					echo json_encode($newdata);
-					break;					   
+					break;
 		case 'json': $data = prepeareData4Graph($CORE, $conn, $taskid);
 					$newdata = array();
 					for ($i=0; $i<count($data); $i++) {
@@ -44,7 +46,7 @@ if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 					if ((isset($_REQUEST['fname']))&&(isset($_REQUEST['fvalue']))) {
 						$fname = $_REQUEST['fname'];
 						if ($fname == 'fm_subscribe') {
-							toggleSubscribe($CORE, $conn, $taskid, $_SESSION['user']['samaccountname'], $_REQUEST['fvalue']);
+							toggleSubscribe($subscriberDAO, $taskid, $_SESSION['user']['samaccountname'], $_REQUEST['fvalue']);
 						} else if ($fname == 'fm_descr_full') {
 							file_put_contents("./attachement/".$taskid, $_REQUEST['fvalue']);
 						} else {
@@ -57,7 +59,7 @@ if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 						}
 						if ($fname=='fm_state') {
 							notify($CORE, $conn, $taskid, $_SESSION['user']);
-						} 
+						}
 					}
 					break;
 	}
@@ -72,10 +74,10 @@ $VIEW->assign("projects", $projects);
 
 if (strlen($_REQUEST['task'])>0) {
         $taskid = $_REQUEST['task'];
-        $taskDAO = new TaskDAO($CORE, $conn); 
+        $taskDAO = new TaskDAO($CORE, $conn);
 	if (strlen($_REQUEST['oper'])>0) {
 	    switch ($_REQUEST['oper']) {
-		case 'new' : 
+		case 'new' :
 			$task = array(
 					'fm_name' => $_REQUEST['fm_name'],
 					'fm_descr' => $_REQUEST['fm_descr'],
@@ -86,19 +88,19 @@ if (strlen($_REQUEST['task'])>0) {
 					'fm_user' => $_SESSION['user']['samaccountname']
 			);
 			$task = $taskDAO -> merge($task);
-			toggleSubscribe($CORE, $conn, $task['id'], $_SESSION['user']['samaccountname'], "off");
+			toggleSubscribe($subscriberDAO, $task['id'], $_SESSION['user']['samaccountname'], "off");
 			header("Location: ?task=".$task['id']);
 			break;
 		case 'clone' :
 			$query = "insert into fm_task ";
 			$query .= "select null, fm_name, fm_descr, fm_project, ";
 			$query .= "1, fm_priority, 0, '".$_SESSION['user']['samaccountname']."' from fm_task where id = ".$taskid;
-			$CORE->executeQuery($conn, $query);	
+			$CORE->executeQuery($conn, $query);
 			$taskid = mysqli_insert_id($conn);
-			toggleSubscribe($CORE, $conn, $taskid, $_SESSION['user']['samaccountname'], "off");
+			toggleSubscribe($subscriberDAO, $taskid, $_SESSION['user']['samaccountname'], "off");
 			header("Location: ?task=".$taskid);
 			break;
-		case 'add': 
+		case 'add':
 			$query = "insert into fm_work_log VALUES(null,";
 			$query .= $taskid.", ".$_REQUEST['fm_cat'].",";
 			$query .= "str_to_date('".$_REQUEST['fm_date']."', '%d.%m.%Y'), now(),";
@@ -112,7 +114,7 @@ if (strlen($_REQUEST['task'])>0) {
 		    break;
 		case 'addrel':
 			if ((isset($_REQUEST['fname']))&&(isset($_REQUEST['fvalue']))) {
-				$fname = $_REQUEST['fname']; 
+				$fname = $_REQUEST['fname'];
 				$fvalue = $_REQUEST['fvalue'];
 				$query = "select id from v_task_all where fm_name ='".$fvalue."'";
 				$data = $CORE->executeQuery($conn, $query);
@@ -131,7 +133,7 @@ if (strlen($_REQUEST['task'])>0) {
 			header("Location: ?task=".$taskid);
 		    break;
 		case 'delrel':
-			$fname = $_REQUEST['fname']; 
+			$fname = $_REQUEST['fname'];
 			$fvalue = $_REQUEST['fvalue'];
 			$query = "delete from fm_relation where ";
 			if ($fname=='fm_parent') {
@@ -142,7 +144,7 @@ if (strlen($_REQUEST['task'])>0) {
 			$CORE->executeQuery($conn, $query);
 			header("Location: ?task=".$taskid);
 		     break;
-		case 'delete': 
+		case 'delete':
 			$query = "delete from fm_work_log where id =".$_REQUEST['fm_work_id'];
 			$CORE->executeQuery($conn, $query);
 			header("Location: ?task=".$taskid);
@@ -151,30 +153,30 @@ if (strlen($_REQUEST['task'])>0) {
 	}
 
 	$task = getTaskInfo($CORE, $conn, $taskid);
-	
+
 	$task['worklog'] = getWorkLog($CORE, $conn, $taskid);
-	
-	$task['subscribers'] = getSubscribers($CORE, $conn, $taskid);
-	
+
+	$task['subscribers'] = $subscriberDAO->getSubscribersByTaskId($taskid);
+
 	$task['fm_descr_full'] = file_get_contents("./attachement/".$taskid);
 
 	$logCategoryDAO = new \ru\timmson\FruitMamangement\dao\LogCategoryDAO($conn);
 	$task['worklog_cat'] = $logCategoryDAO->getAllOrderById();
 
 	$VIEW->assign("task", $task);
-	
+
 } else {
 	$query = "select * from v_task_in_progress ";
 	if ($_REQUEST['state']=='all')  {
-		$query = "select * from v_task_all ";	
+		$query = "select * from v_task_all ";
 	}
-	
+
 	if (strlen($_REQUEST['project'])!='')  {
 		$_SESSION['project'] = $_REQUEST['project'];
 	}
 
 	$query .= " where 1 = 1 ";
-	
+
 	if ((strlen($_SESSION['project'])!='')&&(($_SESSION['project'])!='all')) {
 		$query .= ' and fm_project_id='.$_SESSION['project'];
 	}
@@ -182,7 +184,7 @@ if (strlen($_REQUEST['task'])>0) {
 	if (strlen($_REQUEST['search'])!='') {
 			$query .= " and concat(fm_name,fm_code,fm_descr) like '%".$_REQUEST['search']."%' ";
 	}
-	
+
 	$query .= ' order by id, fm_project_id desc';
 	$tasks = $CORE->executeQuery($conn, $query);
 	$VIEW->assign("tasks", $tasks);
@@ -193,19 +195,19 @@ $CORE->closeConnection($conn);
 
 function getWorkLog($CORE, $conn, $taskid) {
 	$query = "select l.*, c.fm_name as fm_cat_name, c.fm_descr as fm_cat_descr from fm_work_log l, fm_cat_log c where fm_task = ".$taskid." and l.fm_cat = c.id order by fm_date,id";
-	$temp = $CORE->executeQuery($conn, $query); 
+	$temp = $CORE->executeQuery($conn, $query);
 	return $temp;
 }
 
 function getSubscribers($CORE, $conn, $taskid) {
 	$query = "select * from fm_subscribe where fm_task = ".$taskid;
-	$temp = $CORE->executeQuery($conn, $query); 
+	$temp = $CORE->executeQuery($conn, $query);
 	return $temp;
 }
 
 function getTaskInfo($CORE, $conn, $taskid) {
 	global $url_prefix;
-	
+
 	$query = "select t.*, r.fm_parent, r.fm_child, 'current' as tasktype from v_task_all t, fm_relation r";
 	$query.=" where t.id = ".$taskid." and r.id = (select min(id) from fm_relation) or ";
 	$query.=" (r.fm_child = ".$taskid." and t.id = r.fm_parent) or ";
@@ -244,13 +246,12 @@ function getTaskInfo($CORE, $conn, $taskid) {
 	return $task;
 }
 
-function toggleSubscribe($CORE, $conn, $taskid, $username, $value) {
-	if ($value=='off') {
-		$query = "insert into fm_subscribe values(null,".$taskid.",'".$username."')";
+function toggleSubscribe($subscribeDAO, $taskid, $username, $value):void {
+	if ($value == "off") {
+		$subscribeDAO->subscribe($taskid, $username);
 	} else {
-		$query = "delete from fm_subscribe where fm_user ='".$username."' and fm_task = ".$taskid;
+        $subscribeDAO->unsubscribe($taskid, $username);
 	}
-	return $CORE->executeQuery($conn, $query);
 }
 
 function prepeareData4Graph($CORE, $conn, $taskid) {
@@ -268,8 +269,8 @@ function notify($CORE, $conn, $taskid, $user) {
 		$subject = $data['fm_name']." The task has changed by ".$user['fio'].".";
 		$body =  '['.$data['fm_name'].'] '.$data['fm_descr'].'</a> ';
 		$body .= ' The task has changed by '.$user['fio'].'.<br/>URL:&nbsp;'.$url_prefix.$taskid;
-		
-		$subscribers = getSubscribers($CORE, $conn, $taskid); 
+
+		$subscribers = getSubscribers($CORE, $conn, $taskid);
 		for ($i=0; $i<count($subscribers); $i++){
 			if ($user['samaccountname'] != $subscribers[$i]['fm_user']) {
 				$recipient = "i".$subscribers[$i]['fm_user']."@".$CORE->configuration['adauth']['addomain'];
