@@ -35,6 +35,29 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    public function testGetTaskById()
+    {
+        $id = 1;
+        $arrange = [["name" => "0", "work" => "yes"]];
+
+        $this->mysqli->addQueryAndResult("select * from v_task_all where id = $id", $arrange);
+        $result = $this->dao->getTaskById($id);
+
+        $this->assertEquals($arrange[0], $result);
+    }
+
+    public function testGetTaskByName()
+    {
+        $name = "REL-1";
+        $arrange = [["name" => "0", "work" => "yes"]];
+
+        $this->mysqli->addQueryAndResult("select * from v_task_all where fm_name = '$name'", $arrange);
+        $result = $this->dao->getTaskByName($name);
+
+        $this->assertEquals($arrange[0], $result);
+    }
+
+
     public function testGetAllTasksWithFilterAndOrder()
     {
         $arrange = [["name" => "0"]];

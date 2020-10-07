@@ -6,6 +6,7 @@ $url_prefix = $CORE->configuration['global']['site']."?dep=task&task=";
 $conn = $CORE->getConnection();
 
 $subscriberDAO = new \ru\timmson\FruitMamangement\dao\SubscriberDAO($conn);
+$taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAO($conn);
 
 if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 	$taskid = $_REQUEST['task'];
@@ -55,7 +56,7 @@ if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 							$CORE->executeQuery($conn, $query);
 						}
 						if (($fname=='fm_user')&&($fvalue!=$_SESSION['user']['samaccountname'])) {
-							assign($CORE, $conn, $taskid, $_SESSION['user']);
+							assign($taskDAO, $taskid, $_SESSION['user']);
 						}
 						if ($fname=='fm_state') {
 							notify($CORE, $conn, $taskid, $_SESSION['user']);
@@ -74,7 +75,7 @@ $VIEW->assign("projects", $projects);
 
 if (strlen($_REQUEST['task'])>0) {
         $taskid = $_REQUEST['task'];
-        $taskDAO = new TaskDAO($CORE, $conn);
+        $taskDAO1 = new TaskDAO($CORE, $conn);
 	if (strlen($_REQUEST['oper'])>0) {
 	    switch ($_REQUEST['oper']) {
 		case 'new' :
@@ -87,7 +88,7 @@ if (strlen($_REQUEST['task'])>0) {
 					'fm_plan' => ($_REQUEST['fm_plan']!=''?$_REQUEST['fm_plan']:0),
 					'fm_user' => $_SESSION['user']['samaccountname']
 			);
-			$task = $taskDAO -> merge($task);
+			$task = $taskDAO1 -> merge($task);
 			toggleSubscribe($subscriberDAO, $task['id'], $_SESSION['user']['samaccountname'], "off");
 			header("Location: ?task=".$task['id']);
 			break;
@@ -116,9 +117,8 @@ if (strlen($_REQUEST['task'])>0) {
 			if ((isset($_REQUEST['fname']))&&(isset($_REQUEST['fvalue']))) {
 				$fname = $_REQUEST['fname'];
 				$fvalue = $_REQUEST['fvalue'];
-				$query = "select id from v_task_all where fm_name ='".$fvalue."'";
-				$data = $CORE->executeQuery($conn, $query);
-				$fvalue = $data[0]['id'];
+				$data = $taskDAO->getTaskByName($fvalue);
+				$fvalue = $data['id'];
 				if (is_numeric($fvalue)) {
 					$query = "insert into fm_relation values(null,";
 					if ($fname=='fm_parent') {
@@ -279,11 +279,9 @@ function notify($CORE, $conn, $taskid, $user) {
 		}
 	}
 
-function assign($CORE, $conn, $taskid, $user) {
+function assign($taskDAO, $taskid, $user) {
 		global $url_prefix;
-		$query = 'select * from v_task_all where id = '.$taskid;
-		$data = $CORE->executeQuery($conn, $query);
-		$data = $data[0];
+		$data = $taskDAO->getTaskById($taskid);
 		$recipient = "i".$data['fm_user']."@".$CORE->configuration['adauth']['addomain'];
 		$subject = $data['fm_name']." has assigned to you by ".$user['fio'];
 		$body =  '['.$data['fm_name'].'] '.$data['fm_descr'].'</a> ';

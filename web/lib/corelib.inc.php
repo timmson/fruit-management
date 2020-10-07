@@ -203,9 +203,15 @@ class Core {
 
 
 	function sendmail($sender, $email, $subject, $body) {
-		$s = "http://s-msk-rcms01:8080/mail.php?email=".urlencode($email)."&subject=".urlencode($subject)."&body=".urlencode($body)."&from=".$sender;
+        $this->debugs[] = urlencode($email)."&subject=".urlencode($subject)."&body=".urlencode($body)."&from=".$sender;
+        /**
+         * TODO
+         * Create mail box
+         */
+
+        //$s = "http://s-msk-rcms01:8080/mail.php?email=".urlencode($email)."&subject=".urlencode($subject)."&body=".urlencode($body)."&from=".$sender;
         //file_put_contents("1.txt", $body/*, FILE_APPEND*/);
-        file_get_contents($s);
+        //file_get_contents($s);
     }
 	/*
     function sendmail($sender, $email, $subject, $body) {
