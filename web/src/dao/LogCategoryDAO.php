@@ -11,11 +11,10 @@ class LogCategoryDAO extends AbstractDAO
 {
 
     /**
-     * @return array|bool
+     * @return array
      */
     public function getAllOrderById()
     {
-        $query = "select * from fm_cat_log order by id";
-        return $this->executeQuery($query);
+        return $this->executeQuery("select * from fm_cat_log order by id");
     }
 }
