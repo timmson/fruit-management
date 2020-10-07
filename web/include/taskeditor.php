@@ -158,8 +158,8 @@ if (strlen($_REQUEST['task'])>0) {
 	
 	$task['fm_descr_full'] = file_get_contents("./attachement/".$taskid);
 
-	$query = "select * from fm_cat_log order by id";
-	$task['worklog_cat'] = $CORE->executeQuery($conn, $query);
+	$logCategoryDAO = new \ru\timmson\FruitMamangement\dao\LogCategoryDAO($conn);
+	$task['worklog_cat'] = $logCategoryDAO->getAllOrderById();
 
 	$VIEW->assign("task", $task);
 	
