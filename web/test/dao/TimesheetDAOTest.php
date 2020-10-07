@@ -32,7 +32,7 @@ class TimesheetDAOTest extends TestCase
         $arrange = [["name" => "0", "work" => "yes"]];
 
         $this->mysqli->addQueryAndResult("select * from fm_timesheet where work_user = 'user' and work_week = week(now()) and work_year = year(now())", $arrange);
-        $result = $this->dao->getCurrentWeekTimesheetTimeSheetByUser("user");
+        $result = $this->dao->getCurrentWeekTimeSheetByUser("user");
 
         $this->assertEquals($arrange, $result);
     }
