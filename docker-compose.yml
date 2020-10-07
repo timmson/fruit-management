@@ -24,9 +24,7 @@ services:
     container_name: fm-web
     restart: on-failure
     volumes:
-      - type: bind
-          source: ./web/
-          target: /var/www/html/
+      - "./web/:/var/www/html/"
 
     environment:
       - MYSQL_HOST=fm-db:3306

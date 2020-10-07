@@ -24,7 +24,7 @@ abstract class AbstractDAO
 
     /**
      * @param $query
-     * @return array|bool
+     * @return array
      */
     final function executeQuery($query)
     {

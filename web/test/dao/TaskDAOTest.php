@@ -35,4 +35,14 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    public function testGetTasksInProgress()
+    {
+        $arrange = [["name" => "0", "work" => "yes"]];
+
+        $this->mysqli->addQueryAndResult("select * from v_task_in_progress", $arrange);
+        $result = $this->dao->getTasksInProgress();
+
+        $this->assertEquals($arrange, $result);
+    }
+
 }
