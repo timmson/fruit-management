@@ -18,45 +18,9 @@ class HomeServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->timesheetDAO = new class implements TimesheetDAO {
-            function getCurrentWeekTimeSheetByUser($user): array
-            {
-                return [];
-            }
-        };
-        $this->taskDAO = new class implements TaskDAO {
 
-            function getColumns(): array
-            {
-                // TODO: Implement getColumns() method.
-            }
-
-            public function getTaskById(int $id)
-            {
-                // TODO: Implement getTaskById() method.
-            }
-
-            public function getTaskByName(string $name)
-            {
-                // TODO: Implement getTaskByName() method.
-            }
-
-            public function getAllTasks(array $filter = [], array $order = []): array
-            {
-                // TODO: Implement getAllTasks() method.
-            }
-
-            public function getTasksInProgress(array $filter = [], array $order = []): array
-            {
-                return [["fm_plan_hour" => 20, "fm_all_hour" => 10 ]];
-            }
-
-            public function getSubscribedTaskByUser(string $user): array
-            {
-                return [[]];
-            }
-        };
-
+        $this->timesheetDAO = $this->createMock(TimesheetDAO::class);
+        $this->taskDAO = $this->createMock(TaskDAO::class);
         $this->service = new HomeService($this->timesheetDAO, $this->taskDAO);
     }
 
@@ -67,7 +31,6 @@ class HomeServiceTest extends TestCase
             "week" => 1
         ];
         $user = "user";
-
 
         $result = $this->service->sync($request, $user);
 
