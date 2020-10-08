@@ -1,77 +1,48 @@
 <?php
 
-
 namespace ru\timmson\FruitMamangement\dao;
 
+
 /**
- * Class TaskDAO
+ * Interface TaskDAO
  * @package ru\timmson\FruitMamangement\dao
  */
-class TaskDAO extends AbstractDAO
+interface TaskDAO
 {
-
     /**
      * @return array
      */
-    function getColumns(): array
-    {
-        return ["fm_user" => "string", "fm_name" => "string"];
-    }
+    function getColumns(): array;
 
     /**
      * @param int $id
      * @return mixed
      */
-    public function getTaskById(int $id)
-    {
-        $query = "select * from v_task_all";
-
-        return $this->executeQuery($query, ["id" => $id], [])[0];
-    }
+    public function getTaskById(int $id);
 
     /**
      * @param string $name
      * @return mixed
      */
-    public function getTaskByName(string $name)
-    {
-        $query = "select * from v_task_all";
-
-        return $this->executeQuery($query, ["fm_name" => $name], [])[0];
-    }
+    public function getTaskByName(string $name);
 
     /**
      * @param array $filter
      * @param array $order
      * @return array
      */
-    public function getAllTasks(array $filter = [], array $order = []): array
-    {
-        $query = "select * from v_task_all";
-
-        return $this->executeQuery($query, $filter, $order);
-    }
+    public function getAllTasks(array $filter = [], array $order = []): array;
 
     /**
      * @param array $filter
      * @param array $order
      * @return array
      */
-    public function getTasksInProgress(array $filter = [], array $order = []): array
-    {
-        $query = "select * from v_task_in_progress";
-
-        return $this->executeQuery($query, $filter, $order);
-    }
+    public function getTasksInProgress(array $filter = [], array $order = []): array;
 
     /**
      * @param string $user
      * @return array
      */
-    public function getSubscribedTaskByUser(string $user): array
-    {
-        $query = "select t.* from v_task_all t, fm_subscribe s where s.fm_task = t.id and s.fm_user = '$user'";
-
-        return $this->executeQuery($query, [], []);
-    }
+    public function getSubscribedTaskByUser(string $user): array;
 }

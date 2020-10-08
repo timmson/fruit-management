@@ -7,7 +7,7 @@ namespace ru\timmson\FruitMamangement\dao;
  * Class TimesheetDAO
  * @package ru\timmson\FruitMamangement\dao
  */
-class TimesheetDAO extends AbstractDAO
+class TimesheetDAOImpl extends AbstractDAO implements TimeSheetDAO
 {
 
     /**

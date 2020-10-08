@@ -22,7 +22,7 @@ class TaskDAOTest extends TestCase
     {
         parent::setUp();
         $this->mysqli = new mysqli_wrapper();
-        $this->dao = new TaskDAO($this->mysqli);
+        $this->dao = new TaskDAOImpl($this->mysqli);
     }
 
     public function testGetAllTasks()

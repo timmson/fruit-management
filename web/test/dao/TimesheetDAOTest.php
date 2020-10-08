@@ -23,7 +23,7 @@ class TimesheetDAOTest extends TestCase
     {
         parent::setUp();
         $this->mysqli = new mysqli_wrapper();
-        $this->dao = new TimesheetDAO($this->mysqli);
+        $this->dao = new TimesheetDAOImpl($this->mysqli);
     }
 
 

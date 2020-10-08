@@ -81,17 +81,4 @@ class HomeService
         return $view;
     }
 
-    public function async($core, $conn, $user): array
-    {
-        $view = [];
-
-        $query = 'select * from (select l.*, datediff(curdate(), fm_date) as fm_days_ago, 
-		t.fm_name, t.fm_descr from fm_work_log l, v_task_all t where t.id = l.fm_task and l.fm_user <> \'' . $user . '\' 
-		order by l.fm_date desc, l.id desc)   a where a.fm_days_ago > -1 and a.fm_days_ago < 5 limit 15 ';
-        $activity = $core->executeQuery($conn, $query);
-        $view["activity"] = $activity;
-
-        return $view;
-    }
-
 }

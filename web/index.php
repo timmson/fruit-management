@@ -49,7 +49,32 @@ $_SESSION['dep'] = $currentdep['name'];
 
 /* * * Temprary debug ** */
 try {
-    if (!file_exists($CORE->inc_admin_dir . $currentdep['incl'])) {
+    if (in_array($currentdep['incl'], ["homeeditor.php"])) {
+        $conn = $CORE->getConnection();
+
+        $user = $_SESSION['user']['samaccountname'];
+
+        $timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn);
+        $taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn);
+        $service = new \ru\timmson\FruitMamangement\service\HomeService($timesheetDAO, $taskDAO);
+
+        $view = [];
+
+        if ($_REQUEST['mode'] == 'async') {
+
+            $view["activity"] = $CORE->getActivity($conn, $user);
+
+        } else {
+
+            $view = $service->sync($_REQUEST, $user);
+        }
+
+        foreach ($view as $key => $value) {
+            $VIEW->assign($key, $value);
+        }
+
+        $CORE->closeConnection($conn);
+    } else if (!file_exists($CORE->inc_admin_dir . $currentdep['incl'])) {
         $CORE->errorHandler(E_ERROR, 'File not found -' . $CORE->inc_admin_dir . $currentdep['incl'], 'admin.php', 57);
     } else {
     	$loadTime = microtime(true);
