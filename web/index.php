@@ -47,18 +47,24 @@ if (isset($_REQUEST['dep'])) {
 $currentdep = $CORE->getcurrentdep($_SESSION['zone'], $_SESSION['dep']);
 $_SESSION['dep'] = $currentdep['name'];
 
+$conn = $CORE->getConnection();
+
+$genericDAO = new \ru\timmson\FruitMamangement\dao\GenericDAOIml($conn);
+$timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn);
+$taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn);
+
+$services = [
+    "homeeditor.php" => new \ru\timmson\FruitMamangement\service\HomeService($genericDAO, $timesheetDAO, $taskDAO),
+    "usereditor.php" => new \ru\timmson\FruitMamangement\service\UserService($timesheetDAO, $taskDAO)
+];
+
 /* * * Temprary debug ** */
 try {
-    if (in_array($currentdep['incl'], ["homeeditor.php"])) {
-        $conn = $CORE->getConnection();
+    if (array_key_exists($currentdep['incl'], $services)) {
 
-        $user = $_SESSION['user']['samaccountname'];
+        $service = $services[$currentdep['incl']];
 
-        $genericDAO = new \ru\timmson\FruitMamangement\dao\GenericDAOIml($conn);
-        $timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn);
-        $taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn);
-        $service = new \ru\timmson\FruitMamangement\service\HomeService($genericDAO, $timesheetDAO, $taskDAO);
-
+        $user = strlen($_REQUEST['user'])>0?$_REQUEST['user']:$_SESSION['user']['samaccountname'];
         $view = [];
 
         if ($_REQUEST['mode'] == 'async') {

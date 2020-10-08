@@ -273,7 +273,11 @@ class Core {
     }
 
     function search($login) {
-        $adauth = $this->configuration['adauth'];
+        /**
+         * TODO
+         * Replace this
+         */
+/*        $adauth = $this->configuration['adauth'];
         $ldap = ldap_connect($adauth['adhost'], $adauth['adport']);
         $ret = ldap_bind($ldap, 'srv-earlypay-tst01' . '@' . $adauth['addomain'], 'f4vC$50Fw');
         if ($ret) {
@@ -282,7 +286,8 @@ class Core {
            $ret = $this->parseAdInfoMulti(ldap_get_entries($ldap, $sr));
         }
         ldap_close($ldap);
-        return $ret;
+        return $ret;*/
+        return [];
     }
 
     private function parseAdInfoMulti($adinfo) {
@@ -330,13 +335,6 @@ class Core {
             }
         return $this->getcurrentdep($zone, '');
     }
-
-   function getActivity($user) {
-       $query = 'select * from (select l.*, datediff(curdate(), fm_date) as fm_days_ago, 
-		t.fm_name, t.fm_descr from fm_work_log l, v_task_all t where t.id = l.fm_task and l.fm_user <> \'' . $user . '\' 
-		order by l.fm_date desc, l.id desc)   a where a.fm_days_ago > -1 and a.fm_days_ago < 5 limit 15 ';
-       return $this->executeQuery($this->connection, $query);
-   }
 
 }
 

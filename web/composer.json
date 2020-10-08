@@ -22,7 +22,8 @@
     ]
   },
   "scripts": {
-    "test": "vendor/bin/phpunit test"
+    "test": "vendor/bin/phpunit test",
+    "coverage": "vendor/bin/phpunit --coverage-html ./tmp test"
   },
   "require": {
     "smarty/smarty": "2.6.31"

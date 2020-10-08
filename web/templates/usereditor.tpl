@@ -105,4 +105,6 @@
 			});
 </script>
 {/literal}
+{else}
+{$users_json}
 {/if}

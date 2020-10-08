@@ -3,49 +3,41 @@
 namespace ru\timmson\FruitMamangement\service;
 
 use PHPUnit\Framework\TestCase;
-use ru\timmson\FruitMamangement\dao\GenericDAO;
 use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\dao\TimesheetDAO;
+use ru\timmson\FruitMamangement\dao\TimeSheetDAO;
 
-class HomeServiceTest extends TestCase
+class UserServiceTest extends TestCase
 {
 
-    private HomeService $service;
-
-    private TimesheetDAO $timesheetDAO;
-
-    private TaskDAO $taskDAO;
-
-    private GenericDAO $genericDAO;
+    private UserService $service;
+    /**
+     * @var TimeSheetDAO
+     */
+    private $timesheetDAO;
+    /**
+     * @var TaskDAO
+     */
+    private $taskDAO;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->genericDAO = $this->createMock(GenericDAO::class);
         $this->timesheetDAO = $this->createMock(TimesheetDAO::class);
         $this->taskDAO = $this->createMock(TaskDAO::class);
-        $this->service = new HomeService(
-            $this->genericDAO,
-            $this->timesheetDAO,
-            $this->taskDAO
-        );
+        $this->service = new UserService($this->timesheetDAO, $this->taskDAO);
     }
 
     public function testSync()
     {
         $request = [
-            "plandate" => 1,
             "week" => 1
         ];
         $user = "user";
 
-        $tasks = [["fm_plan_hour" => 10, "fm_all_hour" => 0]];
-
-        $this->taskDAO->method("getTasksInProgress")->willReturn($tasks);
         $result = $this->service->sync($request, $user);
 
-        $this->assertCount(5, $result);
+        $this->assertCount(3, $result);
+
     }
 
     public function testAsync()
