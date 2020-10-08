@@ -54,15 +54,16 @@ try {
 
         $user = $_SESSION['user']['samaccountname'];
 
+        $genericDAO = new \ru\timmson\FruitMamangement\dao\GenericDAOIml($conn);
         $timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn);
         $taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn);
-        $service = new \ru\timmson\FruitMamangement\service\HomeService($timesheetDAO, $taskDAO);
+        $service = new \ru\timmson\FruitMamangement\service\HomeService($genericDAO, $timesheetDAO, $taskDAO);
 
         $view = [];
 
         if ($_REQUEST['mode'] == 'async') {
 
-            $view["activity"] = $CORE->getActivity($conn, $user);
+            $view = $service->async($_REQUEST, $user);
 
         } else {
 

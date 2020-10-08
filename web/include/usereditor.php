@@ -14,10 +14,10 @@ if ($_REQUEST['mode'] == 'async') {
 	
 } else {
 
-	$conn = $CORE->getConnection($currentdep['props']);
+	$conn = $CORE->getConnection();
 
 	$week = strlen($_REQUEST['week'])>0?$_REQUEST['week']:date('W');
-	$timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAO($conn);
+	$timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn);
 	$timesheet = $timesheetDAO->getCurrentWeekTimesheetByUser($user);
 	$VIEW->assign("timesheet", $timesheet);
 

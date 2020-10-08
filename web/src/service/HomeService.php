@@ -3,6 +3,8 @@
 
 namespace ru\timmson\FruitMamangement\service;
 
+use Core;
+use ru\timmson\FruitMamangement\dao\GenericDAO;
 use ru\timmson\FruitMamangement\dao\TaskDAO;
 use ru\timmson\FruitMamangement\dao\TimesheetDAO;
 
@@ -17,10 +19,15 @@ class HomeService
 
     private TaskDAO $taskDAO;
 
+    private GenericDAO $genericDAO;
+
     public function __construct(
+        GenericDAO $genericDAO,
         TimesheetDAO $timesheetDAO,
-        TaskDAO $taskDAO)
+        TaskDAO $taskDAO
+    )
     {
+        $this->genericDAO = $genericDAO;
         $this->timesheetDAO = $timesheetDAO;
         $this->taskDAO = $taskDAO;
     }
@@ -77,6 +84,20 @@ class HomeService
 
         $monthcal = getMonthCalendar($plandate);
         $view["monthcal"] = $monthcal;
+
+        return $view;
+    }
+
+    /**
+     * @param array $request
+     * @param string $user
+     * @return array
+     */
+    public function async(array $request, string $user):array
+    {
+        $view = [];
+
+        $view["activity"] = $this->genericDAO->getActivity($user);
 
         return $view;
     }

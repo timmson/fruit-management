@@ -26,6 +26,7 @@ class Core {
     private $root_role = 'developer';
     public $debugs = array();
     private $error = 0;
+    private $connection;
 
     public function __construct($conf) {
         if ($conf != null) {
@@ -48,10 +49,12 @@ class Core {
     }
 
     public function getConnection() {
-        $timeout = microtime();
-        $conn =  mysqli_connect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
-        $this->debugTimeout('MY CONNECT', $timeout, 5);
-        return $conn;
+        if ($this->connection == null) {
+            $timeout = microtime();
+            $this->connection =  mysqli_connect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
+            $this->debugTimeout('MY CONNECT', $timeout, 5);
+        }
+        return $this->connection;
     }
 
     public function executeQuery($conn, $query, $debug=0) {
@@ -328,11 +331,11 @@ class Core {
         return $this->getcurrentdep($zone, '');
     }
 
-   function getActivity($conn, $user) {
+   function getActivity($user) {
        $query = 'select * from (select l.*, datediff(curdate(), fm_date) as fm_days_ago, 
 		t.fm_name, t.fm_descr from fm_work_log l, v_task_all t where t.id = l.fm_task and l.fm_user <> \'' . $user . '\' 
 		order by l.fm_date desc, l.id desc)   a where a.fm_days_ago > -1 and a.fm_days_ago < 5 limit 15 ';
-       return $this->executeQuery($conn, $query);
+       return $this->executeQuery($this->connection, $query);
    }
 
 }
