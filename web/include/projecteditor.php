@@ -1,5 +1,6 @@
-<?
-$conn = $CORE->getConnection($currentdep['props']);
+<?php
+$conn = $CORE->getConnection();
+
 if (($_REQUEST['mode']=='async')&&($_REQUEST['oper']=='gif')) {
 	$query = 'select sum(l.fm_spent_hour) as spent_hours, WEEK(l.fm_date) as week
 		 from fm_work_log l, fm_task t where t.id = l.fm_task and t.fm_project = '.$_REQUEST['project'].'  and l.fm_spent_hour>0  group by WEEK(l.fm_date)';
@@ -43,6 +44,4 @@ $data = $CORE->executeQuery($conn, $query);
 $VIEW->assign("data", $data);
 
 
-$CORE->closeConnection($conn)
-
-?>
+$CORE->closeConnection($conn);

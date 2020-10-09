@@ -140,6 +140,22 @@ SET character_set_client = @saved_cs_client;
 
 /*!50003 SET @SAVE_SQL_MODE=@@SQL_MODE*/;
 
+--
+--
+--
+DROP TABLE IF EXISTS `fm_user`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `fm_user`
+(
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `fm_name` VARCHAR(100) NOT NULL,
+    `fm_descr` VARCHAR(255) NULL,
+    `fm_password_enc` VARCHAR(255) NULL,
+    PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
 DELIMITER ;;
 /*!50003 SET SESSION SQL_MODE="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION" */;;
 /*!50003 CREATE */ /*!50017 DEFINER=`root`@`localhost` */ /*!50003 TRIGGER `i_add_work_log` AFTER INSERT ON `fm_task` FOR EACH ROW BEGIN

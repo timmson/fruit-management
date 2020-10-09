@@ -1,10 +1,10 @@
-<?
+<?php
 require_once('./lib/tasklib.php');
 require_once('./lib/rellib.php');
 
-$conn = $CORE->getConnection($currentdep['props']);
+$conn = $CORE->getConnection();
 
-$backlogid = 334;
+$backlogid = 1;
 
 $query = "select * from v_task_in_progress where fm_project  = 'REL' order by id desc";
 $release = $CORE->executeQuery($conn, $query);
@@ -68,4 +68,4 @@ $VIEW->assign("backlog", $backlog);
 $VIEW->assign("backlogid", $backlogid);
 
 $CORE->closeConnection($conn);
-?>
+

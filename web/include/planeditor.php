@@ -1,5 +1,5 @@
-<?
-$conn = $CORE->getConnection($currentdep['props']);
+<?php
+$conn = $CORE->getConnection();
 
 $query = "select * from v_task_in_progress where fm_project  = 'REL' order by id desc";
 $release = $CORE->executeQuery($conn, $query);
@@ -85,4 +85,3 @@ for ($i=0; $i<count($temp); $i++) {
 $VIEW->assign("structtasks", $structtasks);
 
 $CORE->closeConnection($conn);
-?>

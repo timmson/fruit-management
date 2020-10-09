@@ -40,6 +40,14 @@ VALUES (1, 'REL', 'Release project', 'manager', NULL);
 INSERT INTO `fm_project` (id, fm_name, fm_descr, fm_manager, fm_parent)
 VALUES (2, 'SAMPLE', 'Some new project', 'manager', NULL);
 
+-- fm_user
+INSERT INTO `fm_user` (id, fm_name, fm_descr, fm_password_enc)
+VALUES (1, 'root', 'root', '63a9f0ea7bb98050796b649e85481845');
+INSERT INTO `fm_user` (id, fm_name, fm_descr, fm_password_enc)
+VALUES (2, 'fruit', 'User of Fruits', 'e0deff349b2c61f5f796ccaa344a4930');
+INSERT INTO `fm_user` (id, fm_name, fm_descr, fm_password_enc)
+VALUES (3, 'vegetable', 'User of Vegetables', '4bd349cde0fbfbb97b9e3cfb557cb2af');
+
 -- fm_tasks
 INSERT INTO `fm_task` (id, fm_name, fm_descr, fm_project, fm_state, fm_priority, fm_plan, fm_user)
 VALUES (1, 'RFC', 'Release 1', 1, 3, 2, 100, 'fruit');
