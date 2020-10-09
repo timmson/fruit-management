@@ -5,6 +5,7 @@ namespace ru\timmson\FruitMamangement\service;
 
 use ru\timmson\FruitMamangement\dao\TaskDAO;
 use ru\timmson\FruitMamangement\dao\TimesheetDAO;
+use ru\timmson\FruitMamangement\dao\UserDAO;
 
 /**
  * Class UserService
@@ -14,17 +15,21 @@ class UserService
 {
     private TimesheetDAO $timesheetDAO;
     private TaskDAO $taskDAO;
+    private UserDAO $userDAO;
 
     /**
      * UserService constructor.
      * @param TimesheetDAO $timesheetDAO
      * @param TaskDAO $taskDAO
+     * @param UserDAO $userDAO
      */
-    public function __construct(TimesheetDAO $timesheetDAO, TaskDAO $taskDAO)
+    public function __construct(TimesheetDAO $timesheetDAO, TaskDAO $taskDAO, UserDAO $userDAO)
     {
         $this->timesheetDAO = $timesheetDAO;
         $this->taskDAO = $taskDAO;
+        $this->userDAO = $userDAO;
     }
+
 
     /**
      * @param array $request
@@ -52,16 +57,18 @@ class UserService
     {
         $view = [];
 
-/*        $data = $CORE->search($_REQUEST['user']);
-        $infos = array();
-        for ($i = 0; $i < count($data) ;$i++) {
-            $info = array();
-            $info['label'] = $data[$i]['cn'].' ('.$data[$i]['department'].')';
-            $info['value'] = $data[$i]['samaccountname'];
-            $infos[] = $info;
-        }*/
+        $data = [];
+        $data[] = $this->userDAO->getUserByName($request["user"]);
 
-        $view["users_json"] = "[]";//json_encode($infos);
+        $infos = [];
+        for ($i = 0; $i < count($data); $i++) {
+            $info = [];
+            $info["label"] = $data[$i]["fm_descr"];
+            $info["value"] = $data[$i]["fm_name"];
+            $infos[] = $info;
+        }
+
+        $view["users_json"] = json_encode($infos);
         return $view;
     }
 }

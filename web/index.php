@@ -50,10 +50,11 @@ $conn = $CORE->getConnection();
 $genericDAO = new \ru\timmson\FruitMamangement\dao\GenericDAOIml($conn);
 $timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn);
 $taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn);
+$userDAO = new \ru\timmson\FruitMamangement\dao\UserDAOImpl($conn);
 
 $services = [
     "homeeditor.php" => new \ru\timmson\FruitMamangement\service\HomeService($genericDAO, $timesheetDAO, $taskDAO),
-    "usereditor.php" => new \ru\timmson\FruitMamangement\service\UserService($timesheetDAO, $taskDAO)
+    "usereditor.php" => new \ru\timmson\FruitMamangement\service\UserService($timesheetDAO, $taskDAO, $userDAO)
 ];
 
 /* * * Temprary debug ** */

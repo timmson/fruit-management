@@ -5,6 +5,7 @@ namespace ru\timmson\FruitMamangement\service;
 use PHPUnit\Framework\TestCase;
 use ru\timmson\FruitMamangement\dao\TaskDAO;
 use ru\timmson\FruitMamangement\dao\TimeSheetDAO;
+use ru\timmson\FruitMamangement\dao\UserDAO;
 
 class UserServiceTest extends TestCase
 {
@@ -18,13 +19,18 @@ class UserServiceTest extends TestCase
      * @var TaskDAO
      */
     private $taskDAO;
+    /**
+     * @var UserDAO
+     */
+    private $userDAO;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->timesheetDAO = $this->createMock(TimesheetDAO::class);
         $this->taskDAO = $this->createMock(TaskDAO::class);
-        $this->service = new UserService($this->timesheetDAO, $this->taskDAO);
+        $this->userDAO = $this->createMock(UserDAO::class);
+        $this->service = new UserService($this->timesheetDAO, $this->taskDAO, $this->userDAO);
     }
 
     public function testSync()
@@ -42,9 +48,13 @@ class UserServiceTest extends TestCase
 
     public function testAsync()
     {
-        $request = [];
+        $arrange = ["fm_name" => "", "fm_descr" => ""];
+        $request = [
+            "user" => "user"
+        ];
         $user = "user";
 
+        $this->userDAO->method("getUserByName")->with($user)->willReturn($arrange);
         $result = $this->service->async($request, $user);
 
         $this->assertCount(1, $result);
