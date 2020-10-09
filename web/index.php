@@ -2,8 +2,6 @@
 
 require_once(__DIR__."/vendor/autoload.php");
 
-require_once('./lib/acclib.inc.php');
-
 $siteconfig = './config/site.ini';
 
 $CORE = new Core(parse_ini_file($siteconfig, true));
