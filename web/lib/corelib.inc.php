@@ -235,30 +235,28 @@ class Core {
     }
 
     function auth($login, $pass) {
-        global $root_name, $root_pass;
-        $ret = '';
-        if ((md5($pass) == $root_pass)) {
+        $root_name = "root";
+        $root_pass = "5f4dcc3b5aa765d61d8327deb882cf99";
+
+        $ret = "";
+        if (($root_name == $login) && ($root_pass == md5($pass))) {
             $ret = $this->root_role;
-            $_SESSION['user']['fio'] = $login;
-            $_SESSION['user']['mail'] = $_SERVER['SERVER_ADMIN'];
-	    $_SESSION['user']['samaccountname'] = $login;
-        } else if ((strlen($login) > 0) && (strlen($pass) > 0)) {
-            $adauth = $this->configuration['adauth'];
-            $ldap = ldap_connect($adauth['adhost'], $adauth['adport']);
-            $ret = ldap_bind($ldap, $login . '@' . $adauth['addomain'], $pass);
-            if ($ret) {
-                $filter = $adauth['adfilter'] . '=' . $login;
-                $sr = ldap_search($ldap, $adauth['adbasedn'], $filter);
-                $_SESSION['user'] = $this->parseAdInfo(ldap_get_entries($ldap, $sr));
-                $ret = $this->guest_role;
-                foreach ($this->roles as $role) {
-                    if (in_array($login, $role['login'])) {
-                        $ret = $role['name'];
-                    }
-                }
+            $_SESSION["user"]["fio"] = $login;
+            $_SESSION["user"]["mail"] = $_SERVER['SERVER_ADMIN'];
+            $_SESSION['user']['samaccountname'] = $login;
+        } else {
+
+            $userDAO = new \ru\timmson\FruitMamangement\dao\UserDAOImpl($this->getConnection());
+            $result = $userDAO ->getUserByName($login);
+
+            if ($result != null && $result["fm_password_enc"] == md5($pass)) {
+                $ret = $this->root_role;
+                $_SESSION["user"]["fio"] = $result["fm_descr"];
+                $_SESSION['user']['samaccountname'] = $login;
+                //$_SESSION["user"]["mail"] = $result["fm_descr"];
             }
-            ldap_close($ldap);
         }
+
         return $ret;
     }
 

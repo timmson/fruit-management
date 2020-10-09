@@ -14,6 +14,6 @@ interface UserDAO
      * @param string $name
      * @return array
      */
-    public function getUserByName(string $name): array;
+    public function getUserByName(string $name): ?array;
 
 }

@@ -16,7 +16,7 @@ class UserDAOTest extends TestCase
         $password = "p1ssword";
         $arrange = [["fm_password_enc" => "p1ssword"]];
 
-        $mysqli->addQueryAndResult("select * from fm_user where fm_name = $name", $arrange);
+        $mysqli->addQueryAndResult("select * from fm_user where fm_name = '$name'", $arrange);
         $result = $dao ->getUserByName($name);
 
         $this->assertEquals($password, $result["fm_password_enc"]);
