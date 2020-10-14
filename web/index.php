@@ -47,21 +47,21 @@ $_SESSION['dep'] = $currentdep['name'];
 
 $conn = $CORE->getConnection();
 
-$genericDAO = new \ru\timmson\FruitMamangement\dao\GenericDAOIml($conn);
-$timesheetDAO = new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn);
-$taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn);
-$userDAO = new \ru\timmson\FruitMamangement\dao\UserDAOImpl($conn);
-
-$services = [
-    "homeeditor.php" => new \ru\timmson\FruitMamangement\service\HomeService($genericDAO, $timesheetDAO, $taskDAO),
-    "usereditor.php" => new \ru\timmson\FruitMamangement\service\UserService($timesheetDAO, $taskDAO, $userDAO)
-];
+$containerBuilder = new DI\ContainerBuilder();
+$containerBuilder->addDefinitions([
+    \ru\timmson\FruitMamangement\dao\GenericDAO::class => new \ru\timmson\FruitMamangement\dao\GenericDAOImpl($conn),
+    \ru\timmson\FruitMamangement\dao\TimesheetDAO::class => new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn),
+    \ru\timmson\FruitMamangement\dao\TaskDAO::class => new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn),
+    \ru\timmson\FruitMamangement\dao\UserDAO::class => new \ru\timmson\FruitMamangement\dao\UserDAOImpl($conn)
+]);
+$container = $containerBuilder->build();
 
 /* * * Temprary debug ** */
-try {
-    if (array_key_exists($currentdep['incl'], $services)) {
 
-        $service = $services[$currentdep['incl']];
+try {
+    if ($container->has($currentdep['service'])) {
+
+        $service = $container->get($currentdep['service']);
 
         $user = strlen($_REQUEST['user'])>0?$_REQUEST['user']:$_SESSION['user']['samaccountname'];
         $view = [];

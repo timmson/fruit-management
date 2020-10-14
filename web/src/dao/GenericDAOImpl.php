@@ -4,7 +4,7 @@
 namespace ru\timmson\FruitMamangement\dao;
 
 
-class GenericDAOIml extends AbstractDAO implements GenericDAO
+class GenericDAOImpl extends AbstractDAO implements GenericDAO
 {
 
     protected function getColumns(): array

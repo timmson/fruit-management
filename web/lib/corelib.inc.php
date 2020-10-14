@@ -125,7 +125,14 @@ class Core {
                 $this->zones[$i]['dep'][$j]['name'] = $zone['dep'][$j];
                 $this->zones[$i]['dep'][$j]['descr'] = $root[$zone['dep'][$j]]['descr'];
                 $this->zones[$i]['dep'][$j]['access'] = $root[$zone['dep'][$j]]['access'];
+                /**
+                 * @legacy
+                 */
                 $this->zones[$i]['dep'][$j]['incl'] = $this->zones[$i]['dep'][$j]['name'] . 'editor.php';
+                /**
+                 * New
+                 */
+                $this->zones[$i]['dep'][$j]['service'] = "\\ru\\timmson\\FruitMamangement\\service\\" . ucfirst($this->zones[$i]['dep'][$j]['name']) . 'Service';
                 $this->zones[$i]['dep'][$j]['icon'] = 'admin_' . $this->zones[$i]['dep'][$j]['name'] . '.gif';
                 $this->zones[$i]['dep'][$j]['tpl'] = $this->zones[$i]['dep'][$j]['name'] . 'editor.tpl';
                 $this->zones[$i]['dep'][$j]['props'] = $props;
