@@ -26,7 +26,7 @@ class Core {
     private $root_role = 'developer';
     public $debugs = array();
     private $error = 0;
-    private $connection;
+    private $connection = null;
 
     public function __construct($conf) {
         if ($conf != null) {
@@ -51,7 +51,7 @@ class Core {
     public function getConnection() {
         if ($this->connection == null) {
             $timeout = microtime();
-            $this->connection =  mysqli_connect($_ENV['MYSQL_HOST'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
+            $this->connection = new \ru\timmson\FruitMamangement\dao\MySQLConnection($_ENV['MYSQL_HOST'], $_ENV['MYSQL_PORT'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
             $this->debugTimeout('MY CONNECT', $timeout, 5);
         }
         return $this->connection;
@@ -59,21 +59,14 @@ class Core {
 
     public function executeQuery($conn, $query, $debug=0) {
         $timeout = microtime();
-        $result = mysqli_query($conn, $query);
-
-        if ($result instanceof mysqli_result) {
-            for ($data = array(); $row = $result->fetch_assoc(); $data[] = $row);
-        } else {
-            $data = $result;
-        }
-
+        $data = $conn->query($query);
         $this->debugTimeout('EXECUTE', $timeout, 5);
         $this->debugQuery($query, $data, $debug);
         return $data;
     }
 
     public function closeConnection($conn) {
-        mysqli_close($conn);
+        $conn->close();
     }
 
     private function debugTimeout($descr, $timeout, $limit) {
@@ -241,7 +234,7 @@ class Core {
         return iconv($this->configuration['global']['encoding'], 'UTF-8', $str);
     }
 
-    function auth($login, $pass) {
+    function auth($login, $pass, $userDAO) {
         $root_name = "root";
         $root_pass = "5f4dcc3b5aa765d61d8327deb882cf99";
 
@@ -253,7 +246,6 @@ class Core {
             $_SESSION['user']['samaccountname'] = $login;
         } else {
 
-            $userDAO = new \ru\timmson\FruitMamangement\dao\UserDAOImpl($this->getConnection());
             $result = $userDAO ->getUserByName($login);
 
             if ($result != null && $result["fm_password_enc"] == md5($pass)) {

@@ -8,12 +8,26 @@ $CORE = new Core(parse_ini_file($siteconfig, true));
 $VIEW = $CORE->smarty;
 set_error_handler(array($CORE, 'customErrorHandler'));
 
+$conn = $CORE->getConnection();
+
+$containerBuilder = new DI\ContainerBuilder();
+$containerBuilder->addDefinitions([
+    \ru\timmson\FruitMamangement\dao\Connection::class => $conn,
+    \ru\timmson\FruitMamangement\dao\GenericDAO::class => new \ru\timmson\FruitMamangement\dao\GenericDAOImpl($conn),
+    \ru\timmson\FruitMamangement\dao\SubscriberDAO::class => new \ru\timmson\FruitMamangement\dao\SubscriberDAOImpl($conn),
+    \ru\timmson\FruitMamangement\dao\TaskDAO::class => new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn),
+    \ru\timmson\FruitMamangement\dao\TimesheetDAO::class => new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn),
+    \ru\timmson\FruitMamangement\dao\UserDAO::class => new \ru\timmson\FruitMamangement\dao\UserDAOImpl($conn)
+]);
+$container = $containerBuilder->build();
+
+
 /* * * Login block ** */
 $is_out = ($_GET['login'] == 'logout');
 if (($_SESSION['login'] == '') || ($is_out)) {
     $mess = '';
     if ((isset($_REQUEST['login'])) && (!$is_out)) {
-        $login = $CORE->auth($_REQUEST['login'], $_REQUEST['pass']);
+        $login = $CORE->auth($_REQUEST['login'], $_REQUEST['pass'], $container->get(\ru\timmson\FruitMamangement\dao\UserDAO::class));
         if ($login == '') {
             $mess = 'fail';
         }
@@ -45,17 +59,6 @@ if (isset($_REQUEST['dep'])) {
 $currentdep = $CORE->getcurrentdep($_SESSION['zone'], $_SESSION['dep']);
 $_SESSION['dep'] = $currentdep['name'];
 
-$conn = $CORE->getConnection();
-
-$containerBuilder = new DI\ContainerBuilder();
-$containerBuilder->addDefinitions([
-    \ru\timmson\FruitMamangement\dao\GenericDAO::class => new \ru\timmson\FruitMamangement\dao\GenericDAOImpl($conn),
-    \ru\timmson\FruitMamangement\dao\TimesheetDAO::class => new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn),
-    \ru\timmson\FruitMamangement\dao\TaskDAO::class => new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn),
-    \ru\timmson\FruitMamangement\dao\UserDAO::class => new \ru\timmson\FruitMamangement\dao\UserDAOImpl($conn)
-]);
-$container = $containerBuilder->build();
-
 /* * * Temprary debug ** */
 
 try {
@@ -66,6 +69,7 @@ try {
         $user = strlen($_REQUEST['user'])>0?$_REQUEST['user']:$_SESSION['user']['samaccountname'];
         $view = [];
 
+
         if ($_REQUEST['mode'] == 'async') {
 
             $view = $service->async($_REQUEST, $user);
@@ -73,7 +77,9 @@ try {
         } else {
 
             $view = $service->sync($_REQUEST, $user);
+
         }
+
 
         foreach ($view as $key => $value) {
             $VIEW->assign($key, $value);

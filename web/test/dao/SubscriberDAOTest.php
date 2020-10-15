@@ -4,26 +4,26 @@ namespace ru\timmson\FruitMamangement\dao;
 
 use PHPUnit\Framework\TestCase;
 
-require_once(__DIR__ . "/mysqli_wrapper.php");
+require_once(__DIR__ . "/MockConnection.php");
 
 class SubscriberDAOTest extends TestCase
 {
 
     /**
-     * @var mysqli_wrapper
+     * @var MockConnection
      */
-    private mysqli_wrapper $mysqli;
+    private MockConnection $mysqli;
 
     /**
-     * @var SubscriberDAO
+     * @var SubscriberDAOImpl
      */
-    private SubscriberDAO $dao;
+    private SubscriberDAOImpl $dao;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->mysqli = new mysqli_wrapper();
-        $this->dao = new SubscriberDAO($this->mysqli);
+        $this->mysqli = new MockConnection();
+        $this->dao = new SubscriberDAOImpl($this->mysqli);
     }
 
     public function testGetSubscribersByTaskId()

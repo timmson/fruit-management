@@ -1,51 +1,34 @@
 <?php
 
-
 namespace ru\timmson\FruitMamangement\dao;
+
+
+use Exception;
 
 /**
  * Class SubscriberDAO
  * @package ru\timmson\FruitMamangement\dao
  */
-class SubscriberDAO extends AbstractDAO
+interface SubscriberDAO
 {
     /**
      * @param int $id
      * @return array
+     * @throws Exception
      */
-    public function getSubscribersByTaskId(int $id)
-    {
-
-        $query = "select * from fm_subscribe";
-
-        return $this->executeQuery($query, ["fm_task" => $id], []);
-
-    }
-
-    function getColumns(): array
-    {
-        return [];
-    }
+    public function getSubscribersByTaskId(int $id);
 
     /**
      * @param int $id
      * @param string $name
+     * @throws Exception
      */
-    public function subscribe(int $id, string $name): void
-    {
-        $query = "insert into fm_subscribe values(null, $id, '$name')";
-
-        $this->executeQuery($query, [], []);
-    }
+    public function subscribe(int $id, string $name): void;
 
     /**
      * @param int $id
      * @param string $name
+     * @throws Exception
      */
-    public function unsubscribe(int $id, string $name): void
-    {
-        $query = "delete from fm_subscribe where fm_user ='$name' and fm_task = $id";
-
-        $this->executeQuery($query, [], []);
-    }
+    public function unsubscribe(int $id, string $name): void;
 }

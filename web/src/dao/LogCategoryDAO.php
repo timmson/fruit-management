@@ -3,6 +3,8 @@
 
 namespace ru\timmson\FruitMamangement\dao;
 
+use Exception;
+
 /**
  * Class LogCategoryDAO
  * @package ru\timmson\FruitMamangement\dao
@@ -12,6 +14,7 @@ class LogCategoryDAO extends AbstractDAO
 
     /**
      * @return array
+     * @throws Exception
      */
     public function getAllOrderById()
     {

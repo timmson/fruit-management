@@ -4,6 +4,8 @@
 namespace ru\timmson\FruitMamangement\dao;
 
 
+use Exception;
+
 interface Connection
 {
 
@@ -22,6 +24,7 @@ interface Connection
      *
      * @param string $query
      * @return array
+     * @throws Exception
      */
     public function query(string $query): array;
 

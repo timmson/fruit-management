@@ -5,8 +5,8 @@ $url_prefix = $CORE->configuration['global']['site']."?dep=task&task=";
 
 $conn = $CORE->getConnection();
 
-$subscriberDAO = new \ru\timmson\FruitMamangement\dao\SubscriberDAO($conn);
-$taskDAO = new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn);
+$subscriberDAO = $container->get(\ru\timmson\FruitMamangement\dao\SubscriberDAO::class);
+$taskDAO = $container->get(\ru\timmson\FruitMamangement\dao\TaskDAO::class);
 
 if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 	$taskid = $_REQUEST['task'];

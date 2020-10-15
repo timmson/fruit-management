@@ -3,6 +3,8 @@
 
 namespace ru\timmson\FruitMamangement\dao;
 
+use Exception;
+
 /**
  * Class AbstractDAO
  *
@@ -11,15 +13,15 @@ namespace ru\timmson\FruitMamangement\dao;
 abstract class AbstractDAO
 {
 
-    private object $mysqli;
+    protected Connection $connection;
 
     /**
-     * AbstractDAO constructor.
-     * @param $mysqli
+     * setConnection.
+     * @param $connection
      */
-    public function __construct($mysqli)
+    public function __construct(Connection $connection)
     {
-        $this->mysqli = $mysqli;
+        $this->connection = $connection;
     }
 
     /**
@@ -32,21 +34,15 @@ abstract class AbstractDAO
      * @param array $filter
      * @param array $order
      * @return array
+     * @throws Exception
      */
     final function executeQuery(string $query, array $filter, array $order)
     {
 
         $query = $this->buildQuery($query, $filter, $order);
 
-        $result = $this->mysqli->query($query);
+        return $this->connection->query($query);
 
-        $data = array();
-
-        while (method_exists($result, "fetch_assoc") && $row = $result->fetch_assoc()) {
-            $data[] = $row;
-        }
-
-        return $data;
     }
 
     /**

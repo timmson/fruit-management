@@ -42,6 +42,6 @@ class MySQLConnection implements Connection
      */
     public function close(): void
     {
-        $this->close();
+        mysqli_close($this->connection);
     }
 }

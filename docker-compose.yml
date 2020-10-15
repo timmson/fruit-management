@@ -7,7 +7,7 @@ services:
     container_name: fm-db
     restart: on-failure
     ports:
-      - "3306:3306"
+      - "${DB_PORT}:${DB_PORT}"
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME}
@@ -27,7 +27,8 @@ services:
       - "./web/:/var/www/html/"
 
     environment:
-      - MYSQL_HOST=fm-db:3306
+      - MYSQL_HOST=fm-db
+      - MYSQL_PORT=${DB_PORT}
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
       - MYSQL_PASSWORD=${DB_PASSWORD}

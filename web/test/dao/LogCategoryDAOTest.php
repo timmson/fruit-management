@@ -4,14 +4,14 @@ namespace ru\timmson\FruitMamangement\dao;
 
 use PHPUnit\Framework\TestCase;
 
-require_once(__DIR__ . "/mysqli_wrapper.php");
+require_once(__DIR__ . "/MockConnection.php");
 
 class LogCategoryDAOTest extends TestCase
 {
     /**
-     * @var mysqli_wrapper
+     * @var MockConnection
      */
-    private mysqli_wrapper $mysqli;
+    private MockConnection $mysqli;
 
     /**
      * @var LogCategoryDAO
@@ -21,7 +21,7 @@ class LogCategoryDAOTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->mysqli = new mysqli_wrapper();
+        $this->mysqli = new MockConnection();
         $this->dao = new LogCategoryDAO($this->mysqli);
     }
 

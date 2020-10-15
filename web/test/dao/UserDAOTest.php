@@ -4,14 +4,14 @@ namespace ru\timmson\FruitMamangement\dao;
 
 use PHPUnit\Framework\TestCase;
 
-require_once(__DIR__ . "/mysqli_wrapper.php");
+require_once(__DIR__ . "/MockConnection.php");
 
 class UserDAOTest extends TestCase
 {
     public function testGetUserByName()
     {
         $name = "fruit";
-        $mysqli = new mysqli_wrapper();
+        $mysqli = new MockConnection();
         $dao = new UserDAOImpl($mysqli);
         $password = "p1ssword";
         $arrange = [["fm_password_enc" => "p1ssword"]];
