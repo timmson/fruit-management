@@ -3,6 +3,7 @@
 
 namespace ru\timmson\FruitMamangement\service;
 
+use Exception;
 use ru\timmson\FruitMamangement\dao\TaskDAO;
 use ru\timmson\FruitMamangement\dao\TimesheetDAO;
 use ru\timmson\FruitMamangement\dao\UserDAO;
@@ -52,6 +53,7 @@ class UserService
      * @param array $request
      * @param string $user
      * @return array
+     * @throws Exception
      */
     public function async(array $request, string $user): array
     {
@@ -70,5 +72,23 @@ class UserService
 
         $view["users_json"] = json_encode($infos);
         return $view;
+    }
+
+    /**
+     * @param string $login
+     * @param string $password
+     * @return array
+     * @throws Exception
+     */
+    public function login(string $login, string $password)
+    {
+        $result = $this->userDAO->getUserByNameAndPassword($login, md5($password));
+
+        if ($result != null) {
+            return [0, "SUCCESS"];
+        }
+
+        return [-1, "WRONG_CREDENTIALS"];
+
     }
 }

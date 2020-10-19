@@ -23,26 +23,30 @@ $container = $containerBuilder->build();
 
 
 /* * * Login block ** */
-$is_out = ($_GET['login'] == 'logout');
-if (($_SESSION['login'] == '') || ($is_out)) {
-    $mess = '';
-    if ((isset($_REQUEST['login'])) && (!$is_out)) {
-        $login = $CORE->auth($_REQUEST['login'], $_REQUEST['pass'], $container->get(\ru\timmson\FruitMamangement\dao\UserDAO::class));
-        if ($login == '') {
-            $mess = 'fail';
+$is_out = ($_GET["login"] == "logout");
+
+if (($_SESSION["login"] == "") || ($is_out)) {
+    $mess = "";
+
+    if ((isset($_REQUEST["login"])) && (!$is_out)) {
+        $login = $CORE->auth($_REQUEST["login"], $_REQUEST["pass"], $container->get(\ru\timmson\FruitMamangement\dao\UserDAO::class));
+        if ($login == "") {
+            $mess = "fail";
         }
     } else {
-        $login = '';
-        $mess = '';
+        $login = "";
+        $mess = "";
+        //header("Location: .");
     }
 
-    if ($login == '') {
-        $VIEW->assign('mess', $mess);
+    if ($login == "") {
+        $VIEW->assign("mess", $mess);
         session_unset();
         $VIEW->display($CORE->login_tpl);
         exit;
     }
-    $_SESSION['login'] = $login;
+
+    $_SESSION["login"] = $login;
 }
 /* * * End of login block ** */
 

@@ -60,5 +60,26 @@ class UserServiceTest extends TestCase
         $this->assertCount(1, $result);
     }
 
+    public function testLoginWithRightCredentials()
+    {
+        $login = "user";
+        $password = "right_password";
+        $arrange = ["fm_name" => $login, "fm_descr" => "", "fm_password_enc" => md5($password)];
 
+        $this->userDAO->method("getUserByNameAndPassword")->with($login, md5($password))->willReturn($arrange);
+        $result = $this->service->login($login, $password);
+
+        $this->assertEquals([0, "SUCCESS"], $result);
+    }
+
+    public function testLoginWithBadCredentials()
+    {
+
+        $login = "user";
+        $password = "wrong_password";
+
+        $result = $this->service->login($login, $password);
+
+        $this->assertEquals([-1, "WRONG_CREDENTIALS"], $result);
+    }
 }

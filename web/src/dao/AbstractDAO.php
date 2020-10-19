@@ -60,9 +60,9 @@ abstract class AbstractDAO
 
             $filterQuery = [];
             foreach ($filter as $name => $value) {
-                $filterQuery [] = " " . $name . " = " . (array_key_exists($name, $columns) && $columns[$name] == "string" ? "'" . $value . "'" : $value);
+                $filterQuery [] = $name . " = " . (array_key_exists($name, $columns) && $columns[$name] == "string" ? "'" . $value . "'" : $value);
             }
-            $query .= " where" . implode(" and ", $filterQuery);
+            $query .= " where " . implode(" and ", $filterQuery);
         }
 
         if (count($order) > 0) {

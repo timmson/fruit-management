@@ -246,9 +246,9 @@ class Core {
             $_SESSION['user']['samaccountname'] = $login;
         } else {
 
-            $result = $userDAO ->getUserByName($login);
+            $result = $userDAO ->getUserByName($login, md5($pass));
 
-            if ($result != null && $result["fm_password_enc"] == md5($pass)) {
+            if ($result != null) {
                 $ret = $this->root_role;
                 $_SESSION["user"]["fio"] = $result["fm_descr"];
                 $_SESSION['user']['samaccountname'] = $login;
