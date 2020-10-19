@@ -72,6 +72,17 @@ class UserServiceTest extends TestCase
         $this->assertEquals([0, "SUCCESS"], $result);
     }
 
+    public function testLoginAsRoot()
+    {
+        $login = "root";
+        $password = "root";
+
+        $result = $this->service->login($login, $password);
+
+        $this->assertEquals([0, "SUCCESS"], $result);
+    }
+
+
     public function testLoginWithBadCredentials()
     {
 
@@ -82,4 +93,25 @@ class UserServiceTest extends TestCase
 
         $this->assertEquals([-1, "WRONG_CREDENTIALS"], $result);
     }
+
+/*$root_name = "root";
+$root_pass = "5f4dcc3b5aa765d61d8327deb882cf99";
+
+$ret = "";
+if (($root_name == $login) && ($root_pass == md5($pass))) {
+$ret = $this->root_role;
+$_SESSION["user"]["fio"] = $login;
+$_SESSION["user"]["mail"] = $_SERVER['SERVER_ADMIN'];
+$_SESSION["user"]["samaccountname"] = $login;
+} else {
+
+    $result = $userDAO ->getUserByNameAndPassword($login, md5($pass));
+
+    if ($result != null) {
+        $ret = $this->root_role;
+        $_SESSION["user"]["fio"] = $result["fm_descr"];
+        $_SESSION["user"]["samaccountname"] = $login;
+        //$_SESSION["user"]["mail"] = $result["fm_descr"];
+    }
+}*/
 }

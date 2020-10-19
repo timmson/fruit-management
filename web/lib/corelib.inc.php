@@ -243,7 +243,7 @@ class Core {
             $ret = $this->root_role;
             $_SESSION["user"]["fio"] = $login;
             $_SESSION["user"]["mail"] = $_SERVER['SERVER_ADMIN'];
-            $_SESSION['user']['samaccountname'] = $login;
+            $_SESSION["user"]["samaccountname"] = $login;
         } else {
 
             $result = $userDAO ->getUserByNameAndPassword($login, md5($pass));
@@ -251,7 +251,7 @@ class Core {
             if ($result != null) {
                 $ret = $this->root_role;
                 $_SESSION["user"]["fio"] = $result["fm_descr"];
-                $_SESSION['user']['samaccountname'] = $login;
+                $_SESSION["user"]["samaccountname"] = $login;
                 //$_SESSION["user"]["mail"] = $result["fm_descr"];
             }
         }
