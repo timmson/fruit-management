@@ -69,17 +69,18 @@ class UserServiceTest extends TestCase
         $this->userDAO->method("getUserByNameAndPassword")->with($login, md5($password))->willReturn($arrange);
         $result = $this->service->login($login, $password);
 
-        $this->assertEquals([0, "SUCCESS"], $result);
+        $this->assertEquals([0, "SUCCESS", $arrange], $result);
     }
 
     public function testLoginAsRoot()
     {
         $login = "root";
         $password = "root";
+        $arrange = ["fm_name" => $login, "fm_descr" => "", "fm_password_enc" => md5($password)];
 
         $result = $this->service->login($login, $password);
 
-        $this->assertEquals([0, "SUCCESS"], $result);
+        $this->assertEquals([0, "SUCCESS", $arrange], $result);
     }
 
 

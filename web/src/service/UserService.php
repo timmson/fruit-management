@@ -90,13 +90,13 @@ class UserService
 
         if ($root_name == $login && $root_pass == md5($password)) {
 
-            $ret = [0, "SUCCESS"];
+            $ret = [0, "SUCCESS", ["fm_name" => $login, "fm_descr" => "", "fm_password_enc" => md5($password)]];
 
         } else {
             $result = $this->userDAO->getUserByNameAndPassword($login, md5($password));
 
             if ($result != null) {
-                $ret = [0, "SUCCESS"];
+                $ret = [0, "SUCCESS", $result];
             }
         }
 
