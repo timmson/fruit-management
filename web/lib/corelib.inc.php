@@ -246,7 +246,7 @@ class Core {
             $_SESSION['user']['samaccountname'] = $login;
         } else {
 
-            $result = $userDAO ->getUserByName($login, md5($pass));
+            $result = $userDAO ->getUserByNameAndPassword($login, md5($pass));
 
             if ($result != null) {
                 $ret = $this->root_role;
