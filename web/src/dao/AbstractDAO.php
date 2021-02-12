@@ -36,7 +36,7 @@ abstract class AbstractDAO
      * @return array
      * @throws Exception
      */
-    final function executeQuery(string $query, array $filter, array $order)
+    final function executeQuery(string $query, array $filter, array $order): array
     {
 
         $query = $this->buildQuery($query, $filter, $order);

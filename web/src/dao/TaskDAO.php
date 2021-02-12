@@ -51,4 +51,17 @@ interface TaskDAO
      * @return array
      */
     public function geAllTasksByParentId(int $id): array;
+
+    /**
+     * @param int $id
+     * @param int $fromId
+     * @param int $toId
+     */
+    public function changeParent(int $id, int $fromId, int $toId): void;
+
+    /**
+     * @param int $id
+     * @param string $statusName
+     */
+    public function updateStatus(int $id, string $statusName) : void;
 }

@@ -93,4 +93,29 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
 
         return $this->executeQuery($query, [], []);
     }
+
+    /**
+     * @param int $id
+     * @param int $fromId
+     * @param int $toId
+     * @throws Exception
+     */
+    public function changeParent(int $id, int $fromId, int $toId): void
+    {
+        $query = "update fm_relation set fm_parent=$toId where fm_parent=$fromId and fm_child=$id";
+        $this->executeQuery($query, [], []);
+    }
+
+    /**
+     * @param int $id
+     * @param string $statusName
+     * @throws Exception
+     */
+    public function updateStatus(int $id, string $statusName): void
+    {
+        $query = "update fm_task set fm_state = (select id from fm_state where fm_name = '$statusName') where id = $id";
+        $this->executeQuery($query, [], []);
+    }
+
+
 }

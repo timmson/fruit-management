@@ -40,10 +40,11 @@ class MockConnection implements Connection
     {
         $this->queries[$query] = $result;
 
-
     }
 
-
+    /**
+     * @inheritDoc
+     */
     public function close(): void
     {
 

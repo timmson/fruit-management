@@ -2,6 +2,7 @@
 
 namespace ru\timmson\FruitMamangement\dao;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 require_once(__DIR__ . "/MockConnection.php");
@@ -25,6 +26,9 @@ class TaskDAOTest extends TestCase
         $this->dao = new TaskDAOImpl($this->mysqli);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetAllTasks()
     {
         $arrange = [["name" => "0", "work" => "yes"]];
@@ -35,6 +39,9 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetTaskById()
     {
         $id = 1;
@@ -46,6 +53,9 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange[0], $result);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetTaskByName()
     {
         $name = "REL-1";
@@ -58,6 +68,9 @@ class TaskDAOTest extends TestCase
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function testGetAllTasksWithFilterAndOrder()
     {
         $arrange = [["name" => "0"]];
@@ -70,6 +83,9 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetTasksInProgress()
     {
         $arrange = [["name" => "0", "work" => "yes"]];
@@ -80,6 +96,9 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetInProgressWithFilterAndOrder()
     {
         $arrange = [["name" => "0"]];
@@ -92,6 +111,9 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testGetSubscribedTaskByUser()
     {
         $user = "dummy";
@@ -103,7 +125,11 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
-    public function testGeAllTasksByParentId() {
+    /**
+     * @throws Exception
+     */
+    public function testGeAllTasksByParentId()
+    {
         $id = 1;
         $arrange = [["id" => "1"]];
 
@@ -111,6 +137,32 @@ class TaskDAOTest extends TestCase
         $result = $this->dao->geAllTasksByParentId($id);
 
         $this->assertEquals($arrange, $result);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testChangeParent()
+    {
+        $arrange = [];
+
+        $this->mysqli->addQueryAndResult("update fm_relation set fm_parent=2 where fm_parent=1 and fm_child=3", $arrange);
+        $result = $this->dao->changeParent(3, 1, 2);
+
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testUpdateStatus()
+    {
+        $arrange = [];
+
+        $this->mysqli->addQueryAndResult("update fm_task set fm_state = (select id from fm_state where fm_name = 'new') where id = 1", $arrange);
+        $result = $this->dao->updateStatus(1, "new");
+
+        $this->assertTrue(true);
     }
 
 }
