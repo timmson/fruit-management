@@ -103,4 +103,14 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($arrange, $result);
     }
 
+    public function testGeAllTasksByParentId() {
+        $id = 1;
+        $arrange = [["id" => "1"]];
+
+        $this->mysqli->addQueryAndResult("select t.* from fm_relation r, v_task_all t where r.fm_parent = $id and r.fm_child = t.id order by t.fm_priority, t.id", $arrange);
+        $result = $this->dao->geAllTasksByParentId($id);
+
+        $this->assertEquals($arrange, $result);
+    }
+
 }

@@ -12,7 +12,7 @@ use ru\timmson\FruitMamangement\dao\TimesheetDAO;
  * Class HomeService - service for home tab
  * @package ru\timmson\FruitMamangement\service
  */
-class HomeService
+class HomeService implements Service
 {
 
     private TimesheetDAO $timesheetDAO;
@@ -88,11 +88,6 @@ class HomeService
         return $view;
     }
 
-    /**
-     * @param array $request
-     * @param string $user
-     * @return array
-     */
     public function async(array $request, string $user):array
     {
         $view = [];

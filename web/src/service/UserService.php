@@ -12,7 +12,7 @@ use ru\timmson\FruitMamangement\dao\UserDAO;
  * Class UserService
  * @package ru\timmson\FruitMamangement\service
  */
-class UserService
+class UserService implements Service
 {
     private TimesheetDAO $timesheetDAO;
     private TaskDAO $taskDAO;
@@ -32,11 +32,6 @@ class UserService
     }
 
 
-    /**
-     * @param array $request
-     * @param string $user
-     * @return array
-     */
     public function sync(array $request, string $user): array
     {
         $view = [];
@@ -49,12 +44,6 @@ class UserService
         return $view;
     }
 
-    /**
-     * @param array $request
-     * @param string $user
-     * @return array
-     * @throws Exception
-     */
     public function async(array $request, string $user): array
     {
         $view = [];

@@ -45,4 +45,10 @@ interface TaskDAO
      * @return array
      */
     public function getSubscribedTaskByUser(string $user): array;
+
+    /**
+     * @param int $id
+     * @return array
+     */
+    public function geAllTasksByParentId(int $id): array;
 }

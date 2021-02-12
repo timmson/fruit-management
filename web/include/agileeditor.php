@@ -3,11 +3,9 @@ require_once('./lib/tasklib.php');
 require_once('./lib/rellib.php');
 
 $conn = $CORE->getConnection();
+$taskDAO = $container->get(\ru\timmson\FruitMamangement\dao\TaskDAO::class);
 
-$backlogid = 1;
-
-$query = "select * from v_task_in_progress where fm_project  = 'REL' order by id desc";
-$release = $CORE->executeQuery($conn, $query);
+$release = $taskDAO->getTasksInProgress(["fm_project" => "REL"], ["id" => "desc"]);
 if (strlen($_REQUEST['release'])>0) {
 	$relid = $_REQUEST['release'];
 } else if (strlen($_SESSION['release'])>0) {
