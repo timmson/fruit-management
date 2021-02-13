@@ -1,7 +1,7 @@
 <?php
 $HOLIDAY = array();
 
-function getTaskEnd($start, $length)
+function getTaskEnd($start, $length): DateTime
 {
     $hourInSeconds = 60 * 60;
     $dayInSeconds = 24 * $hourInSeconds;
@@ -21,7 +21,7 @@ function getTaskEnd($start, $length)
     return $end;
 }
 
-function getMonthCalendar($plandate)
+function getMonthCalendar($plandate): array
 {
     $cal = array();
     $month = date("m", $plandate);
