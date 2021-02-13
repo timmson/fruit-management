@@ -47,4 +47,5 @@ jobs:
         php_version: ${{env.php}}
         version: ${{env.composer}}
         working_dir: ${{env.working-directory}}
+        php_extensions: calendar
         command: test
