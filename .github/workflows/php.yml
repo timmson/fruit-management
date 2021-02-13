@@ -23,15 +23,16 @@ jobs:
         working_dir: ${{env.working-directory}}
         command: validate
 
-    - name: Validate dependencies
+    - name: Install dependencies
       uses: php-actions/composer@v5
       with:
         php_version: ${{env.php}}
         version: ${{env.composer}}
         working_dir: ${{env.working-directory}}
+        args: --prefer-dist
         command: install
 
-    - name: Validate dependencies
+    - name: Test
       uses: php-actions/composer@v5
       with:
         php_version: ${{env.php}}
