@@ -16,7 +16,7 @@ jobs:
     - name: Validate dependencies
       uses: php-actions/composer@v5
       with:
-        php-version: '7.4'
-        tools: composer:v2
-        working-directory: ${{env.working-directory}}
+        php_version: 7.4
+        version: 2
+        working_dir: ${{env.working-directory}}
         command: validate
