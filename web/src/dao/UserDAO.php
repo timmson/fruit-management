@@ -1,13 +1,13 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 use Exception;
 
 /**
  * Interface UserDAO
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 interface UserDAO
 {

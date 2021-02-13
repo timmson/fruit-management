@@ -1,14 +1,14 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 use Exception;
 
 /**
  * Class mysqli_wrapper
  * Mock for mysqli
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 class MockConnection implements Connection
 {

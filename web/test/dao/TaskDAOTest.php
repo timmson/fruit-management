@@ -1,6 +1,6 @@
 <?php
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 use Exception;
 use PHPUnit\Framework\TestCase;

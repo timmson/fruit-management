@@ -1,8 +1,8 @@
 <?
 
-use ru\timmson\FruitMamangement\dao\LogCategoryDAO;
-use ru\timmson\FruitMamangement\dao\SubscriberDAO;
-use ru\timmson\FruitMamangement\dao\TaskDAO;
+use ru\timmson\FruitManagement\dao\LogCategoryDAO;
+use ru\timmson\FruitManagement\dao\SubscriberDAO;
+use ru\timmson\FruitManagement\dao\TaskDAO;
 
 $url_prefix = $CORE->configuration['global']['site']."?dep=task&task=";
 

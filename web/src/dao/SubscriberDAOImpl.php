@@ -1,11 +1,11 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 /**
  * Class SubscriberDAO
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 class SubscriberDAOImpl extends AbstractDAO implements SubscriberDAO
 {

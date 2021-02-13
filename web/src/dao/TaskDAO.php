@@ -1,11 +1,11 @@
 <?php
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 
 /**
  * Interface TaskDAO
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 interface TaskDAO
 {

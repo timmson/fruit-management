@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "ru\\timmson\\FruitMamangement\\" : "src"
+      "ru\\timmson\\FruitManagement\\" : "src"
     },
     "files": [
       "lib/calendar.inc.php",

@@ -1,11 +1,11 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\service;
+namespace ru\timmson\FruitManagement\service;
 
 /**
  * Interface Service with synchronous and asynchronous methods
- * @package ru\timmson\FruitMamangement\service
+ * @package ru\timmson\FruitManagement\service
  */
 interface Service
 {

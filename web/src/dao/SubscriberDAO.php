@@ -1,13 +1,13 @@
 <?php
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 
 use Exception;
 
 /**
  * Class SubscriberDAO
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 interface SubscriberDAO
 {

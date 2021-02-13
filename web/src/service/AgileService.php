@@ -1,14 +1,14 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\service;
+namespace ru\timmson\FruitManagement\service;
 
-use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\Session;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\Session;
 
 /**
  * Class Agile1Service
- * @package ru\timmson\FruitMamangement\service
+ * @package ru\timmson\FruitManagement\service
  */
 class AgileService implements Service
 {

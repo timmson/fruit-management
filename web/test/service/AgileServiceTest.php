@@ -1,10 +1,10 @@
 <?php
 
-namespace ru\timmson\FruitMamangement\service;
+namespace ru\timmson\FruitManagement\service;
 
 use PHPUnit\Framework\TestCase;
-use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\HTTPSession;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\HTTPSession;
 
 class AgileServiceTest extends TestCase
 {

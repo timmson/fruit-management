@@ -1,4 +1,7 @@
 <?php
+
+use ru\timmson\FruitManagement\util\Calendar;
+
 $conn = $CORE->getConnection();
 
 $query = "select * from v_task_in_progress where fm_project  = 'REL' order by id desc";
@@ -33,7 +36,7 @@ for ($i=0; $i<count($tasks); $i++) {
 	$length = $tasks[$i]['fm_plan_hour']-$tasks[$i]['fm_all_hour'];
 	if ($length>0) {
 		$borderstart = $border;
-		$borderend = getTaskEnd($border, $length);
+		$borderend = Calendar::getTaskEnd($border, $length);
 
 		if (date("mY", $borderstart)==$month) {
 			$tasks[$i]['fm_plan_start'] = date("d", $borderstart);

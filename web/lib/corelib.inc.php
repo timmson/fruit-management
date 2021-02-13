@@ -51,7 +51,7 @@ class Core {
     public function getConnection() {
         if ($this->connection == null) {
             $timeout = microtime();
-            $this->connection = new \ru\timmson\FruitMamangement\dao\MySQLConnection($_ENV['MYSQL_HOST'], $_ENV['MYSQL_PORT'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
+            $this->connection = new \ru\timmson\FruitManagement\dao\MySQLConnection($_ENV['MYSQL_HOST'], $_ENV['MYSQL_PORT'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
             $this->debugTimeout('MY CONNECT', $timeout, 5);
         }
         return $this->connection;
@@ -125,7 +125,7 @@ class Core {
                 /**
                  * New
                  */
-                $this->zones[$i]['dep'][$j]['service'] = "\\ru\\timmson\\FruitMamangement\\service\\" . ucfirst($this->zones[$i]['dep'][$j]['name']) . 'Service';
+                $this->zones[$i]['dep'][$j]['service'] = "\\ru\\timmson\\FruitManagement\\service\\" . ucfirst($this->zones[$i]['dep'][$j]['name']) . 'Service';
                 $this->zones[$i]['dep'][$j]['icon'] = 'admin_' . $this->zones[$i]['dep'][$j]['name'] . '.gif';
                 $this->zones[$i]['dep'][$j]['tpl'] = $this->zones[$i]['dep'][$j]['name'] . 'editor.tpl';
                 $this->zones[$i]['dep'][$j]['props'] = $props;

@@ -1,16 +1,16 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\service;
+namespace ru\timmson\FruitManagement\service;
 
 use Exception;
-use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\dao\TimesheetDAO;
-use ru\timmson\FruitMamangement\dao\UserDAO;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\dao\TimesheetDAO;
+use ru\timmson\FruitManagement\dao\UserDAO;
 
 /**
  * Class UserService
- * @package ru\timmson\FruitMamangement\service
+ * @package ru\timmson\FruitManagement\service
  */
 class UserService implements Service
 {

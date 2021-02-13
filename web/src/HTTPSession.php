@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement;
+namespace ru\timmson\FruitManagement;
 
 
 class HTTPSession implements Session

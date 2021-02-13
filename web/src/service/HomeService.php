@@ -1,16 +1,17 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\service;
+namespace ru\timmson\FruitManagement\service;
 
 use Core;
-use ru\timmson\FruitMamangement\dao\GenericDAO;
-use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\dao\TimesheetDAO;
+use ru\timmson\FruitManagement\dao\GenericDAO;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\dao\TimesheetDAO;
+use ru\timmson\FruitManagement\util\Calendar;
 
 /**
  * Class HomeService - service for home tab
- * @package ru\timmson\FruitMamangement\service
+ * @package ru\timmson\FruitManagement\service
  */
 class HomeService implements Service
 {
@@ -59,7 +60,7 @@ class HomeService implements Service
             if ($length > 0) {
 
                 $borderstart = $border;
-                $borderend = getTaskEnd($border, $length);
+                $borderend = Calendar::getTaskEnd($border, $length);
                 $border = $borderend;
 
                 if (date("mY", $borderstart) == $month) {

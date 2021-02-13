@@ -1,18 +1,18 @@
 <?php
 
-use ru\timmson\FruitMamangement\dao\Connection;
-use ru\timmson\FruitMamangement\dao\GenericDAO;
-use ru\timmson\FruitMamangement\dao\GenericDAOImpl;
-use ru\timmson\FruitMamangement\dao\SubscriberDAO;
-use ru\timmson\FruitMamangement\dao\SubscriberDAOImpl;
-use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\dao\TaskDAOImpl;
-use ru\timmson\FruitMamangement\dao\TimesheetDAO;
-use ru\timmson\FruitMamangement\dao\TimesheetDAOImpl;
-use ru\timmson\FruitMamangement\dao\UserDAO;
-use ru\timmson\FruitMamangement\dao\UserDAOImpl;
-use ru\timmson\FruitMamangement\HTTPSession;
-use ru\timmson\FruitMamangement\Session;
+use ru\timmson\FruitManagement\dao\Connection;
+use ru\timmson\FruitManagement\dao\GenericDAO;
+use ru\timmson\FruitManagement\dao\GenericDAOImpl;
+use ru\timmson\FruitManagement\dao\SubscriberDAO;
+use ru\timmson\FruitManagement\dao\SubscriberDAOImpl;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\dao\TaskDAOImpl;
+use ru\timmson\FruitManagement\dao\TimesheetDAO;
+use ru\timmson\FruitManagement\dao\TimesheetDAOImpl;
+use ru\timmson\FruitManagement\dao\UserDAO;
+use ru\timmson\FruitManagement\dao\UserDAOImpl;
+use ru\timmson\FruitManagement\HTTPSession;
+use ru\timmson\FruitManagement\Session;
 
 require_once(__DIR__."/vendor/autoload.php");
 

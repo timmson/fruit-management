@@ -1,11 +1,11 @@
 <?php
 
-namespace ru\timmson\FruitMamangement\service;
+namespace ru\timmson\FruitManagement\service;
 
 use PHPUnit\Framework\TestCase;
-use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\dao\TimeSheetDAO;
-use ru\timmson\FruitMamangement\dao\UserDAO;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\dao\TimeSheetDAO;
+use ru\timmson\FruitManagement\dao\UserDAO;
 
 class UserServiceTest extends TestCase
 {
