@@ -9,6 +9,8 @@ jobs:
 
     env:
       working-directory: web
+      php: 7.4
+      composer: 2
 
     steps:
     - uses: actions/checkout@v2
@@ -16,7 +18,23 @@ jobs:
     - name: Validate dependencies
       uses: php-actions/composer@v5
       with:
-        php_version: 7.4
-        version: 2
+        php_version: ${{env.php}}
+        version: ${{env.composer}}
         working_dir: ${{env.working-directory}}
         command: validate
+
+    - name: Validate dependencies
+      uses: php-actions/composer@v5
+      with:
+        php_version: ${{env.php}}
+        version: ${{env.composer}}
+        working_dir: ${{env.working-directory}}
+        command: install
+
+    - name: Validate dependencies
+      uses: php-actions/composer@v5
+      with:
+        php_version: ${{env.php}}
+        version: ${{env.composer}}
+        working_dir: ${{env.working-directory}}
+        command: test
