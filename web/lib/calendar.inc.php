@@ -3,20 +3,20 @@ $HOLIDAY = array();
 
 function getTaskEnd($start, $length)
 {
-    $hourinsec = 60 * 60;
-    $dayinsec = 24 * $hourinsec;
-    $nightinsec = 15 * $hourinsec;
-    $lastw = floor($length / 40);
-    $lastd = floor(($length % 40) / 8);
-    $lasth = $length % 8;
-    $end = $start + $lastw * 7 * $dayinsec + $lastd * $dayinsec + $lasth * $hourinsec;
-    $nextdayh = date("H", $end);
-    if (($nextdayh >= 18) || ($nextdayh < 9)) {
-        $end += $nightinsec;
+    $hourInSeconds = 60 * 60;
+    $dayInSeconds = 24 * $hourInSeconds;
+    $nightInSeconds = 15 * $hourInSeconds;
+    $weeks = floor($length / 40);
+    $days = floor(($length % 40) / 8);
+    $hours = $length % 8;
+    $end = $start + $weeks * 7 * $dayInSeconds + $days * $dayInSeconds + $hours * $hourInSeconds;
+    $hourInNextDay = date("H", $end);
+    if (($hourInNextDay >= 18) || ($hourInNextDay < 9)) {
+        $end += $nightInSeconds;
     }
-    $end += (date("W", $end) - date("W", $start)) * 2 * $dayinsec;
+    $end += (date("W", $end) - date("W", $start)) * 2 * $dayInSeconds;
     while (isHoliday($end)) {
-        $end += $dayinsec;
+        $end += $dayInSeconds;
     }
     return $end;
 }
@@ -35,9 +35,7 @@ function getMonthCalendar($plandate)
     return $cal;
 }
 
-function isHoliday($date)
+function isHoliday($date): bool
 {
     return date("w", $date) == 0 || date("w", $date) == 6;
 }
-
-?>

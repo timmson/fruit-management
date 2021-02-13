@@ -28,6 +28,7 @@
   "require": {
     "smarty/smarty": "^2.6.31",
     "php-di/php-di": "^6.3",
-    "ext-json": "^7.4"
+    "ext-json": "^7.4",
+    "ext-calendar": "^7.4"
   }
 }
