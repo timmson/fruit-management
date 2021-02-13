@@ -1,6 +1,4 @@
 <?
-require_once('./lib/tasklib.php');
-
 $url_prefix = $CORE->configuration['global']['site']."?dep=task&task=";
 
 $conn = $CORE->getConnection();
@@ -75,7 +73,6 @@ $VIEW->assign("projects", $projects);
 
 if (strlen($_REQUEST['task'])>0) {
         $taskid = $_REQUEST['task'];
-        $taskDAO1 = new TaskDAO($CORE, $conn);
 	if (strlen($_REQUEST['oper'])>0) {
 	    switch ($_REQUEST['oper']) {
 		case 'new' :
@@ -88,7 +85,7 @@ if (strlen($_REQUEST['task'])>0) {
 					'fm_plan' => ($_REQUEST['fm_plan']!=''?$_REQUEST['fm_plan']:0),
 					'fm_user' => $_SESSION['user']['samaccountname']
 			);
-			$task = $taskDAO1 -> merge($task);
+			$task = $taskDAO -> create($task);
 			toggleSubscribe($subscriberDAO, $task['id'], $_SESSION['user']['samaccountname'], "off");
 			header("Location: ?task=".$task['id']);
 			break;
@@ -117,7 +114,7 @@ if (strlen($_REQUEST['task'])>0) {
 			if ((isset($_REQUEST['fname']))&&(isset($_REQUEST['fvalue']))) {
 				$fname = $_REQUEST['fname'];
 				$fvalue = $_REQUEST['fvalue'];
-				$data = $taskDAO->getTaskByName($fvalue);
+				$data = $taskDAO->findByName($fvalue);
 				$fvalue = $data['id'];
 				if (is_numeric($fvalue)) {
 					$query = "insert into fm_relation values(null,";

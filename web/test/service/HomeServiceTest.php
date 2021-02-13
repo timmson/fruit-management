@@ -42,7 +42,7 @@ class HomeServiceTest extends TestCase
 
         $tasks = [["fm_plan_hour" => 10, "fm_all_hour" => 0]];
 
-        $this->taskDAO->method("getTasksInProgress")->willReturn($tasks);
+        $this->taskDAO->method("findAllInProgress")->willReturn($tasks);
         $result = $this->service->sync($request, $user);
 
         $this->assertCount(5, $result);

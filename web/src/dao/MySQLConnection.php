@@ -40,6 +40,15 @@ class MySQLConnection implements Connection
     /**
      * @inheritDoc
      */
+    public function getInsertId(): int
+    {
+        return mysqli_insert_id($this->connection);
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function close(): void
     {
         mysqli_close($this->connection);

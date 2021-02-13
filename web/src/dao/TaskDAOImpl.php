@@ -25,7 +25,7 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
      * @return mixed
      * @throws Exception
      */
-    public function getTaskById(int $id)
+    public function findById(int $id): array
     {
         $query = "select * from v_task_all";
 
@@ -37,7 +37,7 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
      * @return mixed
      * @throws Exception
      */
-    public function getTaskByName(string $name)
+    public function findByName(string $name) : array
     {
         $query = "select * from v_task_all";
 
@@ -50,7 +50,7 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
      * @return array
      * @throws Exception
      */
-    public function getAllTasks(array $filter = [], array $order = []): array
+    public function findAll(array $filter = [], array $order = []): array
     {
         $query = "select * from v_task_all";
 
@@ -63,7 +63,7 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
      * @return array
      * @throws Exception
      */
-    public function getTasksInProgress(array $filter = [], array $order = []): array
+    public function findAllInProgress(array $filter = [], array $order = []): array
     {
         $query = "select * from v_task_in_progress";
 
@@ -75,7 +75,7 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
      * @return array
      * @throws Exception
      */
-    public function getSubscribedTaskByUser(string $user): array
+    public function findAllBySubscribedUser(string $user): array
     {
         $query = "select t.* from v_task_all t, fm_subscribe s where s.fm_task = t.id and s.fm_user = '$user'";
 
@@ -87,7 +87,7 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
      * @return array
      * @throws Exception
      */
-    public function geAllTasksByParentId(int $id): array
+    public function findAllByParentId(int $id): array
     {
         $query = "select t.* from fm_relation r, v_task_all t where r.fm_parent = $id and r.fm_child = t.id order by t.fm_priority, t.id";
 
@@ -115,6 +115,27 @@ class TaskDAOImpl extends AbstractDAO implements TaskDAO
     {
         $query = "update fm_task set fm_state = (select id from fm_state where fm_name = '$statusName') where id = $id";
         $this->executeQuery($query, [], []);
+    }
+
+    /**
+     * @param array $task
+     * @return array
+     * @throws Exception
+     */
+    public function create(array $task): array
+    {
+        $query = "insert into fm_task(id, fm_name, fm_descr, fm_project, fm_state, fm_priority, fm_plan, fm_user) ";
+        $query .= "values (null,";
+        $query .= "'".$task['fm_name']."',";
+        $query .= "'".$task['fm_descr']."',";
+        $query .= $task['fm_project'].",";
+        $query .= $task['fm_state'].",";
+        $query .= $task['fm_priority'].",";
+        $query .= $task['fm_plan'].",";
+        $query .= "'".$task['fm_user']."')";
+        $this->executeQuery($query, [], []);
+        $task['id'] = $this->connection->getInsertId();
+        return $task;
     }
 
 

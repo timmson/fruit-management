@@ -40,10 +40,10 @@ class HomeService implements Service
         $week = strlen($request['week']) > 0 ? $request['week'] : date('W');
         $view["timesheet"] = $timesheet;
 
-        $tasks = $this->taskDAO->getTasksInProgress(["fm_user" => $user], ["fm_priority" => "", "id" => ""]);
+        $tasks = $this->taskDAO->findAllInProgress(["fm_user" => $user], ["fm_priority" => "", "id" => ""]);
         $view["tasks"] = $tasks;
 
-        $subcribe_tasks = $this->taskDAO->getSubscribedTaskByUser($user);
+        $subcribe_tasks = $this->taskDAO->findAllBySubscribedUser($user);
         $view["subcribe_tasks"] = $subcribe_tasks;
 
         $border = time();

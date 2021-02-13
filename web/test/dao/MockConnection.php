@@ -12,7 +12,15 @@ use Exception;
  */
 class MockConnection implements Connection
 {
+    /**
+     * @var array
+     */
     private array $queries = array();
+
+    /**
+     * @var int
+     */
+    private int $insertedId;
 
     public function __construct(string $host = null, string $port = null, string $user = null, string $password = null, string $database = null) {
 
@@ -40,6 +48,22 @@ class MockConnection implements Connection
     {
         $this->queries[$query] = $result;
 
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getInsertId(): int
+    {
+        return $this->insertedId;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setInsertedId(int $insertedId): void
+    {
+        $this->insertedId = $insertedId;
     }
 
     /**

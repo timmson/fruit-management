@@ -29,6 +29,11 @@ interface Connection
     public function query(string $query): array;
 
     /**
+     * @return int
+     */
+    public function getInsertId(): int;
+
+    /**
      *  Close connection
      */
     public function close(): void;

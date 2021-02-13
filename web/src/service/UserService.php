@@ -38,7 +38,7 @@ class UserService implements Service
 
         $week = strlen($request['week']) > 0 ? $request['week'] : date('W');
         $view["timesheet"] = $this->timesheetDAO->getCurrentWeekTimesheetByUser($user);
-        $view["tasks"] = $this->taskDAO->getTasksInProgress(["fm_user" => $user], ["fm_priority" => ""]);
+        $view["tasks"] = $this->taskDAO->findAllInProgress(["fm_user" => $user], ["fm_priority" => ""]);
         $view["user"] = $user;
 
         return $view;

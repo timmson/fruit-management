@@ -16,41 +16,41 @@ interface TaskDAO
 
     /**
      * @param int $id
-     * @return mixed
+     * @return array
      */
-    public function getTaskById(int $id);
+    public function findById(int $id): array;
 
     /**
      * @param string $name
-     * @return mixed
+     * @return array
      */
-    public function getTaskByName(string $name);
+    public function findByName(string $name): array;
 
     /**
      * @param array $filter
      * @param array $order
      * @return array
      */
-    public function getAllTasks(array $filter = [], array $order = []): array;
+    public function findAll(array $filter = [], array $order = []): array;
 
     /**
      * @param array $filter
      * @param array $order
      * @return array
      */
-    public function getTasksInProgress(array $filter = [], array $order = []): array;
+    public function findAllInProgress(array $filter = [], array $order = []): array;
 
     /**
      * @param string $user
      * @return array
      */
-    public function getSubscribedTaskByUser(string $user): array;
+    public function findAllBySubscribedUser(string $user): array;
 
     /**
      * @param int $id
      * @return array
      */
-    public function geAllTasksByParentId(int $id): array;
+    public function findAllByParentId(int $id): array;
 
     /**
      * @param int $id
@@ -64,4 +64,10 @@ interface TaskDAO
      * @param string $statusName
      */
     public function updateStatus(int $id, string $statusName) : void;
+
+    /**
+     * @param array $task
+     * @return array
+     */
+    public function create(array $task) : array;
 }

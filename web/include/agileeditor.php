@@ -4,7 +4,7 @@ $taskDAO = $container->get(\ru\timmson\FruitMamangement\dao\TaskDAO::class);
 
 $backlogId = 1;
 
-$release = $taskDAO->getTasksInProgress(["fm_project" => "REL"], ["id" => "desc"]);
+$release = $taskDAO->findAllInProgress(["fm_project" => "REL"], ["id" => "desc"]);
 if (strlen($_REQUEST['release']) > 0) {
     $releaseId = $_REQUEST['release'];
 } else if (strlen($_SESSION['release']) > 0) {
@@ -20,7 +20,6 @@ $VIEW->assign("relid", $releaseId);
 if (isset($_REQUEST['oper'])) {
     $taskId = $_REQUEST['task'];
     $toId = $_REQUEST['toid'];
-    //$query = 'select max(fm_child) as id from fm_relation where fm_parent = '.$relid;
     $query = 'select r1.fm_parent as id from fm_relation r1, fm_relation r2 where r1.fm_child = ' . $taskId . ' and r2.fm_parent = ' . $releaseId . ' and r1.fm_parent = r2.fm_child';
     $fromId = $CORE->executeQuery($conn, $query);
     $fromId = (strlen($fromId[0]['id']) > 0) ? $fromId[0]['id'] : $backlogId;
@@ -57,7 +56,7 @@ for ($i = 0; $i < count($temp); $i++) {
 }
 $VIEW->assign("structtasks", $structtasks);
 
-$backlog = $taskDAO->geAllTasksByParentId($backlogId);
+$backlog = $taskDAO->findAllByParentId($backlogId);
 $VIEW->assign("backlog", $backlog);
 $VIEW->assign("backlogid", $backlogId);
 

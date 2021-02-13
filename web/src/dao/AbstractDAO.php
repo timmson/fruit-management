@@ -45,6 +45,11 @@ abstract class AbstractDAO
 
     }
 
+    final function getInsertedId() {
+        return $this->connection->getInsertId();
+    }
+
+
     /**
      * @param string $query
      * @param array $filter
