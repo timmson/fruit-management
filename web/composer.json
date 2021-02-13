@@ -17,7 +17,6 @@
       "ru\\timmson\\FruitManagement\\" : "src"
     },
     "files": [
-      "lib/calendar.inc.php",
       "lib/corelib.inc.php"
     ]
   },

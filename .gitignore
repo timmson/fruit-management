@@ -1,6 +1,7 @@
 .idea
 
-web/.phpunit.result.cache
+.phpunit.result.cache
+
 web/smarty/templates_c
 web/tmp/
 web/vendor/

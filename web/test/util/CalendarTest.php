@@ -48,4 +48,29 @@ class CalendarTest extends TestCase
         $this->assertEquals(new DateTime("2020-09-28T09:00"), $resultInDateTime);
     }
 
+    public function testGetMonthCalendar() {
+        $arrange = new DateTime("2020-09-27T09:00");
+        $expected = ['day' => 27, 'isweekend' => true];
+
+        $result = Calendar::getMonthCalendar($arrange->getTimestamp());
+
+        $this->assertEquals($expected, $result[26]);
+    }
+
+    public function testIsHolidayIfWorkDayIsGiven() {
+        $arrange = new DateTime("2020-09-23T09:00");
+
+        $result = Calendar::isHoliday($arrange->getTimestamp());
+
+        $this->assertFalse($result);
+    }
+
+    public function testIsHolidayIfHolidayIsGiven() {
+        $arrange = new DateTime("2020-09-26T09:00");
+
+        $result = Calendar::isHoliday($arrange->getTimestamp());
+
+        $this->assertTrue($result);
+    }
+
 }

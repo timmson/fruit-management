@@ -83,7 +83,7 @@ class HomeService implements Service
 
         $view["plantasks"] = $plantasks;
 
-        $monthcal = getMonthCalendar($plandate);
+        $monthcal = Calendar::getMonthCalendar($plandate);
         $view["monthcal"] = $monthcal;
 
         return $view;

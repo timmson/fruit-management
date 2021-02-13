@@ -21,7 +21,7 @@ class Calendar
             $end += $nightInSeconds;
         }
         $end += (date("W", $end) - date("W", $start)) * 2 * $dayInSeconds;
-        while (isHoliday($end)) {
+        while (Calendar::isHoliday($end)) {
             $end += $dayInSeconds;
         }
         return $end;
@@ -36,7 +36,7 @@ class Calendar
         for ($i = 0; $i < $length; $i++) {
             $cal[$i]['day'] = $i + 1;
             $time = strtotime($cal[$i]['day'] . "." . $month . "." . $year);
-            $cal[$i]['isweekend'] = isHoliday($time);
+            $cal[$i]['isweekend'] = Calendar::isHoliday($time);
         }
         return $cal;
     }

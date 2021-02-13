@@ -58,7 +58,7 @@ for ($i=0; $i<count($tasks); $i++) {
 
 $VIEW->assign("plantasks", $plantasks);
 
-$monthcal = getMonthCalendar($plandate);
+$monthcal = Calendar::getMonthCalendar($plandate);
 $VIEW->assign("monthcal", $monthcal);
 
 $query = " (select t.*, r1.fm_parent as fm_parent from fm_relation r1, v_task_all t ";
