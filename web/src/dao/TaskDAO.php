@@ -70,4 +70,14 @@ interface TaskDAO
      * @return array
      */
     public function create(array $task) : array;
+
+    /**
+     * Temporary method
+     *
+     * @param string $query
+     * @param array $filter
+     * @param array $order
+     * @return array
+     */
+    public function executeQuery(string $query, array $filter, array $order): array;
 }

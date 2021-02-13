@@ -190,4 +190,17 @@ class TaskDAOTest extends TestCase
         $this->assertEquals($task, $result);
     }
 
+
+    /**
+     * @throws Exception
+     */
+    public function testExecuteQuery()
+    {
+        $arrange = [];
+
+        $this->mysqli->addQueryAndResult("query", $arrange);
+        $result = $this->dao->executeQuery("query", [], []);
+
+        $this->assertEquals($arrange, $result);
+    }
 }
