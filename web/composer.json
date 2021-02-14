@@ -14,19 +14,18 @@
   },
   "autoload": {
     "psr-4": {
-      "ru\\timmson\\FruitMamangement\\" : "src"
+      "ru\\timmson\\FruitManagement\\": "src"
     },
-    "files": [
-      "lib/calendar.inc.php",
-      "lib/corelib.inc.php"
-    ]
+    "files": []
   },
   "scripts": {
     "test": "vendor/bin/phpunit test",
     "coverage": "vendor/bin/phpunit --coverage-html ./tmp test"
   },
   "require": {
-    "smarty/smarty": "2.6.31",
-    "php-di/php-di": "^6.3"
+    "smarty/smarty": "^2.6.31",
+    "php-di/php-di": "^6.3",
+    "ext-json": "^7.4",
+    "ext-calendar": "^7.4"
   }
 }

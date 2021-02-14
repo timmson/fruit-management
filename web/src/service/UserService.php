@@ -1,18 +1,18 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\service;
+namespace ru\timmson\FruitManagement\service;
 
 use Exception;
-use ru\timmson\FruitMamangement\dao\TaskDAO;
-use ru\timmson\FruitMamangement\dao\TimesheetDAO;
-use ru\timmson\FruitMamangement\dao\UserDAO;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\dao\TimesheetDAO;
+use ru\timmson\FruitManagement\dao\UserDAO;
 
 /**
  * Class UserService
- * @package ru\timmson\FruitMamangement\service
+ * @package ru\timmson\FruitManagement\service
  */
-class UserService
+class UserService implements Service
 {
     private TimesheetDAO $timesheetDAO;
     private TaskDAO $taskDAO;
@@ -32,29 +32,18 @@ class UserService
     }
 
 
-    /**
-     * @param array $request
-     * @param string $user
-     * @return array
-     */
     public function sync(array $request, string $user): array
     {
         $view = [];
 
         $week = strlen($request['week']) > 0 ? $request['week'] : date('W');
         $view["timesheet"] = $this->timesheetDAO->getCurrentWeekTimesheetByUser($user);
-        $view["tasks"] = $this->taskDAO->getTasksInProgress(["fm_user" => $user], ["fm_priority" => ""]);
+        $view["tasks"] = $this->taskDAO->findAllInProgress(["fm_user" => $user], ["fm_priority" => ""]);
         $view["user"] = $user;
 
         return $view;
     }
 
-    /**
-     * @param array $request
-     * @param string $user
-     * @return array
-     * @throws Exception
-     */
     public function async(array $request, string $user): array
     {
         $view = [];

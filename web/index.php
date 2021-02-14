@@ -1,5 +1,20 @@
 <?php
 
+use ru\timmson\FruitManagement\Core;
+use ru\timmson\FruitManagement\dao\Connection;
+use ru\timmson\FruitManagement\dao\GenericDAO;
+use ru\timmson\FruitManagement\dao\GenericDAOImpl;
+use ru\timmson\FruitManagement\dao\SubscriberDAO;
+use ru\timmson\FruitManagement\dao\SubscriberDAOImpl;
+use ru\timmson\FruitManagement\dao\TaskDAO;
+use ru\timmson\FruitManagement\dao\TaskDAOImpl;
+use ru\timmson\FruitManagement\dao\TimesheetDAO;
+use ru\timmson\FruitManagement\dao\TimesheetDAOImpl;
+use ru\timmson\FruitManagement\dao\UserDAO;
+use ru\timmson\FruitManagement\dao\UserDAOImpl;
+use ru\timmson\FruitManagement\http\HTTPSession;
+use ru\timmson\FruitManagement\http\Session;
+
 require_once(__DIR__."/vendor/autoload.php");
 
 $siteconfig = './config/site.ini';
@@ -12,12 +27,13 @@ $conn = $CORE->getConnection();
 
 $containerBuilder = new DI\ContainerBuilder();
 $containerBuilder->addDefinitions([
-    \ru\timmson\FruitMamangement\dao\Connection::class => $conn,
-    \ru\timmson\FruitMamangement\dao\GenericDAO::class => new \ru\timmson\FruitMamangement\dao\GenericDAOImpl($conn),
-    \ru\timmson\FruitMamangement\dao\SubscriberDAO::class => new \ru\timmson\FruitMamangement\dao\SubscriberDAOImpl($conn),
-    \ru\timmson\FruitMamangement\dao\TaskDAO::class => new \ru\timmson\FruitMamangement\dao\TaskDAOImpl($conn),
-    \ru\timmson\FruitMamangement\dao\TimesheetDAO::class => new \ru\timmson\FruitMamangement\dao\TimesheetDAOImpl($conn),
-    \ru\timmson\FruitMamangement\dao\UserDAO::class => new \ru\timmson\FruitMamangement\dao\UserDAOImpl($conn)
+    Connection::class => $conn,
+    GenericDAO::class => new GenericDAOImpl($conn),
+    SubscriberDAO::class => new SubscriberDAOImpl($conn),
+    TaskDAO::class => new TaskDAOImpl($conn),
+    TimesheetDAO::class => new TimesheetDAOImpl($conn),
+    UserDAO::class => new UserDAOImpl($conn),
+    Session::class => new HTTPSession($_SESSION)
 ]);
 $container = $containerBuilder->build();
 
@@ -29,7 +45,7 @@ if (($_SESSION["login"] == "") || ($is_out)) {
     $mess = "";
 
     if ((isset($_REQUEST["login"])) && (!$is_out)) {
-        $login = $CORE->auth($_REQUEST["login"], $_REQUEST["pass"], $container->get(\ru\timmson\FruitMamangement\dao\UserDAO::class));
+        $login = $CORE->auth($_REQUEST["login"], $_REQUEST["pass"], $container->get(UserDAO::class));
         if ($login == "") {
             $mess = "fail";
         }
@@ -142,5 +158,3 @@ if ($_REQUEST['mode'] == 'async') {
     $VIEW->display($CORE->admin_tpl);
 }
 //print_r($CORE->debugs);
-?>
-

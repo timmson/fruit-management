@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 
 use mysqli_result;
@@ -36,6 +36,15 @@ class MySQLConnection implements Connection
 
         return $data;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getInsertId(): int
+    {
+        return mysqli_insert_id($this->connection);
+    }
+
 
     /**
      * @inheritDoc

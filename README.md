@@ -25,6 +25,9 @@ git clone https://github.com/timmson/fruit-management.git
 ### Run
 ```
 cd fruit-management/
+
+composer install --prefer-dist --no-progress
+
 docker-compose up -d --build
 ```
 

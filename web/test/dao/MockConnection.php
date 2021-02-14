@@ -1,18 +1,26 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 use Exception;
 
 /**
  * Class mysqli_wrapper
  * Mock for mysqli
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 class MockConnection implements Connection
 {
+    /**
+     * @var array
+     */
     private array $queries = array();
+
+    /**
+     * @var int
+     */
+    private int $insertedId;
 
     public function __construct(string $host = null, string $port = null, string $user = null, string $password = null, string $database = null) {
 
@@ -40,10 +48,27 @@ class MockConnection implements Connection
     {
         $this->queries[$query] = $result;
 
-
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getInsertId(): int
+    {
+        return $this->insertedId;
+    }
 
+    /**
+     * @inheritDoc
+     */
+    public function setInsertedId(int $insertedId): void
+    {
+        $this->insertedId = $insertedId;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function close(): void
     {
 

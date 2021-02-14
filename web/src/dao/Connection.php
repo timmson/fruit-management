@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 
 use Exception;
@@ -27,6 +27,11 @@ interface Connection
      * @throws Exception
      */
     public function query(string $query): array;
+
+    /**
+     * @return int
+     */
+    public function getInsertId(): int;
 
     /**
      *  Close connection

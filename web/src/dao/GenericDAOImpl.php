@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 
 class GenericDAOImpl extends AbstractDAO implements GenericDAO

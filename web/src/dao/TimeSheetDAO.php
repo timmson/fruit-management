@@ -1,11 +1,11 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 /**
  * Interface TimeSheetDAO
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 interface TimeSheetDAO
 {

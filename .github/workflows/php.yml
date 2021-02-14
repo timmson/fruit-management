@@ -1,10 +1,6 @@
 name: PHP Composer
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push]
 
 jobs:
   build:
@@ -13,13 +9,19 @@ jobs:
 
     env:
       working-directory: web
+      php: 7.4
+      composer: 2
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-      working-directory: ${{env.working-directory}}
+    - name: Validate dependencies
+      uses: php-actions/composer@v5
+      with:
+        php_version: ${{env.php}}
+        version: ${{env.composer}}
+        working_dir: ${{env.working-directory}}
+        command: validate
 
     - name: Cache Composer packages
       id: composer-cache
@@ -31,10 +33,20 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
-      #if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
-      working-directory: ${{env.working-directory}}
+      uses: php-actions/composer@v5
+      with:
+        php_version: ${{env.php}}
+        version: ${{env.composer}}
+        working_dir: ${{env.working-directory}}
+        php_extensions: calendar
+        args: --prefer-dist
+        command: install
 
-    - name: Run test suite
-      run: composer test
-      working-directory: ${{env.working-directory}}
+    - name: Test
+      uses: php-actions/composer@v5
+      with:
+        php_version: ${{env.php}}
+        version: ${{env.composer}}
+        working_dir: ${{env.working-directory}}
+        php_extensions: calendar
+        command: test

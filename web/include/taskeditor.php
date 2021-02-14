@@ -1,12 +1,15 @@
 <?
-require_once('./lib/tasklib.php');
+
+use ru\timmson\FruitManagement\dao\LogCategoryDAO;
+use ru\timmson\FruitManagement\dao\SubscriberDAO;
+use ru\timmson\FruitManagement\dao\TaskDAO;
 
 $url_prefix = $CORE->configuration['global']['site']."?dep=task&task=";
 
 $conn = $CORE->getConnection();
 
-$subscriberDAO = $container->get(\ru\timmson\FruitMamangement\dao\SubscriberDAO::class);
-$taskDAO = $container->get(\ru\timmson\FruitMamangement\dao\TaskDAO::class);
+$subscriberDAO = $container->get(SubscriberDAO::class);
+$taskDAO = $container->get(TaskDAO::class);
 
 if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 	$taskid = $_REQUEST['task'];
@@ -24,8 +27,8 @@ if (in_array($_REQUEST['oper'], array('json', 'update', 'search', 'tasks'))) {
 		case 'tasks':
 					$query = "select * from v_task_all ";
 					$query .=" where id <> ".$taskid." and concat(fm_name,fm_code,fm_descr) like '%".$_REQUEST['search']."%' ";
-					$query .=" order by id, fm_project_id desc"; ;
-					$data = $CORE->executeQuery($conn, $query);
+					$query .=" order by id, fm_project_id desc";
+			$data = $CORE->executeQuery($conn, $query);
 					$newdata = array();
 					for ($i=0; $i<count($data); $i++) {
 						$newdata[] = array(
@@ -75,7 +78,6 @@ $VIEW->assign("projects", $projects);
 
 if (strlen($_REQUEST['task'])>0) {
         $taskid = $_REQUEST['task'];
-        $taskDAO1 = new TaskDAO($CORE, $conn);
 	if (strlen($_REQUEST['oper'])>0) {
 	    switch ($_REQUEST['oper']) {
 		case 'new' :
@@ -88,7 +90,7 @@ if (strlen($_REQUEST['task'])>0) {
 					'fm_plan' => ($_REQUEST['fm_plan']!=''?$_REQUEST['fm_plan']:0),
 					'fm_user' => $_SESSION['user']['samaccountname']
 			);
-			$task = $taskDAO1 -> merge($task);
+			$task = $taskDAO -> create($task);
 			toggleSubscribe($subscriberDAO, $task['id'], $_SESSION['user']['samaccountname'], "off");
 			header("Location: ?task=".$task['id']);
 			break;
@@ -117,7 +119,7 @@ if (strlen($_REQUEST['task'])>0) {
 			if ((isset($_REQUEST['fname']))&&(isset($_REQUEST['fvalue']))) {
 				$fname = $_REQUEST['fname'];
 				$fvalue = $_REQUEST['fvalue'];
-				$data = $taskDAO->getTaskByName($fvalue);
+				$data = $taskDAO->findByName($fvalue);
 				$fvalue = $data['id'];
 				if (is_numeric($fvalue)) {
 					$query = "insert into fm_relation values(null,";
@@ -160,7 +162,7 @@ if (strlen($_REQUEST['task'])>0) {
 
 	$task['fm_descr_full'] = file_get_contents("./attachement/".$taskid);
 
-	$logCategoryDAO = new \ru\timmson\FruitMamangement\dao\LogCategoryDAO($conn);
+	$logCategoryDAO = new LogCategoryDAO($conn);
 	$task['worklog_cat'] = $logCategoryDAO->getAllOrderById();
 
 	$VIEW->assign("task", $task);

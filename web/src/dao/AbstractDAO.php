@@ -1,14 +1,14 @@
 <?php
 
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 use Exception;
 
 /**
  * Class AbstractDAO
  *
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 abstract class AbstractDAO
 {
@@ -36,7 +36,7 @@ abstract class AbstractDAO
      * @return array
      * @throws Exception
      */
-    final function executeQuery(string $query, array $filter, array $order)
+    final function executeQuery(string $query, array $filter, array $order): array
     {
 
         $query = $this->buildQuery($query, $filter, $order);
@@ -44,6 +44,11 @@ abstract class AbstractDAO
         return $this->connection->query($query);
 
     }
+
+    final function getInsertedId() {
+        return $this->connection->getInsertId();
+    }
+
 
     /**
      * @param string $query

@@ -61,6 +61,8 @@ INSERT INTO `fm_relation` (id, fm_parent, fm_child)
 VALUES (1, 0, 0);
 INSERT INTO `fm_relation` (id, fm_parent, fm_child)
 VALUES (2, 1, 2);
+INSERT INTO `fm_relation` (id, fm_parent, fm_child)
+VALUES (3, 2, 3);
 
 -- fm_work_log
 INSERT INTO `fm_work_log` (fm_task, fm_cat, fm_date, fm_date_actual, fm_spent_hour, fm_comment, fm_user)

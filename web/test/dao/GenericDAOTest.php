@@ -1,6 +1,6 @@
 <?php
 
-namespace ru\timmson\FruitMamangement\dao;
+namespace ru\timmson\FruitManagement\dao;
 
 require_once(__DIR__ . "/MockConnection.php");
 
@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class GenericDAOTest
- * @package ru\timmson\FruitMamangement\dao
+ * @package ru\timmson\FruitManagement\dao
  */
 class GenericDAOTest extends TestCase
 {
