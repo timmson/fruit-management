@@ -1,8 +1,6 @@
 <?php
 
-
-namespace ru\timmson\FruitManagement;
-
+namespace ru\timmson\FruitManagement\http;
 
 class HTTPSession implements Session
 {

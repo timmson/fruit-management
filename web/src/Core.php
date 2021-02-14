@@ -1,5 +1,9 @@
 <?php
 
+namespace ru\timmson\FruitManagement;
+
+use Smarty;
+
 class Core {
 
     public $admin_php = 'index.php';
@@ -334,5 +338,3 @@ class Core {
     }
 
 }
-
-?>

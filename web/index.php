@@ -1,5 +1,6 @@
 <?php
 
+use ru\timmson\FruitManagement\Core;
 use ru\timmson\FruitManagement\dao\Connection;
 use ru\timmson\FruitManagement\dao\GenericDAO;
 use ru\timmson\FruitManagement\dao\GenericDAOImpl;
@@ -11,8 +12,8 @@ use ru\timmson\FruitManagement\dao\TimesheetDAO;
 use ru\timmson\FruitManagement\dao\TimesheetDAOImpl;
 use ru\timmson\FruitManagement\dao\UserDAO;
 use ru\timmson\FruitManagement\dao\UserDAOImpl;
-use ru\timmson\FruitManagement\HTTPSession;
-use ru\timmson\FruitManagement\Session;
+use ru\timmson\FruitManagement\http\HTTPSession;
+use ru\timmson\FruitManagement\http\Session;
 
 require_once(__DIR__."/vendor/autoload.php");
 

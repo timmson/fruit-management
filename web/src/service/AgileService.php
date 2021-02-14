@@ -4,7 +4,7 @@
 namespace ru\timmson\FruitManagement\service;
 
 use ru\timmson\FruitManagement\dao\TaskDAO;
-use ru\timmson\FruitManagement\Session;
+use ru\timmson\FruitManagement\http\Session;
 
 /**
  * Class Agile1Service

@@ -1,8 +1,6 @@
 <?php
 
-
-namespace ru\timmson\FruitManagement;
-
+namespace ru\timmson\FruitManagement\http;
 
 interface Session
 {
@@ -24,5 +22,5 @@ interface Session
      * @param string $name
      * @return bool
      */
-    public function contains(string $name) : bool;
+    public function contains(string $name): bool;
 }
