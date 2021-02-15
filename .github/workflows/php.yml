@@ -38,7 +38,7 @@ jobs:
         php_version: ${{env.php}}
         version: ${{env.composer}}
         working_dir: ${{env.working-directory}}
-        php_extensions: calendar
+        php_extensions: calendar, gd
         args: --prefer-dist
         command: install
 
@@ -48,5 +48,5 @@ jobs:
         php_version: ${{env.php}}
         version: ${{env.composer}}
         working_dir: ${{env.working-directory}}
-        php_extensions: calendar
+        php_extensions: calendar, gd
         command: test
