@@ -3,10 +3,9 @@
 
 namespace ru\timmson\FruitManagement\service;
 
-use Core;
-use ru\timmson\FruitManagement\dao\GenericDAO;
 use ru\timmson\FruitManagement\dao\TaskDAO;
 use ru\timmson\FruitManagement\dao\TimesheetDAO;
+use ru\timmson\FruitManagement\dao\WorkLogDAO;
 use ru\timmson\FruitManagement\util\Calendar;
 
 /**
@@ -20,15 +19,15 @@ class HomeService implements Service
 
     private TaskDAO $taskDAO;
 
-    private GenericDAO $genericDAO;
+    private WorkLogDAO $workLogDAO;
 
     public function __construct(
-        GenericDAO $genericDAO,
+        TaskDAO $taskDAO,
         TimesheetDAO $timesheetDAO,
-        TaskDAO $taskDAO
+        WorkLogDAO $workLogDAO
     )
     {
-        $this->genericDAO = $genericDAO;
+        $this->workLogDAO = $workLogDAO;
         $this->timesheetDAO = $timesheetDAO;
         $this->taskDAO = $taskDAO;
     }
@@ -93,7 +92,7 @@ class HomeService implements Service
     {
         $view = [];
 
-        $view["activity"] = $this->genericDAO->getActivity($user);
+        $view["activity"] = $this->workLogDAO->getActivity($user);
 
         return $view;
     }

@@ -6,10 +6,10 @@ namespace ru\timmson\FruitManagement\dao;
 use Exception;
 
 /**
- * Interface GenericDAO
+ * Interface WorkLogDAO
  * @package ru\timmson\FruitManagement\dao
  */
-interface GenericDAO
+interface WorkLogDAO
 {
     /**
      * @param string $user
@@ -17,5 +17,12 @@ interface GenericDAO
      * @throws Exception
      */
     public function getActivity(string $user): array;
+
+    /**
+     * @param string $project
+     * @return array
+     * @throws Exception
+     */
+    public function getWorkedLog(string $project): array;
 
 }

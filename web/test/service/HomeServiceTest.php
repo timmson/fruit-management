@@ -2,8 +2,9 @@
 
 namespace ru\timmson\FruitManagement\service;
 
+use Exception;
 use PHPUnit\Framework\TestCase;
-use ru\timmson\FruitManagement\dao\GenericDAO;
+use ru\timmson\FruitManagement\dao\WorkLogDAO;
 use ru\timmson\FruitManagement\dao\TaskDAO;
 use ru\timmson\FruitManagement\dao\TimesheetDAO;
 
@@ -12,26 +13,29 @@ class HomeServiceTest extends TestCase
 
     private HomeService $service;
 
-    private TimesheetDAO $timesheetDAO;
-
     private TaskDAO $taskDAO;
 
-    private GenericDAO $genericDAO;
+    private TimesheetDAO $timesheetDAO;
+
+    private WorkLogDAO $workLogDAO;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-                $this->genericDAO = $this->createMock(GenericDAO::class);
+        $this->workLogDAO = $this->createMock(WorkLogDAO::class);
         $this->timesheetDAO = $this->createMock(TimesheetDAO::class);
         $this->taskDAO = $this->createMock(TaskDAO::class);
         $this->service = new HomeService(
-            $this->genericDAO,
+            $this->taskDAO,
             $this->timesheetDAO,
-            $this->taskDAO
+            $this->workLogDAO
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public function testSync()
     {
         $request = [
@@ -48,6 +52,9 @@ class HomeServiceTest extends TestCase
         $this->assertCount(5, $result);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testAsync()
     {
         $request = [];
