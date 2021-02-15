@@ -3,7 +3,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset={$const.global.encodingHTML}" />
         <link href="{$factory->stylesheet_dir}index.css" rel="stylesheet" type="text/css" />
 		<link href="{$factory->stylesheet_dir}fonts.css" rel="stylesheet" type="text/css" />
-		<link href="{$factory->stylesheet_dir}xpdiagram.css" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="{$factory->img_admin_dir}admin_logo.ico"/>
         <title>Вход в {$const.admin.name}</title>
     </head>
