@@ -33,9 +33,15 @@ $containerBuilder->addDefinitions([
     TaskDAO::class => new TaskDAOImpl($conn),
     TimesheetDAO::class => new TimesheetDAOImpl($conn),
     UserDAO::class => new UserDAOImpl($conn),
-    Session::class => new HTTPSession($_SESSION)
+    Session::class => new HTTPSession($_SESSION),
+    Core::class => $CORE
 ]);
-$container = $containerBuilder->build();
+
+try {
+    $container = $containerBuilder->build();
+} catch (Exception $e) {
+    $CORE->errorHandler(E_ERROR, $e->getMessage(), $e->getFile(), $e->getLine());
+}
 
 
 /* * * Login block ** */
