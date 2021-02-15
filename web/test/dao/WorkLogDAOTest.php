@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  * Class GenericDAOTest
  * @package ru\timmson\FruitManagement\dao
  */
-class GenericDAOTest extends TestCase
+class WorkLogDAOTest extends TestCase
 {
 
     /**
@@ -20,15 +20,15 @@ class GenericDAOTest extends TestCase
     private MockConnection $connection;
 
     /**
-     * @var GenericDAO
+     * @var WorkLogDAO
      */
-    private GenericDAO $dao;
+    private WorkLogDAO $dao;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->connection = new MockConnection();
-        $this->dao = new GenericDAOImpl($this->connection);
+        $this->dao = new WorkLogDAOImpl($this->connection);
     }
 
     /**
@@ -44,6 +44,21 @@ class GenericDAOTest extends TestCase
 
         $this->assertEquals($arrange, $result);
 
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testGetWorkedLogByWeeks()
+    {
+        $arrange = [["name" => "0", "work" => "yes"]];
+        $project = "project";
+
+        $this->connection->addQueryAndResult("select sum(l.fm_spent_hour) as spent_hours, WEEK(l.fm_date) as week from fm_work_log l, fm_task t where t.id = l.fm_task and t.fm_project = '$project'  and l.fm_spent_hour>0  group by WEEK(l.fm_date)", $arrange);
+
+        $result = $this->dao->getWorkedLog($project);
+
+        $this->assertEquals($arrange, $result);
     }
 
 

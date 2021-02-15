@@ -2,8 +2,10 @@
 
 use ru\timmson\FruitManagement\Core;
 use ru\timmson\FruitManagement\dao\Connection;
-use ru\timmson\FruitManagement\dao\GenericDAO;
-use ru\timmson\FruitManagement\dao\GenericDAOImpl;
+use ru\timmson\FruitManagement\dao\ProjectDAO;
+use ru\timmson\FruitManagement\dao\ProjectDAOImpl;
+use ru\timmson\FruitManagement\dao\WorkLogDAO;
+use ru\timmson\FruitManagement\dao\WorkLogDAOImpl;
 use ru\timmson\FruitManagement\dao\SubscriberDAO;
 use ru\timmson\FruitManagement\dao\SubscriberDAOImpl;
 use ru\timmson\FruitManagement\dao\TaskDAO;
@@ -12,7 +14,9 @@ use ru\timmson\FruitManagement\dao\TimesheetDAO;
 use ru\timmson\FruitManagement\dao\TimesheetDAOImpl;
 use ru\timmson\FruitManagement\dao\UserDAO;
 use ru\timmson\FruitManagement\dao\UserDAOImpl;
+use ru\timmson\FruitManagement\http\HTTPImage;
 use ru\timmson\FruitManagement\http\HTTPSession;
+use ru\timmson\FruitManagement\http\Image;
 use ru\timmson\FruitManagement\http\Session;
 
 require_once(__DIR__."/vendor/autoload.php");
@@ -28,14 +32,21 @@ $conn = $CORE->getConnection();
 $containerBuilder = new DI\ContainerBuilder();
 $containerBuilder->addDefinitions([
     Connection::class => $conn,
-    GenericDAO::class => new GenericDAOImpl($conn),
+    Image::class => new HTTPImage(),
+    ProjectDAO::class => new ProjectDAOImpl($conn),
+    Session::class => new HTTPSession($_SESSION),
     SubscriberDAO::class => new SubscriberDAOImpl($conn),
     TaskDAO::class => new TaskDAOImpl($conn),
     TimesheetDAO::class => new TimesheetDAOImpl($conn),
     UserDAO::class => new UserDAOImpl($conn),
-    Session::class => new HTTPSession($_SESSION)
+    WorkLogDAO::class => new WorkLogDAOImpl($conn)
 ]);
-$container = $containerBuilder->build();
+
+try {
+    $container = $containerBuilder->build();
+} catch (Exception $e) {
+    $CORE->errorHandler(E_ERROR, $e->getMessage(), $e->getFile(), $e->getLine());
+}
 
 
 /* * * Login block ** */

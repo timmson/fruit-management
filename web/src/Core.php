@@ -2,6 +2,7 @@
 
 namespace ru\timmson\FruitManagement;
 
+use ru\timmson\FruitManagement\dao\MySQLConnection;
 use Smarty;
 
 class Core {
@@ -55,7 +56,7 @@ class Core {
     public function getConnection() {
         if ($this->connection == null) {
             $timeout = microtime();
-            $this->connection = new \ru\timmson\FruitManagement\dao\MySQLConnection($_ENV['MYSQL_HOST'], $_ENV['MYSQL_PORT'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
+            $this->connection = new MySQLConnection($_ENV['MYSQL_HOST'], $_ENV['MYSQL_PORT'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
             $this->debugTimeout('MY CONNECT', $timeout, 5);
         }
         return $this->connection;

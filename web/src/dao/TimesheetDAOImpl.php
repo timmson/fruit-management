@@ -11,8 +11,7 @@ class TimesheetDAOImpl extends AbstractDAO implements TimeSheetDAO
 {
 
     /**
-     * @param $user
-     * @return array
+     * @inheritDoc
      */
     public function getCurrentWeekTimeSheetByUser($user): array
     {
