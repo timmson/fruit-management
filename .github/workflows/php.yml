@@ -10,7 +10,7 @@ jobs:
     env:
       working-directory: web
       php: 7.4
-      php_extensions: calendar
+      php_extensions: 'calendar, gd'
       composer: 2
 
     steps:
