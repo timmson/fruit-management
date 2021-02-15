@@ -10,6 +10,7 @@ jobs:
     env:
       working-directory: web
       php: 7.4
+      php_extensions: 'calendar, gd'
       composer: 2
 
     steps:
@@ -38,7 +39,7 @@ jobs:
         php_version: ${{env.php}}
         version: ${{env.composer}}
         working_dir: ${{env.working-directory}}
-        php_extensions: calendar, gd
+        php_extensions: ${{env.php_extensions}}
         args: --prefer-dist
         command: install
 
@@ -48,5 +49,5 @@ jobs:
         php_version: ${{env.php}}
         version: ${{env.composer}}
         working_dir: ${{env.working-directory}}
-        php_extensions: calendar, gd
+        php_extensions: ${{env.php_extensions}}
         command: test
