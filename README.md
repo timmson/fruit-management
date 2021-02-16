@@ -20,14 +20,12 @@ Custom issue tracker
 ### Get last sources
 ```
 git clone https://github.com/timmson/fruit-management.git 
+cd fruit-management
 ```
 
 ### Run
 ```
-cd fruit-management/
-
-composer install --prefer-dist --no-progress
-
+composer install --prefer-dist --no-progress -d web
 docker-compose up -d --build
 ```
 

@@ -17,7 +17,7 @@
     <span style="font-style: italic">
                     <b>{$smarty.session.user.fio}</b>
     </span>
-    <a href="?login=logout" class="av">
+    <a href="logout.php" class="av">
     	[Выход]
     </a>
     <div style="float:right;">
