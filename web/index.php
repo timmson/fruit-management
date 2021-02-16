@@ -42,6 +42,8 @@ $containerBuilder->addDefinitions([
     WorkLogDAO::class => new WorkLogDAOImpl($conn)
 ]);
 
+$container = null;
+
 try {
     $container = $containerBuilder->build();
 } catch (Exception $e) {
@@ -50,24 +52,20 @@ try {
 
 
 /* * * Login block ** */
-$is_out = ($_GET["login"] == "logout");
+if ($_SESSION["login"] == "") {
 
-if (($_SESSION["login"] == "") || ($is_out)) {
-    $mess = "";
+    $login = "";
+    $message = "";
 
-    if ((isset($_REQUEST["login"])) && (!$is_out)) {
+    if (isset($_REQUEST["login"])) {
         $login = $CORE->auth($_REQUEST["login"], $_REQUEST["pass"], $container->get(UserDAO::class));
         if ($login == "") {
-            $mess = "fail";
+            $message = "fail";
         }
-    } else {
-        $login = "";
-        $mess = "";
-        //header("Location: .");
     }
 
     if ($login == "") {
-        $VIEW->assign("mess", $mess);
+        $VIEW->assign("mess", $message);
         session_unset();
         $VIEW->display($CORE->login_tpl);
         exit;
