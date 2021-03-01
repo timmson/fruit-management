@@ -13,11 +13,11 @@
       <th>ПТ</th>
    </tr>
    {section name=i loop=$timesheet}
-	{assign var="mon" value=`$mon+$timesheet[i].task_spent_mon`}
-	{assign var="tue" value=`$tue+$timesheet[i].task_spent_tue`}
-	{assign var="wen" value=`$wen+$timesheet[i].task_spent_wen`}
-	{assign var="th" value=`$th+$timesheet[i].task_spent_th`}
-	{assign var="fr" value=`$fr+$timesheet[i].task_spent_fr`}
+	{assign var="mon" value="$mon+$timesheet[i].task_spent_mon"}
+	{assign var="tue" value="$tue+$timesheet[i].task_spent_tue"}
+	{assign var="wen" value="$wen+$timesheet[i].task_spent_wen"}
+	{assign var="th" value="$th+$timesheet[i].task_spent_th"}
+	{assign var="fr" value="$fr+$timesheet[i].task_spent_fr"}
    <tr >
    <td style="text-align:left;">
 	 <a href="?dep=task&task={$timesheet[i].task_id}">
@@ -135,12 +135,12 @@
        {section name=m loop=$monthcal}
    		{assign var=bgcolor value=inherit}
    		{if $monthcal[m].day >= $plantasks[i].fm_plan_start and $monthcal[m].day <= $plantasks[i].fm_plan_end}
-		   		{assign var=bgcolor value=#0f0}
+		   		{assign var="bgcolor" value="#0f0"}
    				{if $plantasks[i].fm_priority eq 2}
-   		   			{assign var=bgcolor value=#8f8}
+   		   			{assign var="bgcolor" value="#8f8"}
    		   		{/if}
    		   		{if $plantasks[i].fm_priority eq 3}
-   		   			{assign var=bgcolor value=#dfd}
+   		   			{assign var="bgcolor" value="#dfd"}
    		   		{/if}
    		{/if}
        	<td style="background:{$bgcolor};"> 

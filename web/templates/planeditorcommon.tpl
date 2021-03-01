@@ -33,15 +33,15 @@
       	  {math equation="(p-r)/8" r=$plantasks[i].fm_all_hour p=$plantasks[i].fm_plan_hour format="%.0f"}д
       	  {math equation="(p-r)%8" r=$plantasks[i].fm_all_hour p=$plantasks[i].fm_plan_hour format="%.0f"}ч
       </td>
-       {section name=m loop=$monthcal}
-   		{assign var=bgcolor value=inherit}
+       {section name="m" loop="$monthcal"}
+   		{assign var="bgcolor" value="inherit"}
    		{if $monthcal[m].day >= $plantasks[i].fm_plan_start and $monthcal[m].day <= $plantasks[i].fm_plan_end}
-		   		{assign var=bgcolor value=#0f0}
+		   		{assign var="bgcolor" value="#0f0"}
    				{if $plantasks[i].fm_priority eq 2}
-   		   			{assign var=bgcolor value=#8f8}
+   		   			{assign var="bgcolor" value="#8f8"}
    		   		{/if}
    		   		{if $plantasks[i].fm_priority eq 3}
-   		   			{assign var=bgcolor value=#dfd}
+   		   			{assign var="bgcolor" value="#dfd"}
    		   		{/if}
    		{/if}
        	<td style="background:{$bgcolor};"> 

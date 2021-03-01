@@ -13,11 +13,11 @@
       <th>ПТ</th>
    </tr>
    {section name=i loop=$timesheet}
-	{assign var="mon" value=`$mon+$timesheet[i].task_spent_mon`}
-	{assign var="tue" value=`$tue+$timesheet[i].task_spent_tue`}
-	{assign var="wen" value=`$wen+$timesheet[i].task_spent_wen`}
-	{assign var="th" value=`$th+$timesheet[i].task_spent_th`}
-	{assign var="fr" value=`$fr+$timesheet[i].task_spent_fr`}
+	{assign var="mon" value="$mon+$timesheet[i].task_spent_mon"}
+	{assign var="tue" value="$tue+$timesheet[i].task_spent_tue"}
+	{assign var="wen" value="$wen+$timesheet[i].task_spent_wen"}
+	{assign var="th" value="$th+$timesheet[i].task_spent_th"}
+	{assign var="fr" value="$fr+$timesheet[i].task_spent_fr"}
    <tr >
       <td>
 	<a href="?dep=task&task={$timesheet[i].task_id}">

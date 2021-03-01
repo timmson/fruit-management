@@ -122,7 +122,7 @@ class PlanService implements Service
      */
     public function async(array $request, string $user): array
     {
-        // TODO: Implement async() method.
+        return $this->sync($request, $user);
     }
 }
 
