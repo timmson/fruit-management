@@ -2,6 +2,8 @@
 
 .phpunit.result.cache
 
+composer.phar
+
 web/smarty/templates_c
 web/tmp/
 web/vendor/

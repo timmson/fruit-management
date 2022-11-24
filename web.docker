@@ -1,6 +1,6 @@
-FROM php:7.4-apache
+FROM --platform=linux/amd64 php:7.4-apache
 
-RUN apt update && apt dist-upgrade -y && apt install zlibc zlib1g zlib1g-dev libpng-dev -y
+RUN apt update && apt dist-upgrade -y && apt install zlib1g zlib1g-dev libpng-dev -y
 
 RUN docker-php-ext-install mysqli calendar gd
 

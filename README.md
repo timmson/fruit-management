@@ -23,6 +23,9 @@ git clone https://github.com/timmson/fruit-management.git
 cd fruit-management
 ```
 
+### Install PHP and Composer
+See installation depending on you platform
+
 ### Run
 ```
 composer install --prefer-dist --no-progress -d web
