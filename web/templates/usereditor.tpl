@@ -13,11 +13,11 @@
       <th>ПТ</th>
    </tr>
    {section name=i loop=$timesheet}
-	{assign var="mon" value="$mon+$timesheet[i].task_spent_mon"}
-	{assign var="tue" value="$tue+$timesheet[i].task_spent_tue"}
-	{assign var="wen" value="$wen+$timesheet[i].task_spent_wen"}
-	{assign var="th" value="$th+$timesheet[i].task_spent_th"}
-	{assign var="fr" value="$fr+$timesheet[i].task_spent_fr"}
+	{assign var="mon" value=$mon+$timesheet[i].task_spent_mon}
+	{assign var="tue" value=$tue+$timesheet[i].task_spent_tue}
+	{assign var="wen" value=$wen+$timesheet[i].task_spent_wen}
+	{assign var="th" value=$th+$timesheet[i].task_spent_th}
+	{assign var="fr" value=$fr+$timesheet[i].task_spent_fr}
    <tr >
       <td>
 	<a href="?dep=task&task={$timesheet[i].task_id}">
@@ -32,22 +32,22 @@
       <td>
 	<!--img src="{$factory->img_admin_dir}state_{$timesheet[i].fm_state_name}.gif" alt="{$timesheet[i].fm_state_name}" title="{$timesheet[i].fm_state}"/-->{$timesheet[i].task_state}
       </td>
-	<td align="center">{$timesheet[i].task_spent_mon}</td>
-	<td align="center">{$timesheet[i].task_spent_tue}</td>
-	<td align="center">{$timesheet[i].task_spent_wen}</td>
-	<td align="center">{$timesheet[i].task_spent_th}</td>
-	<td align="center">{$timesheet[i].task_spent_fr}</td>
+	<td "text-align: center">{$timesheet[i].task_spent_mon}</td>
+	<td "text-align: center">{$timesheet[i].task_spent_tue}</td>
+	<td "text-align: center">{$timesheet[i].task_spent_wen}</td>
+	<td "text-align: center">{$timesheet[i].task_spent_th}</td>
+	<td "text-align: center">{$timesheet[i].task_spent_fr}</td>
    </tr>
    {/section}
    <tr style="font-weight:bold;">
       <td colspan="3" style="text-align:right">
 		{if $fr eq 8}<span style="text-decoration:blink; color:red;">ОТЧЕТ!!!</span>{else}Итого{/if}
 	</td>
-	<td align="center">{$mon}</td>
-	<td align="center">{$tue}</td>
-	<td align="center">{$wen}</td>
-	<td align="center">{$th}</td>
-	<td align="center">{$fr}</td>
+	<td "text-align: center">{$mon}</td>
+	<td "text-align: center">{$tue}</td>
+	<td "text-align: center">{$wen}</td>
+	<td "text-align: center">{$th}</td>
+	<td "text-align: center">{$fr}</td>
    </tr>
 </table>
 <h3>Задачи</h3>
