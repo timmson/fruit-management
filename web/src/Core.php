@@ -5,7 +5,8 @@ namespace ru\timmson\FruitManagement;
 use ru\timmson\FruitManagement\dao\MySQLConnection;
 use Smarty;
 
-class Core {
+class Core
+{
 
     public $admin_php = 'index.php';
     public $admin_tpl = 'index.tpl';
@@ -30,7 +31,8 @@ class Core {
     private $error = 0;
     private $connection = null;
 
-    public function __construct($conf) {
+    public function __construct($conf)
+    {
         if ($conf != null) {
             $this->configuration = $conf;
             $this->init();
@@ -39,44 +41,48 @@ class Core {
         }
     }
 
-    private function init() {
+    private function init()
+    {
         session_start();
         setlocale(LC_ALL, '');
-        ini_set('memory_limit', $this->configuration['global']['memory_limit']);
-        date_default_timezone_set($this->configuration['global']['timezone']);
-        $this->configuration['admin']['major'] = (date("y") - 9);
-        $this->configuration['admin']['minor'] = '.' . date("m");
-        $this->configuration['global']['copyright'] = $this->configuration['global']['copyright'] . '-' . date("Y");
-        $this->configuration['admin']['copyright'] = $this->configuration['admin']['copyright'] . '-' . date("Y");
+        ini_set('memory_limit', $this->configuration["memory_limit"]);
+        date_default_timezone_set($this->configuration["timezone"]);
+        $this->configuration["major"] = (date("y") - 9);
+        $this->configuration["minor"] = '.' . date("m");
+        $this->configuration["copyright"] = $this->configuration["copyright"] . "-" . date("Y");
     }
 
-    public function getConnection() {
+    public function getConnection(): ?MySQLConnection
+    {
         if ($this->connection == null) {
             $timeout = microtime();
-            $this->connection = new MySQLConnection($_ENV['MYSQL_HOST'], $_ENV['MYSQL_PORT'], $_ENV['MYSQL_USER'], $_ENV['MYSQL_PASSWORD'], $_ENV['MYSQL_DATABASE']);
-            $this->debugTimeout('MY CONNECT', $timeout, 5);
+            $this->connection = new MySQLConnection($_ENV["MYSQL_HOST"], $_ENV["MYSQL_PORT"], $_ENV["MYSQL_USER"], $_ENV["MYSQL_PASSWORD"], $_ENV["MYSQL_DATABASE"]);
+            $this->debugTimeout("MY CONNECT", $timeout, 5);
         }
         return $this->connection;
     }
 
-    public function executeQuery($conn, $query, $debug=0) {
+    public function executeQuery($conn, $query, $debug = 0)
+    {
         $timeout = microtime();
         $data = $conn->query($query);
-        $this->debugTimeout('EXECUTE', $timeout, 5);
+        $this->debugTimeout("EXECUTE", $timeout, 5);
         $this->debugQuery($query, $data, $debug);
         return $data;
     }
 
-    public function closeConnection($conn) {
+    public function closeConnection($conn)
+    {
         $conn->close();
     }
 
-    private function debugTimeout($descr, $timeout, $limit) {
-	$tmp = explode(" ", microtime());
-	$end = $tmp[0]+$tmp[1];
-	$tmp = explode(" ", $timeout);
-	$start = $tmp[0]+$tmp[1];
-	$timeout = round($end - $start, 2);
+    private function debugTimeout($descr, $timeout, $limit)
+    {
+        $tmp = explode(" ", microtime());
+        $end = $tmp[0] + $tmp[1];
+        $tmp = explode(" ", $timeout);
+        $start = $tmp[0] + $tmp[1];
+        $timeout = round($end - $start, 2);
         if ($timeout < $limit) {
             $this->debugs[] = $descr . ' TIMEOUT: ' . $timeout . 's';
         } else {
@@ -84,19 +90,21 @@ class Core {
         }
     }
 
-    private function debugQuery($query, $data, $debug) {
+    private function debugQuery($query, $data, $debug)
+    {
         if (count($data) == 0) {
             $data[0] = 'No rows found';
         }
         $trace = 'QUERY:<b>' . $query . '</b><br/>';
-        $trace.='FIRST ROW:';
-        $trace.='<pre>';
-        $trace.=print_r($debug > 1 ? $data : $data[0], true);
-        $trace.='</pre>';
+        $trace .= 'FIRST ROW:';
+        $trace .= '<pre>';
+        $trace .= print_r($debug > 1 ? $data : $data[0], true);
+        $trace .= '</pre>';
         $this->debugs[] = $trace;
     }
 
-    private function initsmarty() {
+    private function initsmarty()
+    {
         $this->smarty = new Smarty();
         $this->smarty->setTemplateDir($this->tpl_admin_dir);
         $this->smarty->setConfigDir($this->smarty_config_dir);
@@ -106,66 +114,41 @@ class Core {
         $this->smarty->assign('factory', $this);
     }
 
-    private function initdeps() {
-        $root = parse_ini_file($this->configuration['admin']['adminconf'], true);
-        for ($i = 0; $i < count($root['root']['zone']); $i++) {
-            $this->zones[$i]['name'] = $root['root']['zone'][$i];
-            $zone = $root[$root['root']['zone'][$i]];
-            $this->zones[$i]['descr'] = $zone['descr'];
-            $props = $root[$this->zones[$i]['name']];
-            unset($props['name']);
-            unset($props['descr']);
-            unset($props['dep']);
-            for ($j = 0; $j < count($zone['dep']); $j++) {
-                $this->zones[$i]['dep'][$j]['name'] = $zone['dep'][$j];
-                $this->zones[$i]['dep'][$j]['descr'] = $root[$zone['dep'][$j]]['descr'];
-                //$this->zones[$i]['dep'][$j]['access'] = $root[$zone['dep'][$j]]['access'];
-                /**
-                 * @legacy
-                 */
-                $this->zones[$i]['dep'][$j]['incl'] = $this->zones[$i]['dep'][$j]['name'] . 'editor.php';
-                /**
-                 * New
-                 */
-                $this->zones[$i]['dep'][$j]['service'] = "\\ru\\timmson\\FruitManagement\\service\\" . ucfirst($this->zones[$i]['dep'][$j]['name']) . 'Service';
-                $this->zones[$i]['dep'][$j]['icon'] = 'admin_' . $this->zones[$i]['dep'][$j]['name'] . '.gif';
-                $this->zones[$i]['dep'][$j]['tpl'] = $this->zones[$i]['dep'][$j]['name'] . 'editor.tpl';
-                $this->zones[$i]['dep'][$j]['props'] = $props;
-            }
+    private function initdeps()
+    {
+        for ($j = 0; $j < count($this->configuration["sections"]); $j++) {
+            $section = $this->configuration["sections"][$j];
+            $this->configuration["sections"][$j] = array(
+                "name" => $section,
+                "description" => $this->configuration[$section]["description"],
+                "incl" => $section . "editor.php",
+                "service" => "\\ru\\timmson\\FruitManagement\\service\\" . ucfirst($section) . "Service",
+                "icon" => "admin_" . $section . ".gif",
+                "tpl" => $section . "editor.tpl"
+            );
         }
-        $this->smarty->assign('zones', $this->zones);
-        $this->root_role = $root['roles']['root'];
-        $this->guest_role = $root['roles']['guest'];
-        $roles = $root['roles']['role'];
+        $this->root_role = $this->configuration["roles"]["root"];
+        $this->guest_role = $this->configuration["roles"]["guest"];
+        $roles = $this->configuration["roles"]["role"];
         for ($i = 0; $i < count($roles); $i++) {
             $this->roles[$roles[$i]]['name'] = $roles[$i];
-            $this->roles[$roles[$i]]['login'] = $root[$roles[$i]]['login'];
-            $this->roles[$roles[$i]]['descr'] = $root[$roles[$i]]['descr'];
+            $this->roles[$roles[$i]]['login'] = $this->configuration[$roles[$i]]['login'];
+            $this->roles[$roles[$i]]["description"] = $this->configuration[$roles[$i]]["description"];
             $this->roles[$roles[$i]]['email'] = 'XXXXXXX';
         }
     }
 
-    public function applypolicy($login, $zone) {
-        $deps = $this->getdeps($zone);
-        for ($i = 0; $i < count($deps); $i++) {
-            if (($deps[$i]['access'] != '') && (strpos($deps[$i]['access'], $login) === false)) {
-                $deps[$i]['access'] = 1;
-            } else {
-                $deps[$i]['access'] = 0;
-            }
-        }
-        $this->smarty->assign('deps', $deps);
-        $this->smarty->assign('currentrole', $this->roles[$login]);
-    }
 
-    public function customErrorHandler($errno, $errstr, $errfile, $errline) {
+    public function customErrorHandler($errno, $errstr, $errfile, $errline)
+    {
         global $CORE;
         $CORE->errorHandler($errno, $errstr, $errfile, $errline);
         return true;
     }
 
-    public function errorHandler($errno, $errstr, $errfile, $errline) {
-        if ($errno < $this->configuration['admin']['debug']) {
+    public function errorHandler($errno, $errstr, $errfile, $errline)
+    {
+        if ($errno < $this->configuration["debug"]) {
             echo '#' . $errno . ':' . $errstr . '<br/>[' . $errfile . '@' . $errline . '] E' . $this->error . '<br/>';
         }
         switch ($errno) {
@@ -188,27 +171,30 @@ class Core {
         }
     }
 
-    public function debugRequestAndSession() {
+    public function debugRequestAndSession()
+    {
         $trace = 'REQUEST:';
-        $trace.='<pre>';
-        $trace.=print_r($_REQUEST, true);
-        $trace.='</pre>';
+        $trace .= '<pre>';
+        $trace .= print_r($_REQUEST, true);
+        $trace .= '</pre>';
         $this->debugs[] = $trace;
 
         $trace = 'SESSION:';
-        $trace.='<pre>';
-        $trace.=print_r($_SESSION, true);
-        $trace.='</pre>';
+        $trace .= '<pre>';
+        $trace .= print_r($_SESSION, true);
+        $trace .= '</pre>';
         $this->debugs[] = $trace;
     }
 
-    public function timestamp2date($time) {
-        return date($this->configuration['global']['dateformat'], $time);
+    public function timestamp2date($time)
+    {
+        return date($this->configuration["global"]['dateformat'], $time);
     }
 
 
-	function sendmail($sender, $email, $subject, $body) {
-        $this->debugs[] = urlencode($email)."&subject=".urlencode($subject)."&body=".urlencode($body)."&from=".$sender;
+    function sendmail($sender, $email, $subject, $body)
+    {
+        $this->debugs[] = urlencode($email) . "&subject=" . urlencode($subject) . "&body=" . urlencode($body) . "&from=" . $sender;
         /**
          * TODO
          * Create mail box
@@ -218,7 +204,8 @@ class Core {
         //file_put_contents("1.txt", $body/*, FILE_APPEND*/);
         //file_get_contents($s);
     }
-	/*
+
+    /*
     function sendmail($sender, $email, $subject, $body) {
         //TODO move to site.ini
         $headers = "From: " . $sender . "\n" .
@@ -228,15 +215,18 @@ class Core {
     }
     */
 
-    function fromutf($str) {
-        return iconv('UTF-8', $this->configuration['global']['encoding'], $str);
+    function fromutf($str)
+    {
+        return iconv('UTF-8', $this->configuration["global"]['encoding'], $str);
     }
 
-    function toutf($str) {
-        return iconv($this->configuration['global']['encoding'], 'UTF-8', $str);
+    function toutf($str)
+    {
+        return iconv($this->configuration["global"]['encoding'], 'UTF-8', $str);
     }
 
-    function auth($login, $pass, $userDAO) {
+    function auth($login, $pass, $userDAO)
+    {
         $root_name = "root";
         $root_pass = "5f4dcc3b5aa765d61d8327deb882cf99";
 
@@ -248,7 +238,7 @@ class Core {
             $_SESSION["user"]["samaccountname"] = $login;
         } else {
 
-            $result = $userDAO ->getUserByNameAndPassword($login, md5($pass));
+            $result = $userDAO->getUserByNameAndPassword($login, md5($pass));
 
             if ($result != null) {
                 $ret = $this->root_role;
@@ -261,78 +251,41 @@ class Core {
         return $ret;
     }
 
-   private function parseAdInfo($info) {
-        $info = $info[0];
-        $retinfo = array();
-        for ($i = 0; $i < $info['count']; $i++) {
-            $retinfo[$info[$i]] = $info[$info[$i]][0];
-        }
-		$retinfo['fio'] = $retinfo['cn'];
-        return $retinfo;
-    }
-
-    function search($login) {
+    function search($login)
+    {
         /**
          * TODO
          * Replace this
          */
-/*        $adauth = $this->configuration['adauth'];
-        $ldap = ldap_connect($adauth['adhost'], $adauth['adport']);
-        $ret = ldap_bind($ldap, 'srv-earlypay-tst01' . '@' . $adauth['addomain'], 'f4vC$50Fw');
-        if ($ret) {
-           $filter = '(|('.$adauth['adfilter'] . '=' . $login . '*)(cn=' . $login . '*))';
-           $sr = ldap_search($ldap, $adauth['adbasedn'], $filter);
-           $ret = $this->parseAdInfoMulti(ldap_get_entries($ldap, $sr));
-        }
-        ldap_close($ldap);
-        return $ret;*/
+        /*        $adauth = $this->configuration['adauth'];
+                $ldap = ldap_connect($adauth['adhost'], $adauth['adport']);
+                $ret = ldap_bind($ldap, 'srv-earlypay-tst01' . '@' . $adauth['addomain'], 'f4vC$50Fw');
+                if ($ret) {
+                   $filter = '(|('.$adauth['adfilter'] . '=' . $login . '*)(cn=' . $login . '*))';
+                   $sr = ldap_search($ldap, $adauth['adbasedn'], $filter);
+                   $ret = $this->parseAdInfoMulti(ldap_get_entries($ldap, $sr));
+                }
+                ldap_close($ldap);
+                return $ret;*/
         return [];
     }
 
-    private function parseAdInfoMulti($adinfo) {
-        $retinfos = array();
-        for ($j = 0; $j< $adinfo['count']; $j++) {
-        	$info = $adinfo[$j];
-		    for ($i = 0; $i < $info['count']; $i++) {
-		        $retinfo[$info[$i]] = $info[$info[$i]][0];
-		    }
-		    $retinfos[] = $retinfo;
-        }
-        return $retinfos;
+    function getSections()
+    {
+        return $this->configuration["sections"];
     }
 
-    function log_access() {
-        $f = fopen($this->configuration['admin']['logdir'] . '/access_' . date("Y-m-d") . '.log', 'a');
-        $info = date('Y.m.d G:i:s') . ' ';
-        $info .= $_SESSION['user']['samaccountname']. ':' . $_SESSION['login'] . '@' . gethostbyaddr($_SERVER['REMOTE_ADDR']) . ' - ';
-        $info .= $_SESSION['zone'] . " " . $_SESSION['dep'] . "\r\n";
-	fwrite($f, $info, strlen($info));
-        fclose($f);
-    }
+    function getCurrentSection($section)
+    {
+        $sections = $this->getSections();
 
-    function getzones() {
-        return $this->zones;
-    }
-
-    function getdeps($zone) {
-        for ($i = 0; $i < count($this->zones); $i++) {
-            if ($this->zones[$i]['name'] == $zone || $zone == '') {
-                $this->smarty->assign('deps', $this->zones[$i]['dep']);
-                $_SESSION['zone'] = $this->zones[$i]['name'];
-                return $this->zones[$i]['dep'];
+        for ($i = 0; $i < count($sections); $i++) {
+            if ($sections[$i]["name"] == $section) {
+                return $sections[$i];
             }
         }
-        return $this->getdeps('');
-    }
 
-    function getcurrentdep($zone, $dep) {
-        $deps = $this->getdeps($zone);
-        for ($i = 0; $i < count($deps); $i++)
-            if ($deps[$i]['name'] == $dep || $dep == '') {
-                $this->smarty->assign('currentdep', $deps[$i]);
-                return $deps[$i];
-            }
-        return $this->getcurrentdep($zone, '');
+        return $section[0];
     }
 
 }

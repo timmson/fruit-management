@@ -1,9 +1,13 @@
+.DS_Store
 .idea
 
+# PHP
 .phpunit.result.cache
-
-composer.phar
-
 web/smarty/templates_c
 web/tmp/
 web/vendor/
+
+# NPM
+front/node_modules
+front/coverage
+
