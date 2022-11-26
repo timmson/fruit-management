@@ -10,7 +10,6 @@ class Core {
     public $admin_php = 'index.php';
     public $admin_tpl = 'index.tpl';
     public $default_tpl = 'homeeditor.tpl';
-    public $login_tpl = 'login.tpl';
     public $smarty_compile_dir = './smarty/templates_c/';
     public $smarty_config_dir = './smarty/config/';
     public $smarty_cache_dir = './smarty/cache/';

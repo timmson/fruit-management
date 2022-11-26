@@ -65,9 +65,10 @@ if ($_SESSION["login"] == "") {
     }
 
     if ($login == "") {
-        $VIEW->assign("mess", $message);
+        header("Location: ./new/");
+/*        $VIEW->assign("mess", $message);
         session_unset();
-        $VIEW->display($CORE->login_tpl);
+        $VIEW->display($CORE->login_tpl);*/
         exit;
     }
 
