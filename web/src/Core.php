@@ -11,11 +11,9 @@ class Core {
     public $admin_tpl = 'index.tpl';
     public $default_tpl = 'homeeditor.tpl';
     public $login_tpl = 'login.tpl';
-    public $smarty_class_path = './smarty/Smarty.class.php';
     public $smarty_compile_dir = './smarty/templates_c/';
     public $smarty_config_dir = './smarty/config/';
     public $smarty_cache_dir = './smarty/cache/';
-    public $smarty_pages_dir = '../pages/';
     public $files_dir = './files/';
     public $fotos_dir = './fotos/';
     public $img_admin_dir = './img/';
@@ -100,11 +98,11 @@ class Core {
     }
 
     private function initsmarty() {
-        $this->smarty = new Smarty;
-        $this->smarty->compile_dir = $this->smarty_compile_dir;
-        $this->smarty->config_dir = $this->smarty_config_dir;
-        $this->smarty->cache_dir = $this->smarty_cache_dir;
-        $this->smarty->template_dir = $this->tpl_admin_dir;
+        $this->smarty = new Smarty();
+        $this->smarty->setTemplateDir($this->tpl_admin_dir);
+        $this->smarty->setConfigDir($this->smarty_config_dir);
+        $this->smarty->setCompileDir($this->smarty_compile_dir);
+        $this->smarty->setCacheDir($this->smarty_cache_dir);
         $this->smarty->assign('const', $this->configuration);
         $this->smarty->assign('factory', $this);
     }
@@ -122,7 +120,7 @@ class Core {
             for ($j = 0; $j < count($zone['dep']); $j++) {
                 $this->zones[$i]['dep'][$j]['name'] = $zone['dep'][$j];
                 $this->zones[$i]['dep'][$j]['descr'] = $root[$zone['dep'][$j]]['descr'];
-                $this->zones[$i]['dep'][$j]['access'] = $root[$zone['dep'][$j]]['access'];
+                //$this->zones[$i]['dep'][$j]['access'] = $root[$zone['dep'][$j]]['access'];
                 /**
                  * @legacy
                  */

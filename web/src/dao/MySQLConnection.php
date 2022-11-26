@@ -3,7 +3,7 @@
 
 namespace ru\timmson\FruitManagement\dao;
 
-
+use mysqli;
 use mysqli_result;
 
 class MySQLConnection implements Connection
@@ -16,7 +16,7 @@ class MySQLConnection implements Connection
      */
     public function __construct(string $host = null, string $port = null, string $user = null, string $password = null, string $database = null)
     {
-        $this->connection = mysqli_connect($host, $user, $password, $database, $port);
+        $this->connection = new mysqli($host, $user, $password, $database, $port);
     }
 
     /**
