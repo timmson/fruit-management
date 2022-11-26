@@ -77,27 +77,24 @@ if ($_SESSION["login"] == "") {
 /* * * End of login block ** */
 
 /* * * Session params block ** */
-if (isset($_REQUEST['zone'])) {
-    $_SESSION['zone'] = $_REQUEST['zone'];
-}
-
-if (isset($_REQUEST['dep'])) {
-    $_SESSION['dep'] = $_REQUEST['dep'];
+if (isset($_REQUEST["section"])) {
+    $_SESSION["section"] = $_REQUEST["section"];
 }
 /* * * End of session params block ** */
 
-$currentdep = $CORE->getcurrentdep($_SESSION['zone'], $_SESSION['dep']);
-$_SESSION['dep'] = $currentdep['name'];
+$currentSection = $CORE->getCurrentSection($_SESSION["section"]);
+$VIEW->assign("currentSection", $currentSection);
+$_SESSION["section"] = $currentSection["name"];
 
 /* * * Temprary debug ** */
 
 try {
-    if ($container->has($currentdep['service'])) {
-        $service = $container->get($currentdep['service']);
-        $user = strlen($_REQUEST['user'])>0?$_REQUEST['user']:$_SESSION['user']['samaccountname'];
+    if ($container->has($currentSection["service"])) {
+        $service = $container->get($currentSection["service"]);
+        $user = isset($_REQUEST["user"]) ? $_REQUEST['user'] : $_SESSION["user"]["samaccountname"];
         $view = [];
 
-        if ($_REQUEST['mode'] == 'async') {
+        if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "async") {
             $view = $service->async($_REQUEST, $user);
         } else {
             $view = $service->sync($_REQUEST, $user);
@@ -108,18 +105,19 @@ try {
         }
 
         $CORE->closeConnection($conn);
-    } else if (!file_exists($CORE->inc_admin_dir . $currentdep['incl'])) {
-        $CORE->errorHandler(E_ERROR, 'File not found -' . $CORE->inc_admin_dir . $currentdep['incl'], 'admin.php', 57);
+    } else if (!file_exists($CORE->inc_admin_dir . $currentSection["incl"])) {
+        $CORE->errorHandler(E_ERROR, 'File not found -' . $CORE->inc_admin_dir . $currentSection['incl'], 'admin.php', 57);
     } else {
     	$loadTime = microtime(true);
-        include_once($CORE->inc_admin_dir . $currentdep['incl']);
+        include_once($CORE->inc_admin_dir . $currentSection["incl"]);
         $loadTime = round(microtime(true)-$loadTime, 2);
-        $VIEW->assign('loadTime', $loadTime);
+        $VIEW->assign("loadTime", $loadTime);
     }
-    $VIEW->assign('page', $currentdep['tpl']);
-    if (!file_exists($CORE->tpl_admin_dir . $currentdep['tpl'])) {
-        $CORE->errorHandler(E_ERROR, 'File not found -' . $CORE->tpl_admin_dir . $currentdep['tpl'], 'admin.php', 60);
-        $currentdep['tpl'] = $CORE->default_tpl;
+    print_r($currentSection["tpl"]);
+    $VIEW->assign("page", $currentSection["tpl"]);
+    if (!file_exists($CORE->tpl_admin_dir . $currentSection["tpl"])) {
+        $CORE->errorHandler(E_ERROR, 'File not found -' . $CORE->tpl_admin_dir . $currentSection['tpl'], 'admin.php', 60);
+        $currentSection["tpl"] = $CORE->default_tpl;
     }
 } catch (Exception $e) {
     $CORE->errorHandler(E_ERROR, $e->getMessage(), $e->getFile(), $e->getLine());
@@ -127,15 +125,14 @@ try {
 
 /* * * End of Temprary debug ** */
 
-$CORE->applypolicy($_SESSION['login'], $_SESSION['zone']);
-$VIEW->assign('dep', $_SESSION['dep']);
-$VIEW->assign('zone', $_SESSION['zone']);
-if ($_REQUEST['mode'] == 'async') {
-    if ($_REQUEST['oper'] == 'xls') {
+$VIEW->assign("sections", $CORE->getSections());
+
+if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "async") {
+    if ($_REQUEST["oper"] == 'xls') {
         header("Content-Type:  application/vnd.ms-excel; charset=".$CORE->configuration['global']['encodingHTML']);
         header("Content-Disposition: attachment; filename=" . $_SESSION['zone'] . "_" . $_SESSION['dep'] . "_" . time() . ".xls");
-		$VIEW->display($currentdep['tpl']);
-    } else if ($_REQUEST['oper'] == 'doc') {
+		$VIEW->display($currentSection['tpl']);
+    } else if ($_REQUEST["oper"] == 'doc') {
 		header("Content-Type:  text/html; charset=".$CORE->configuration['global']['encodingHTML']);
 		//header("Content-Type:  application/vnd.ms-word; charset=".$CORE->configuration['global']['encodingHTML']);
 		$fileName = microtime();
@@ -146,17 +143,16 @@ if ($_REQUEST['mode'] == 'async') {
 			$fileName = "Release";
 		}
 		header("Content-Disposition: attachment; filename=".$fileName.".doc");
-		$VIEW->display($currentdep['tpl']);
-    } else if ($_REQUEST['oper'] == 'gif') {
+		$VIEW->display($currentSection['tpl']);
+    } else if ($_REQUEST["oper"] == 'gif') {
 		header("Content-type:  image/gif");
-	} else if ($_REQUEST['oper'] == 'json') {
+	} else if ($_REQUEST["oper"] == 'json') {
 		header("Content-type:  text/json");
     } else {
 		header("Content-Type:  text/html; charset=".$CORE->configuration['global']['encodingHTML']);
-		$VIEW->display($currentdep['tpl']);
+		$VIEW->display($currentSection["tpl"]);
     }
 } else {
-    //$CORE->log_access();
     $VIEW->display($CORE->admin_tpl);
 }
 //print_r($CORE->debugs);

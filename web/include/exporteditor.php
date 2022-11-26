@@ -1,5 +1,5 @@
 <?
-$conn = $CORE->getConnection($currentdep['props']);
+$conn = $CORE->getConnection($currentSection['props']);
 
 $week=isset($_REQUEST['week'])?$_REQUEST['week']:date('W');
 
