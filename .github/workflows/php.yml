@@ -9,7 +9,7 @@ jobs:
 
     env:
       working-directory: web
-      php: 7.4
+      php: 8.1
       php_extensions: 'calendar gd'
       composer: 2
 
