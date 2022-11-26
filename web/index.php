@@ -92,23 +92,15 @@ $_SESSION['dep'] = $currentdep['name'];
 
 try {
     if ($container->has($currentdep['service'])) {
-
         $service = $container->get($currentdep['service']);
-
         $user = strlen($_REQUEST['user'])>0?$_REQUEST['user']:$_SESSION['user']['samaccountname'];
         $view = [];
 
-
         if ($_REQUEST['mode'] == 'async') {
-
             $view = $service->async($_REQUEST, $user);
-
         } else {
-
             $view = $service->sync($_REQUEST, $user);
-
         }
-
 
         foreach ($view as $key => $value) {
             $VIEW->assign($key, $value);

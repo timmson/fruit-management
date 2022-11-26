@@ -8,8 +8,7 @@ Custom issue tracker
 ## Requirements
 
 ### As "classic"
-    * Apache >= 2.2
-    * PHP >= 7.4
+    * PHP >= 8.1
     * MySQL >= 5
 
 ### As Docker container

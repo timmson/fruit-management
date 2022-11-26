@@ -10,7 +10,7 @@ jobs:
     env:
       working-directory: web
       php: 8.1
-      php_extensions: 'calendar gd'
+      php_extensions: 'mysqli calendar gd'
       composer: 2
 
     steps:
