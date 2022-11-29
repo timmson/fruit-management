@@ -43,7 +43,6 @@ class Core
 
     private function init()
     {
-        session_start();
         setlocale(LC_ALL, '');
         ini_set('memory_limit', $this->configuration["memory_limit"]);
         date_default_timezone_set($this->configuration["timezone"]);
@@ -225,32 +224,6 @@ class Core
         return iconv($this->configuration["global"]['encoding'], 'UTF-8', $str);
     }
 
-    function auth($login, $pass, $userDAO)
-    {
-        $root_name = "root";
-        $root_pass = "5f4dcc3b5aa765d61d8327deb882cf99";
-
-        $ret = "";
-        if (($root_name == $login) && ($root_pass == md5($pass))) {
-            $ret = $this->root_role;
-            $_SESSION["user"]["fio"] = $login;
-            $_SESSION["user"]["mail"] = $_SERVER['SERVER_ADMIN'];
-            $_SESSION["user"]["samaccountname"] = $login;
-        } else {
-
-            $result = $userDAO->getUserByNameAndPassword($login, md5($pass));
-
-            if ($result != null) {
-                $ret = $this->root_role;
-                $_SESSION["user"]["fio"] = $result["fm_descr"];
-                $_SESSION["user"]["samaccountname"] = $login;
-                //$_SESSION["user"]["mail"] = $result["fm_descr"];
-            }
-        }
-
-        return $ret;
-    }
-
     function search($login)
     {
         /**
@@ -285,7 +258,7 @@ class Core
             }
         }
 
-        return $section[0];
+        return $sections[0];
     }
 
 }

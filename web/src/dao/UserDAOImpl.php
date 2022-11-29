@@ -24,7 +24,8 @@ class UserDAOImpl extends AbstractDAO implements UserDAO
      */
     public function getUserByNameAndPassword(string $name, string $password): ?array
     {
-        return $this->executeQuery("select * from fm_user", ["fm_name" => $name, "fm_password_enc" => $password], [])[0];
+        $users = $this->executeQuery("select * from fm_user", ["fm_name" => $name, "fm_password_enc" => $password], []);
+        return empty($users) ? array() : $users[0];
     }
 
     /**

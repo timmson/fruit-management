@@ -12,7 +12,7 @@ exports[`Login should return login form 1`] = `
     >
       <img
         alt="Fruit Management"
-        src="../img/logo.gif"
+        src="img/logo.gif"
       />
     </div>
   </div>
@@ -25,12 +25,18 @@ exports[`Login should return login form 1`] = `
       <h1>
         Fruit Management
       </h1>
+      <p
+        style={
+          {
+            "color": "#FF0000",
+          }
+        }
+      />
     </div>
   </div>
   <form
-    action="../"
-    id="formsec"
-    method="post"
+    id="loginForm"
+    onSubmit={[Function]}
   >
     <div
       className="row mt-4"
@@ -53,7 +59,7 @@ exports[`Login should return login form 1`] = `
           id="login"
           name="login"
           onChange={[Function]}
-          placeholder="Nick"
+          placeholder="fruit"
           type="text"
           value=""
         />
@@ -85,7 +91,7 @@ exports[`Login should return login form 1`] = `
           id="pass"
           name="pass"
           onChange={[Function]}
-          placeholder="*******"
+          placeholder="*****"
           type="password"
           value=""
         />
@@ -125,7 +131,7 @@ exports[`Login should return login form 1`] = `
     >
       <img
         alt="powered by xhtml"
-        src="../img/xhtml.png"
+        src="img/xhtml.png"
       />
     </div>
     <div
@@ -133,7 +139,7 @@ exports[`Login should return login form 1`] = `
     >
       <img
         alt="powered by css"
-        src="../img/css.png"
+        src="img/css.png"
       />
     </div>
     <div
@@ -141,7 +147,7 @@ exports[`Login should return login form 1`] = `
     >
       <img
         alt="powered by php"
-        src="../img/php.png"
+        src="img/php.png"
       />
     </div>
     <div
@@ -149,7 +155,7 @@ exports[`Login should return login form 1`] = `
     >
       <img
         alt="powered by smarty"
-        src="../img/smarty.png"
+        src="img/smarty.png"
       />
     </div>
     <div
@@ -157,7 +163,7 @@ exports[`Login should return login form 1`] = `
     >
       <img
         alt="powered by ajax"
-        src="../img/ajax.png"
+        src="img/ajax.png"
       />
     </div>
     <div
@@ -165,7 +171,7 @@ exports[`Login should return login form 1`] = `
     >
       <img
         alt="powered by natali"
-        src="../img/natali.png"
+        src="img/natali.png"
       />
     </div>
     <div
