@@ -4,7 +4,8 @@ import "./index.scss"
 import React from "react"
 import {createRoot} from "react-dom/client"
 import Login from "./login"
-import {AUTH_PHP, IMG_PATH, TITLE, WEB_ROOT} from "./constants"
+
+import {AUTH_SERVICE, CORE_SERVICE, IMG_PATH, TITLE} from "./constants"
 
 
 const setPageDefaults = () => {
@@ -18,9 +19,9 @@ const setPageDefaults = () => {
 
 const render = async () => {
     try {
-        const resp = await fetch(AUTH_PHP)
+        const resp = await fetch(AUTH_SERVICE)
         if (resp.ok) {
-            window.location.href = WEB_ROOT
+            window.location.href = CORE_SERVICE
         } else {
             createRoot(document.getElementById("app")).render(<Login/>)
             setPageDefaults()

@@ -3,11 +3,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset={$const.encodingHTML}"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <link href="{$factory->stylesheet_dir}/index.css" rel="stylesheet" type="text/css" />
-    <link href="{$factory->stylesheet_dir}/fonts.css" rel="stylesheet" type="text/css" />
     <link href="{$factory->stylesheet_dir}smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{$factory->img_admin_dir}admin_logo.ico"/>
     <title>{$const.name}&nbsp;{$const.major}{$const.minor} - {$currentSection.description}</title>
-    <script src="{$factory->js_dir}/index.js" type="text/javascript"></script>
+    <script src="{$factory->js_dir}/index_old.js" type="text/javascript"></script>
     <script src="{$factory->js_dir}/jquery.min.js" type="text/javascript"></script>
     <script src="{$factory->js_dir}/jquery-ui.min.js" type="text/javascript"></script>
     <script src="{$factory->js_dir}/jquery.flot.min.js" type="text/javascript"></script>
@@ -17,7 +16,7 @@
     <span style="font-style: italic">
                     <b>{$smarty.session.user.fio}</b>
     </span>
-    <a href="logout.php" class="av">
+    <a href="./auth.php?logout" class="av">
     	[Выход]
     </a>
     <div style="float:right;">
