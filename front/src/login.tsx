@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react"
-import {Actions, AUTH_SERVICE, IMG_PATH, TITLE} from "./constants"
+import {AUTH_SERVICE, IMG_PATH, TITLE} from "./constants"
 import Context from "./context"
+import {Actions} from "./types";
 
 type LoginData = {
     login: string,
