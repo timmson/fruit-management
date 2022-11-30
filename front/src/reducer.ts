@@ -1,4 +1,4 @@
-import {Actions, State} from "./constants"
+import {Actions, State} from "./types"
 
 export default function Reducer(state: State, action: Actions) {
     switch (action) {

@@ -2,8 +2,9 @@ import React, {useEffect, useReducer} from "react"
 import Context from "./context"
 import Reducer from "./reducer"
 import Login from "./login"
-import {Actions, AUTH_SERVICE, CORE_SERVICE, State} from "./constants"
-import Home from "./home";
+import {AUTH_SERVICE, CORE_SERVICE} from "./constants"
+import Layout from "./layout";
+import {Actions, State} from "./types";
 
 
 export default function App() {
@@ -28,7 +29,7 @@ export default function App() {
 
     return (
         <Context.Provider value={dispatch}>
-            {(state.isLoggedOn) ? <Home/> : <Login/>}
+            {(state.isLoggedOn) ? <Layout/> : <Login/>}
         </Context.Provider>
     )
 

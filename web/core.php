@@ -22,6 +22,7 @@ use ru\timmson\FruitManagement\http\Session;
 require_once(__DIR__ . "/vendor/autoload.php");
 
 $siteconfig = './config/site.ini';
+$isDebugWithFront = false;
 
 $CORE = new Core(parse_ini_file($siteconfig, true));
 session_start();
@@ -85,6 +86,10 @@ try {
             $view = $service->sync($_REQUEST, $user);
         }
 
+        if ($isDebugWithFront) {
+            echo json_encode($view);
+        }
+
         foreach ($view as $key => $value) {
             $VIEW->assign($key, $value);
         }
@@ -137,6 +142,8 @@ if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "async") {
         $VIEW->display($currentSection["tpl"]);
     }
 } else {
-    $VIEW->display($CORE->admin_tpl);
+    if (!$isDebugWithFront) {
+        $VIEW->display($CORE->admin_tpl);
+    }
 }
 //print_r($CORE->debugs);

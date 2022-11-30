@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section should return section 1`] = `
+<div
+  className="col pt-2 text-center border-top border-bottom "
+>
+  <a
+    className="av"
+    href="?section=name"
+  >
+    <img
+      alt="name"
+      src="img/admin_name.gif"
+    />
+    <br />
+    descr
+  </a>
+</div>
+`;
