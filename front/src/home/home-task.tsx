@@ -5,18 +5,20 @@ type HomeTaskProps = {
     tasks: any[]
 }
 
-export default function HomeTasks(props: HomeTaskProps) {
+export default function HomeTask(props: HomeTaskProps) {
 
     const tasks = props.tasks.map((t, i) => {
         return (
             <tr key={i} className="text-start">
                 <td>
-                    <a href={'?dep=task&task=' + t.id}>
+                    <a href={'?section=task&task=' + t.id}>
                         {t.fm_name}&nbsp;{t.fm_code}.{t.fm_descr}
                     </a>
                 </td>
                 <td>{t.fm_last_comment}</td>
-                <td>%</td>
+                <td>
+                    {t.fm_all_hour * 100.0 / t.fm_plan_hour}
+                </td>
                 <td>
                     <img src={IMG_PATH + '/priority_' + t.fm_priority_name + '.gif'} alt={t.fm_priority_name}/>
                 </td>

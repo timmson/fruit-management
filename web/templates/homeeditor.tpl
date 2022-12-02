@@ -58,19 +58,20 @@
       <td>Статус</td>
    </tr>
     {section name=i loop=$subcribe_tasks}
-   <tr>
-      <td style="text-align:left;">
-	  <a href="?dep=task&task={$subcribe_tasks[i].id}">
-		{$subcribe_tasks[i].fm_name}&nbsp;{$subcribe_tasks[i].fm_code}.{$subcribe_tasks[i].fm_descr}
-	  </a>
-      </td>
-      <td style="text-align:left;">{$subcribe_tasks[i].fm_user}</td>
-      <td>
-	 	{math equation="(a/p)*100" a=$subcribe_tasks[i].fm_all_hour p=$subcribe_tasks[i].fm_plan_hour format="%.0f"}
-      </td>
-      <td>
-	<img src="{$factory->img_admin_dir}state_{$subcribe_tasks[i].fm_state_name}.gif" alt="{$subcribe_tasks[i].fm_state_name}" title="{$subcribe_tasks[i].fm_state}"/>
-       </td>
+        <tr>
+            <td style="text-align:left;">
+                <a href="?section=task&task={$subcribe_tasks[i].id}">
+                    {$subcribe_tasks[i].fm_name}&nbsp;{$subcribe_tasks[i].fm_code}.{$subcribe_tasks[i].fm_descr}
+                </a>
+            </td>
+            <td style="text-align:left;">{$subcribe_tasks[i].fm_user}</td>
+            <td>
+                {math equation="(a/p)*100" a=$subcribe_tasks[i].fm_all_hour p=$subcribe_tasks[i].fm_plan_hour format="%.0f"}
+            </td>
+            <td>
+                <img src="{$factory->img_admin_dir}state_{$subcribe_tasks[i].fm_state_name}.gif" alt="{$subcribe_tasks[i].fm_state_name}"
+                     title="{$subcribe_tasks[i].fm_state}"/>
+            </td>
    </tr>
    {/section}
 </table>   
@@ -85,19 +86,20 @@
       <td>Статус</td>
    </tr>
     {section name=i loop=$tasks}
-   <tr>
-      <td style="text-align:left;">
-	  <a href="?dep=task&task={$tasks[i].id}">
-		{$tasks[i].fm_name}&nbsp;{$tasks[i].fm_code}.{$tasks[i].fm_descr}
-	  </a>
-      </td>
-      <td style="text-align:left;">{$tasks[i].fm_last_comment}</td>
-      <td>
-	 {math equation="(a/p)*100" a=$tasks[i].fm_all_hour p=$tasks[i].fm_plan_hour format="%.0f"}
-      </td>
-      <td>
-	   <img src="{$factory->img_admin_dir}priority_{$tasks[i].fm_priority_name}.gif" alt="{$tasks[i].fm_priority_name}" title="{$tasks[i].fm_priority_descr}"/>
-	</td>
+        <tr>
+            <td style="text-align:left;">
+                <a href="?section=task&task={$tasks[i].id}">
+                    {$tasks[i].fm_name}&nbsp;{$tasks[i].fm_code}.{$tasks[i].fm_descr}
+                </a>
+            </td>
+            <td style="text-align:left;">{$tasks[i].fm_last_comment}</td>
+            <td>
+                {math equation="(a/p)*100" a=$tasks[i].fm_all_hour p=$tasks[i].fm_plan_hour format="%.0f"}
+            </td>
+            <td>
+                <img src="{$factory->img_admin_dir}priority_{$tasks[i].fm_priority_name}.gif" alt="{$tasks[i].fm_priority_name}"
+                     title="{$tasks[i].fm_priority_descr}"/>
+            </td>
       <td>
 	<img src="{$factory->img_admin_dir}state_{$tasks[i].fm_state_name}.gif" alt="{$tasks[i].fm_state_name}" title="{$tasks[i].fm_state}"/>
         </td>
@@ -122,19 +124,19 @@
       {/section}
    </tr>
     {section name=i loop=$plantasks}
-   <tr>
-      <td style="text-align:left;">
-	  <a href="?dep=task&task={$plantasks[i].id}">
-		{$plantasks[i].fm_name}&nbsp;{$plantasks[i].fm_code}.{$plantasks[i].fm_descr}
-	  </a>
-      </td>
-      <td>
-      	  {math equation="floor((p-r)/8)" r=$plantasks[i].fm_all_hour p=$plantasks[i].fm_plan_hour format="%.0f"}д
-      	  {math equation="(p-r)%8" r=$plantasks[i].fm_all_hour p=$plantasks[i].fm_plan_hour format="%.0f"}ч
-      </td>
-       {section name=m loop=$monthcal}
-   		{assign var=bgcolor value=inherit}
-   		{if $monthcal[m].day >= $plantasks[i].fm_plan_start and $monthcal[m].day <= $plantasks[i].fm_plan_end}
+        <tr>
+            <td style="text-align:left;">
+                <a href="?section=task&task={$plantasks[i].id}">
+                    {$plantasks[i].fm_name}&nbsp;{$plantasks[i].fm_code}.{$plantasks[i].fm_descr}
+                </a>
+            </td>
+            <td>
+                {math equation="floor((p-r)/8)" r=$plantasks[i].fm_all_hour p=$plantasks[i].fm_plan_hour format="%.0f"}д
+                {math equation="(p-r)%8" r=$plantasks[i].fm_all_hour p=$plantasks[i].fm_plan_hour format="%.0f"}ч
+            </td>
+            {section name=m loop=$monthcal}
+                {assign var=bgcolor value=inherit}
+                {if $monthcal[m].day >= $plantasks[i].fm_plan_start and $monthcal[m].day <= $plantasks[i].fm_plan_end}
 		   		{assign var="bgcolor" value="#0f0"}
    				{if $plantasks[i].fm_priority eq 2}
    		   			{assign var="bgcolor" value="#8f8"}
