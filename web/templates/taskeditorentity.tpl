@@ -26,7 +26,7 @@
 		   <tr>
 			<th style="text-align:right;">Исполнитель</th>
 			<td style="text-align:left">
-				<a href="?dep=user&user={$task.fm_user}" id="fm_user">{$task.fm_user}</a>
+				<a href="?section=user&user={$task.fm_user}" id="fm_user">{$task.fm_user}</a>
 				<a href="#" class="edit" onclick="changeFieldPromt('fm_user', 'input');">
 					<img src="{$factory->img_admin_dir}edit.png"/>
 				</a>
@@ -95,7 +95,7 @@
 			<th style="text-align:right;">Подписчики</th>
 			<td style="text-align:left">
 				{section name=i loop=$task.subscribers}
-					<a href="?dep=user&user={$task.subscribers[i].fm_user}">{$task.subscribers[i].fm_user}</a>
+					<a href="?section=user&user={$task.subscribers[i].fm_user}">{$task.subscribers[i].fm_user}</a>
 				{/section}
 			</td>
 		   </tr>
@@ -119,7 +119,7 @@
 					 <a href="?task={$task.child[i].id}" style="font-size:8pt">{$task.child[i].fm_name}&nbsp;{$task.child[i].fm_code}.{$task.child[i].fm_descr}</a>
 				</td>
 				<td >
-					 <a href="?dep=user&user={$task.child[i].fm_user}">{$task.child[i].fm_user}</a>
+					 <a href="?section=user&user={$task.child[i].fm_user}">{$task.child[i].fm_user}</a>
 				</td>
 				<td>
 				   {if $task.child[i].fm_state_name eq 'done'}
@@ -167,7 +167,7 @@
 					 <a href="?task={$task.parent[i].id}" style="font-size:8pt">{$task.parent[i].fm_name}&nbsp;{$task.parent[i].fm_code}.{$task.parent[i].fm_descr}</a>
 				</td>
 				<td >
-					 <a href="?dep=user&user={$task.parent[i].fm_user}">{$task.parent[i].fm_user}</a>
+					 <a href="?section=user&user={$task.parent[i].fm_user}">{$task.parent[i].fm_user}</a>
 				</td>
 				<td>
 				   {if $task.parent[i].fm_state_name eq 'done'}
@@ -242,7 +242,7 @@
     </td>
 	<td style="text-align:left;">{$task.worklog[i].fm_comment}</td>
 	<td>
-		<a href="?dep=user&user={$task.worklog[i].fm_user}">{$task.worklog[i].fm_user}</a>
+		<a href="?section=user&user={$task.worklog[i].fm_user}">{$task.worklog[i].fm_user}</a>
 	</td>
 	<td>{$task.worklog[i].fm_spent_hour}</td>
 	<td>

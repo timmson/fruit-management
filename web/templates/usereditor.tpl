@@ -20,12 +20,12 @@
 	{assign var="fr" value=$fr+$timesheet[i].task_spent_fr}
    <tr >
       <td>
-	<a href="?dep=task&task={$timesheet[i].task_id}">
+	<a href="?section=task&task={$timesheet[i].task_id}">
 		{$timesheet[i].project_name}-{$timesheet[i].task_id}
 	</a>
       </td>
       <td style="text-align:left;">
-	 <a href="?dep=task&task={$timesheet[i].task_id}">
+	 <a href="?section=task&task={$timesheet[i].task_id}">
 		{$timesheet[i].task_name}.{$timesheet[i].task_descr}
 	</a>
      </td>
@@ -62,9 +62,9 @@
    </tr>
     {section name=i loop=$tasks}
    <tr>
-      <td><a href="?dep=task&task={$tasks[i].id}">{$tasks[i].fm_name}</a></td>
+      <td><a href="?section=task&task={$tasks[i].id}">{$tasks[i].fm_name}</a></td>
       <td style="text-align:left;">
-	  <a href="?dep=task&task={$tasks[i].id}">
+	  <a href="?section=task&task={$tasks[i].id}">
 		{$tasks[i].fm_code}.{$tasks[i].fm_descr}
 	  </a>
       </td>

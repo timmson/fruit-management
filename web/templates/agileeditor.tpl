@@ -5,7 +5,7 @@
 	</a>&nbsp;
 {/section}
 <div style="float:right;">
-	<a href="?dep=plan">Классическое&nbsp;планирование</a>
+	<a href="?section=plan">Классическое&nbsp;планирование</a>
 </div>
 {assign var=plan_hour value=0}
 {assign var=all_hour value=0}
@@ -153,7 +153,7 @@
 		$(".droppable").css("min-height", "300px");
 
 		$(".draggable").click(function(){
-			window.location = '?dep=task&task=' + $(this).prop("id");
+			window.location = '?section=task&task=' + $(this).prop("id");
 		});
 
 		$(".droppable").droppable({
