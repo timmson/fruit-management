@@ -5,7 +5,7 @@
 	</a>&nbsp;
 {/section}
 <div style="float:right;">
-	<a href="?dep=agile">Гибкое&nbsp;планирование</a>
+	<a href="?section=agile">Гибкое&nbsp;планирование</a>
 </div>
 
 <h3>Календарное планирование</h3>
@@ -27,7 +27,7 @@
     {section name=i loop=$plantasks}
    <tr>
       <td>
-      	 <a href="?dep=user&user={$plantasks[i].fm_user}">{$plantasks[i].fm_user}</a>
+      	 <a href="?section=user&user={$plantasks[i].fm_user}">{$plantasks[i].fm_user}</a>
       </td>
       <td>
       	  {math equation="(p-r)/8" r=$plantasks[i].fm_all_hour p=$plantasks[i].fm_plan_hour format="%.0f"}д
@@ -77,18 +77,18 @@
 	<tr>
 		{if $smarty.section.j.index eq 0}
     	<td style="text-align:left; vertical-align:top;" rowspan="{math equation="x" x=$structtasks[i].child|@count}">			
-			<a href="?dep=task&task={$structtasks[i].id}" style="font-size:8pt">
+			<a href="?section=task&task={$structtasks[i].id}" style="font-size:8pt">
 				{$structtasks[i].fm_name}&nbsp;{$structtasks[i].fm_code}.{$structtasks[i].fm_descr}
 			</a>
     	</td>
 		{/if}
         <td style="text-align:left;">
-	 	     <a href="?dep=task&task={$structtasks[i].child[j].id}" style="font-size:8pt">
+	 	     <a href="?section=task&task={$structtasks[i].child[j].id}" style="font-size:8pt">
 	 	     	{$structtasks[i].child[j].fm_name}&nbsp;{$structtasks[i].child[j].fm_code}.{$structtasks[i].child[j].fm_descr}
 	 	     </a>
 		</td>
 		<td >
-	 	     <a href="?dep=user&user={$structtasks[i].child[j].fm_user}">{$structtasks[i].child[j].fm_user}</a>
+	 	     <a href="?section=user&user={$structtasks[i].child[j].fm_user}">{$structtasks[i].child[j].fm_user}</a>
 		</td>
 		<td>
            {if $structtasks[i].child[j].fm_plan_hour ne 0}
@@ -111,7 +111,7 @@
     {sectionelse}
 	<tr>
 		<td style="width:30%; text-align:left;">
-			<a href="?dep=task&task={$structtasks[i].id}" style="font-size:8pt">
+			<a href="?section=task&task={$structtasks[i].id}" style="font-size:8pt">
 				{$structtasks[i].fm_name}&nbsp;{$structtasks[i].fm_code}.{$structtasks[i].fm_descr}
 			</a>
 		</td>

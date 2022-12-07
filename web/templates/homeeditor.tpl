@@ -20,7 +20,7 @@
 	{assign var="fr" value=$fr+$timesheet[i].task_spent_fr}
    <tr >
    <td style="text-align:left;">
-	 <a href="?dep=task&task={$timesheet[i].task_id}">
+	 <a href="?section=task&task={$timesheet[i].task_id}">
 		{$timesheet[i].project_name}-{$timesheet[i].task_id}&nbsp;{$timesheet[i].task_name}.{$timesheet[i].task_descr}
 	</a>
      </td>
@@ -202,7 +202,7 @@
    	  		{/if}
    	  	{/if}
    	  	работал над задачей 
-   	  	<a style="font-weight: bold;" href="?dep=task&task={$activity[i].fm_task}">[{$activity[i].fm_name}.{$activity[i].fm_descr}]</a>
+   	  	<a style="font-weight: bold;" href="?section=task&task={$activity[i].fm_task}">[{$activity[i].fm_name}.{$activity[i].fm_descr}]</a>
    	  	&nbsp;-&nbsp;<i>{$activity[i].fm_comment}</i>
    	  </td>
    </tr>

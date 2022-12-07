@@ -2,10 +2,9 @@ import React, {useEffect, useReducer} from "react"
 import Context from "./context"
 import Reducer from "./reducer"
 import Login from "./login"
-import {AUTH_SERVICE} from "./constants"
-import Layout from "./layout";
-import {Actions, State} from "./types";
-
+import {AUTH_SERVICE, CORE_SERVICE} from "./constants"
+import Layout from "./layout"
+import {Actions, State} from "./types"
 
 export default function App() {
 
@@ -24,7 +23,7 @@ export default function App() {
     }, [])
 
     if (state.isLoggedOn) {
-        //window.location.href = CORE_SERVICE
+        window.location.href = CORE_SERVICE
     }
 
     return (

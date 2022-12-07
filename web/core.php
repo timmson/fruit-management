@@ -139,7 +139,10 @@ if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "async") {
         header("Content-type:  text/json");
     } else {
         header("Content-Type:  text/html; charset=" . $CORE->configuration['global']['encodingHTML']);
-        $VIEW->display($currentSection["tpl"]);
+
+        if (!$isDebugWithFront) {
+            $VIEW->display($currentSection["tpl"]);
+        }
     }
 } else {
     if (!$isDebugWithFront) {

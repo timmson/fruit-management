@@ -34,7 +34,7 @@
 		{$tasks[i].fm_code}.{$tasks[i].fm_descr}
 	   </a>
 	</td>
-	<td> <a href="?dep=user&user={$tasks[i].fm_user}">{$tasks[i].fm_user}</a></td>
+	<td> <a href="?section=user&user={$tasks[i].fm_user}">{$tasks[i].fm_user}</a></td>
 	<td>
 	  {if $tasks[i].fm_state_name eq 'done'}
            	100

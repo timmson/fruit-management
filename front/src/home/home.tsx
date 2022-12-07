@@ -5,10 +5,11 @@ import HomeTask from "./home-task"
 import HomeActivity from "./home-activity"
 import HomeSubscription from "./home-subscription"
 import HomeCalendar from "./home-calendar"
+import HomeTeamActivity from "./home-team-activity"
 
 export default function Home() {
 
-    const [state, setState] = useState({tasks: [], activities: [], subscriptions: [], month: [], plans: []})
+    const [state, setState] = useState({tasks: [], activities: [], subscriptions: [], month: [], plans: [], teamActivities: []})
 
     useEffect(() => {
         fetch(CORE_SERVICE + "?section=home").then((resp) => {
@@ -43,6 +44,11 @@ export default function Home() {
             <div className="row mt-3">
                 <div className="col">
                     <HomeCalendar month={state.month} plans={state.plans}/>
+                </div>
+            </div>
+            <div className="row mt-3">
+                <div className="col">
+                    <HomeTeamActivity/>
                 </div>
             </div>
         </>

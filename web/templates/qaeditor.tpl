@@ -34,7 +34,7 @@
 		</td>
 		<td>{$defects[i].owner}</td>
 		<td>
-			<a href="?dep=task&task=0&oper=new&fm_name=Defect%23{$defects[i].id}&fm_descr={$defects[i].name|escape}&fm_project={$projects[$projectid].fm}" title="Создать&nbsp;задачу&nbsp;на&nbsp;основе&nbsp;дефекта">
+			<a href="?section=task&task=0&oper=new&fm_name=Defect%23{$defects[i].id}&fm_descr={$defects[i].name|escape}&fm_project={$projects[$projectid].fm}" title="Создать&nbsp;задачу&nbsp;на&nbsp;основе&nbsp;дефекта">
 				<img src="{$factory->img_admin_dir}copy.png"/>
 			</a>
 		</td>
