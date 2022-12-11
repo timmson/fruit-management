@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react"
 import {AUTH_SERVICE, IMG_PATH, TITLE} from "./constants"
 import Context from "./context"
-import {Actions} from "./types";
+import {ActionName} from "./types"
 
 type LoginData = {
     login: string,
@@ -13,8 +13,7 @@ export default function Login() {
 
     const defaultState: LoginData = {login: "", pass: ""}
     const [state, setState] = useState(defaultState)
-    const dispatch = useContext(Context)
-
+    const [_, dispatch] = useContext(Context)
 
     const change = (element) => {
         state[element.name] = element.value
@@ -30,11 +29,14 @@ export default function Login() {
 
             const response = await fetch(AUTH_SERVICE, {method: "POST", body: formData})
             if (response.ok) {
-                dispatch(Actions.LOGIN)
+                const user = await response.json()
+                dispatch({name: ActionName.LOG_IN, data: user})
             } else {
                 change({"name": "message", "value": "Логин и/или пароль не верны"})
             }
+
         } catch (error) {
+            change({"name": "message", "value": "Произошла ошибка ;("})
             console.log(error)
         }
     }

@@ -37,7 +37,7 @@ class Core
             $this->configuration = $conf;
             $this->init();
             $this->initsmarty();
-            $this->initdeps();
+            $this->initSections();
         }
     }
 
@@ -113,13 +113,14 @@ class Core
         $this->smarty->assign('factory', $this);
     }
 
-    private function initdeps()
+    private function initSections(): void
     {
         for ($j = 0; $j < count($this->configuration["sections"]); $j++) {
             $section = $this->configuration["sections"][$j];
             $this->configuration["sections"][$j] = array(
                 "name" => $section,
                 "description" => $this->configuration[$section]["description"],
+                "new_front" => $this->configuration[$section]["new_front"],
                 "incl" => $section . "editor.php",
                 "service" => "\\ru\\timmson\\FruitManagement\\service\\" . ucfirst($section) . "Service",
                 "icon" => "admin_" . $section . ".gif",

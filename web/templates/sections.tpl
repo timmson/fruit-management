@@ -9,7 +9,7 @@
                 {else}
                     class="av"
                 {/if}
-                        href="?section={$sections[i].name}">
+                        href=".?section={$sections[i].name}">
                     <img src="{$factory->img_admin_dir}{$sections[i].icon}" alt="{$sections[i].name}"/>
                     <br/>
                     {$sections[i].description}

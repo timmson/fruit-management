@@ -12,13 +12,13 @@ const getActivityColor = (activity: any) => {
 }
 
 const getDaysAgoString = (daysAgo: number) => {
-    let weekString = `${daysAgo}&nbsp;дней&nbsp;назад`
+    let weekString = `${daysAgo} дней назад`
     if (daysAgo == 0) {
         weekString = "Сегодня"
     } else if (daysAgo == 1) {
         weekString = "Вчера"
     } else if (daysAgo < 5) {
-        weekString = `${daysAgo}&nbsp;дня&nbsp;назад`
+        weekString = `${daysAgo} дня назад`
     }
     return weekString
 }
@@ -53,6 +53,7 @@ export default function HomeTeamActivityItem(props: HomeTeamActivityItemProps) {
     return (
         <tr>
             <td className="text-start" style={{color: getActivityColor(a)}}>
+                &nbsp;
                 {getDaysAgoString(a.fm_days_ago)}
                 &nbsp;
                 пользователь <b>{a.fm_user}</b>

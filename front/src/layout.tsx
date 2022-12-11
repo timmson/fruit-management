@@ -1,6 +1,7 @@
 import React from "react"
 import Header from "./header"
 import Home from "./home/home"
+import {COPYRIGHT} from "./constants"
 
 export default function Layout() {
 
@@ -18,7 +19,7 @@ export default function Layout() {
                 </div>
                 <div className="row mt-2">
                     <div className="col text-end text-dark" style={{fontSize: "8pt"}}>
-                        loadTimes&nbsp;&copy;const.copyright&nbsp;const.developedBy
+                        loadTimes&nbsp;&copy;{COPYRIGHT}
                     </div>
                 </div>
             </div>
