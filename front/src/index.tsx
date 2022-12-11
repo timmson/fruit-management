@@ -14,5 +14,3 @@ favicon.href = `${IMG_PATH}/admin_logo.ico`
 document.head.appendChild(favicon)
 
 createRoot(document.getElementById("app")).render(<App/>)
-
-

@@ -9,7 +9,16 @@ import HomeTeamActivity from "./home-team-activity"
 
 export default function Home() {
 
-    const [state, setState] = useState({tasks: [], activities: [], subscriptions: [], month: [], plans: [], teamActivities: []})
+    const [state, setState] = useState(
+        {
+            tasks: [],
+            activities: [],
+            subscriptions: [],
+            month: [],
+            plans: [],
+            teamActivities: []
+        }
+    )
 
     useEffect(() => {
         fetch(CORE_SERVICE + "?section=home").then((resp) => {
