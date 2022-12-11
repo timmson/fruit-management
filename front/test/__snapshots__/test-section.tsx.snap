@@ -1,12 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Section should return section 1`] = `
-<div
-  className="col pt-2 text-center border-top border-bottom "
+<td
+  className="pt-2 text-center align-bottom"
+  style={
+    {
+      "width": "15%",
+    }
+  }
 >
   <a
     className="av"
     href="?section=name"
+    style={
+      {
+        "fontSize": "12pt",
+      }
+    }
   >
     <img
       alt="name"
@@ -15,5 +25,5 @@ exports[`Section should return section 1`] = `
     <br />
     descr
   </a>
-</div>
+</td>
 `;
