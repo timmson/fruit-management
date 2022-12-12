@@ -16,7 +16,7 @@ export default function Home() {
             subscriptions: [],
             month: [],
             plans: [],
-            teamActivities: []
+            projects: []
         }
     )
 

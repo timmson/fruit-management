@@ -32,13 +32,13 @@ export default function Header() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-4 text-center border rounded-start">
-                    <h2 className="mb-0">{TITLE}&nbsp;{VERSION}</h2>
+                <div className="col-3 text-center border rounded-start pt-3" style={{minWidth: "350px"}}>
+                    <h2 className="mb-1">{TITLE}&nbsp;{VERSION}</h2>
                     <p className="font-italic" style={{fontSize: "9pt"}}>
                         &quot;Walking on water and developing software from a specification are easy if both are frozen&quot;
                     </p>
                 </div>
-                <div className="col-8 text-center border-top border-bottom border-end rounded-end">
+                <div className="col text-center border-top border-bottom border-end rounded-end">
                     <Sections/>
                 </div>
             </div>

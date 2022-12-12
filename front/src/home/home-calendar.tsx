@@ -49,7 +49,7 @@ export default function HomeCalendar(props: HomeCalendar) {
     return (
         <>
             <h3>Календарь</h3>
-            <table className="container w-100">
+            <table className="basic w-100">
                 <thead>
                 <tr>
                     <th rowSpan="2">Задача</th>

@@ -10,7 +10,7 @@ export default function HomeActivity(props: HomeActivityProps) {
     return (
         <>
             <h3>Моя активность</h3>
-            <table className="container w-100">
+            <table className="basic w-100">
                 <thead>
                 <tr className="fw-bold">
                     <th>Задача</th>

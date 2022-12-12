@@ -46,7 +46,7 @@ class Core
         setlocale(LC_ALL, '');
         ini_set('memory_limit', $this->configuration["memory_limit"]);
         date_default_timezone_set($this->configuration["timezone"]);
-        $this->configuration["major"] = (date("y") - 9);
+        $this->configuration["major"] = (date("y") - 7);
         $this->configuration["minor"] = '.' . date("m");
         $this->configuration["copyright"] = $this->configuration["copyright"] . "-" . date("Y");
     }

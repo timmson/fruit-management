@@ -1,9 +1,4 @@
-import {ActionName, LogonState, State} from "./types"
-
-type Action = {
-    name: ActionName
-    data?: any
-}
+import {Action, ActionName, LogonState, SECTIONS, State} from "./types"
 
 export default function Reducer(state: State, action: Action) {
 
@@ -22,6 +17,11 @@ export default function Reducer(state: State, action: Action) {
                 logonState: LogonState.IS_LOGGED_OUT
             }
 
+        case ActionName.CHANGE_SECTION:
+            return {
+                ...state,
+                section: SECTIONS.filter((s) => s.name === action.data)[0]
+            }
         default:
             return {...state}
     }

@@ -1,15 +1,29 @@
-@import "~bootstrap/scss/bootstrap.scss";
-@import "fonts.scss";
-
 /*
 colors
 #F9F300 - yellow
 #FFFCBE - body-yellow
 */
 body, html {
+  margin: 0;
+  padding: 10px;
+  border: 0;
   font-family: Trebuchet MS, serif;
   color: #333;
+  min-width: 950px;
   font-size: 10pt;
+}
+
+img {
+  border: 0;
+}
+
+
+td.skeleton {
+  border: 1px solid #ccc;
+}
+
+td.menu {
+  border-bottom: 1px solid #ccc;
 }
 
 div.debug-info {
@@ -51,42 +65,15 @@ table.plain td {
   padding: 2px;
 }
 
-table.basic {
+table.container {
   border: 1px solid #ccc;
   border-collapse: collapse;
   padding: 0;
   width: 100%;
 }
 
-table.basic td, th {
+table.container td, th {
   border: 1px solid #ccc;
   padding: 2px;
   text-align: center;
-}
-
-h1 {
-  font-size: 22pt;
-}
-
-h2 {
-  font-size: 18pt;
-  font-weight: bold;
-}
-
-h3 {
-  font-size: 14pt;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-p.av {
-  font-size: 12pt;
-  cursor: pointer;
 }

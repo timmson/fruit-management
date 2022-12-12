@@ -1,30 +1,32 @@
 import React, {useEffect, useReducer} from "react"
+
 import Context from "./context"
 import Reducer from "./reducer"
 import Login from "./login"
-import {AUTH_SERVICE, CORE_SERVICE, SECTIONS} from "./constants"
 import Layout from "./layout"
-import {ActionName, LogonState, State} from "./types"
-import Loader from "./loader";
+import Loader from "./loader"
 
-const searchParams = new URL(window.location.href).searchParams
+import {AUTH_SERVICE, CORE_SERVICE, TITLE, VERSION} from "./constants"
+import {ActionName, LogonState, SectionName, SECTIONS, State} from "./types"
 
-const getSection = () => searchParams.get("section") || "home"
+const getSection = (searchParams: URLSearchParams) => {
+    const sectionName = searchParams.get("section") || SectionName.HOME
+    return SECTIONS.filter((s) => s.name === sectionName)[0]
+}
 
-const isOldFront = (sectionName: string) =>
-    SECTIONS.filter((s) =>
-        (s.name === sectionName) && s.new_front).length == 0
-
-export default function App() {
+export default function App(props: {query: URLSearchParams}) {
 
     const initialState: State = {
         logonState: LogonState.UNDEFINED,
         user: undefined,
-        section: getSection()
+        section: getSection(props.query)
     }
 
     const [state, dispatch] = useReducer(Reducer, initialState)
-    const context = [state, dispatch]
+
+    document.title = `${TITLE} ${VERSION} ${state.section.description}`
+    props.query.set("section", state.section.name)
+    window.history.replaceState({}, document.title, ".?" + props.query.toString());
 
     useEffect(() => {
         fetch(AUTH_SERVICE).then((resp) => {
@@ -42,14 +44,14 @@ export default function App() {
 
     switch (state.logonState) {
         case LogonState.IS_LOGGED_OUT:
-            ret = <Context.Provider value={context}><Login/></Context.Provider>
+            ret = <Context.Provider value={[state, dispatch]}><Login/></Context.Provider>
             break
 
         case LogonState.IS_LOGGED_IN:
-            if (isOldFront(state.section)) {
-                window.location.href = `${CORE_SERVICE}?${searchParams.toString()}`
+            if (state.section.new_front) {
+                ret = <Context.Provider value={[state, dispatch]}><Layout/></Context.Provider>
             } else {
-                ret = <Context.Provider value={context}><Layout/></Context.Provider>
+                window.location.href = `${CORE_SERVICE}?${props.query.toString()}`
             }
             break
     }

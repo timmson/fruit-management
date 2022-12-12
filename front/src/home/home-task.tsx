@@ -32,7 +32,7 @@ export default function HomeTask(props: HomeTaskProps) {
     return (
         <>
             <h3>Мои задачи</h3>
-            <table className="container w-100">
+            <table className="basic w-100">
                 <thead>
                 <tr className="fw-bold">
                     <td>Задача</td>

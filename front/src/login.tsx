@@ -60,7 +60,7 @@ export default function Login() {
                         <label htmlFor="login" className="col-form-label">Логин:</label>
                     </div>
                     <div className="col-2 text-start">
-                        <input id="login" name="login" type="text" value={state.login} placeholder="fruit" className="form-control"
+                        <input id="login" name="login" type="text" value={state.login} placeholder="fruit" className="form-control corp_text"
                                onChange={(event) => change(event.target)}/>
                     </div>
                     <div className="col-5 text-end">
@@ -72,7 +72,7 @@ export default function Login() {
                         <label htmlFor="pass" className="col-form-label">Пароль:</label>
                     </div>
                     <div className="col-2 text-start">
-                        <input id="pass" name="pass" type="password" value={state.pass} placeholder="*****" className="form-control"
+                        <input id="pass" name="pass" type="password" value={state.pass} placeholder="*****" className="form-control corp_text"
                                onChange={(event) => change(event.target)}/>
                     </div>
                     <div className="col-5 text-end">

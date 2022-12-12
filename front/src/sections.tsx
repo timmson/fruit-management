@@ -1,12 +1,8 @@
 import React from "react"
 import Section from "./section"
-import {SECTIONS} from "./constants"
+import {SECTIONS} from "./types"
 
-type SectionsProps = {
-    //value: SectionEntity[]
-}
-
-export default function Sections(props: SectionsProps) {
+export default function Sections() {
     const sections = SECTIONS.map((entity, i) => <Section key={i} value={entity}/>)
 
     return (

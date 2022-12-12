@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {CORE_SERVICE} from "../constants"
-import HomeTeamActivityItem from "./home-team-activity-item";
+import HomeTeamActivityItem from "./home-team-activity-item"
 
 type HomeTeamActivityProps = {
     /* teamActivities: any[]*/
@@ -30,9 +30,11 @@ export default function HomeTeamActivity(props: HomeTeamActivityProps) {
     return (
         <>
             <h3>Активность команды</h3>
-            <table className="container">
+            <table className="basic">
                 <tbody>
-                {teamActivities}
+                {teamActivities.length > 0 ? teamActivities : <tr>
+                    <td className="text-start">Пока здесь пусто;(</td>
+                </tr>}
                 </tbody>
             </table>
         </>
