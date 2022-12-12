@@ -36,11 +36,11 @@ export type SectionEntity = {
 }
 
 export const SECTIONS = [
-    {"name": SectionName.HOME, "description": "Главная", "new_front": true},
-    {"name": SectionName.PROJECT, "description": "Проекты", "new_front": true},
-    {"name": "task", "description": "Задачи"},
-    {"name": "agile", "description": "Agile"},
-    {"name": "plan", "description": "Планирование"},
-    {"name": "user", "description": "Пользователи"},
-    {"name": "export", "description": "Выгрузка"}
+	{"name": SectionName.HOME, "description": "Главная", "new_front": true},
+	{"name": SectionName.PROJECT, "description": "Проекты", "new_front": true},
+	{"name": "task", "description": "Задачи"},
+	{"name": "agile", "description": "Agile"},
+	{"name": "plan", "description": "Планирование"},
+	{"name": "user", "description": "Пользователи"},
+	{"name": "export", "description": "Выгрузка"}
 ]

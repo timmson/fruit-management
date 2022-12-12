@@ -5,20 +5,20 @@ import Context from "../src/context"
 
 describe("Section should", () => {
 
-    test("return section", () => {
-        const entity = {name: "name", description: "descr"}
+	test("return section", () => {
+		const entity = {name: "name", description: "descr"}
 
-        const context = []
+		const context = []
 
-        const component = renderer.create(
-            <Context.Provider value={context}>
-                <Section value={entity}/>
-            </Context.Provider>
-        )
+		const component = renderer.create(
+			<Context.Provider value={context}>
+				<Section value={entity}/>
+			</Context.Provider>
+		)
 
-        expect(component.toJSON()).toMatchSnapshot()
+		expect(component.toJSON()).toMatchSnapshot()
 
-        component.unmount()
-    })
+		component.unmount()
+	})
 
 })
