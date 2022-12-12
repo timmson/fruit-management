@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section should return section 1`] = `
+<td
+  className="pt-2 text-center align-bottom"
+  onClick={[Function]}
+  style={
+    {
+      "width": "15%",
+    }
+  }
+>
+  <p
+    className="av"
+  >
+    <img
+      alt="name"
+      src="img/admin_name.gif"
+    />
+    <br />
+    descr
+  </p>
+</td>
+`;

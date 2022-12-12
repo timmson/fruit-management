@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login should return login form 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col text-center"
+    >
+      <img
+        alt="Fruit Management"
+        src="img/logo.gif"
+      />
+    </div>
+  </div>
+  <div
+    className="row mt-4"
+  >
+    <div
+      className="col text-center"
+    >
+      <h1>
+        Fruit Management
+      </h1>
+      <p
+        style={
+          {
+            "color": "#FF0000",
+          }
+        }
+      />
+    </div>
+  </div>
+  <form
+    id="loginForm"
+    onSubmit={[Function]}
+  >
+    <div
+      className="row mt-4"
+    >
+      <div
+        className="col-5 text-end"
+      >
+        <label
+          className="col-form-label"
+          htmlFor="login"
+        >
+          Логин:
+        </label>
+      </div>
+      <div
+        className="col-2 text-start"
+      >
+        <input
+          className="form-control corp_text"
+          id="login"
+          name="login"
+          onChange={[Function]}
+          placeholder="fruit"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="col-5 text-end"
+      >
+         
+      </div>
+    </div>
+    <div
+      className="row mt-2"
+    >
+      <div
+        className="col-5 text-end"
+      >
+        <label
+          className="col-form-label"
+          htmlFor="pass"
+        >
+          Пароль:
+        </label>
+      </div>
+      <div
+        className="col-2 text-start"
+      >
+        <input
+          className="form-control corp_text"
+          id="pass"
+          name="pass"
+          onChange={[Function]}
+          placeholder="*****"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="col-5 text-end"
+      >
+         
+      </div>
+    </div>
+    <div
+      className="row mt-3"
+    >
+      <div
+        className="col text-center"
+      >
+        <input
+          className="btn btn-primary corp"
+          id="sub"
+          name="sub"
+          type="submit"
+          value="Войти"
+        />
+      </div>
+    </div>
+  </form>
+  <div
+    className="row mt-4"
+  >
+    <div
+      className="col-3"
+    >
+       
+    </div>
+    <div
+      className="col-1"
+    >
+      <img
+        alt="powered by xhtml"
+        src="img/xhtml.png"
+      />
+    </div>
+    <div
+      className="col-1"
+    >
+      <img
+        alt="powered by css"
+        src="img/css.png"
+      />
+    </div>
+    <div
+      className="col-1"
+    >
+      <img
+        alt="powered by php"
+        src="img/php.png"
+      />
+    </div>
+    <div
+      className="col-1"
+    >
+      <img
+        alt="powered by smarty"
+        src="img/smarty.png"
+      />
+    </div>
+    <div
+      className="col-1"
+    >
+      <img
+        alt="powered by ajax"
+        src="img/ajax.png"
+      />
+    </div>
+    <div
+      className="col-1"
+    >
+      <img
+        alt="powered by natali"
+        src="img/natali.png"
+      />
+    </div>
+    <div
+      className="col-3"
+    >
+       
+    </div>
+  </div>
+</div>
+`;
