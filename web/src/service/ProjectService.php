@@ -68,23 +68,25 @@ class ProjectService implements Service
                 }
             }
 
-            $multx = ($diagramWidth - 50) / count($data);
-            $multy = ($diagramHeight - 30) / $maxLoad;
-            $oldX = 0;
-            $oldY = 0;
-            for ($i = 0; $i < count($data); $i++) {
-                $newX = 25 + $i * $multx;
-                $newY = $diagramHeight - $data[$i]['spent_hours'] * $multy;
-                if ($i != 0) {
-                    imageline($image, $oldX, $oldY, $newX, $newY, $colorBackground);
+            if (count($data) > 0) {
+                $multiplyX = ($diagramWidth - 50) / count($data);
+                $multiplyY = ($diagramHeight - 30) / $maxLoad;
+                $oldX = 0;
+                $oldY = 0;
+                for ($i = 0; $i < count($data); $i++) {
+                    $newX = 25 + $i * $multiplyX;
+                    $newY = $diagramHeight - $data[$i]['spent_hours'] * $multiplyY;
+                    if ($i != 0) {
+                        imageline($image, $oldX, $oldY, $newX, $newY, $colorBackground);
+                    }
+
+                    $this->image->arc($image, $newX, $newY, 10, 10, 0, 360, $colorBackground);
+                    $this->image->string($image, 10, $newX + 10, $newY, $data[$i]['spent_hours'] . "h", $colorBlack);
+                    $this->image->string($image, 10, $newX + 10, $newY + 15, $data[$i]['week'] . "w", $colorBlack);
+
+                    $oldX = $newX;
+                    $oldY = $newY;
                 }
-
-                $this->image->arc($image, $newX, $newY, 10, 10, 0, 360, $colorBackground);
-                $this->image->string($image, 10, $newX + 10, $newY, $data[$i]['spent_hours'] . "h", $colorBlack);
-                $this->image->string($image, 10, $newX + 10, $newY + 15, $data[$i]['week'] . "w", $colorBlack);
-
-                $oldX = $newX;
-                $oldY = $newY;
             }
 
             $this->image->send($image);

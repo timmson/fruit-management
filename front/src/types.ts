@@ -32,15 +32,16 @@ export enum SectionName {
 export type SectionEntity = {
     name: string,
     description: string
+    show: boolean
     new_front?: boolean
 }
 
 export const SECTIONS = [
-	{"name": SectionName.HOME, "description": "Главная", "new_front": true},
-	{"name": SectionName.PROJECT, "description": "Проекты", "new_front": true},
-	{"name": "task", "description": "Задачи"},
-	{"name": "agile", "description": "Agile"},
-	{"name": "plan", "description": "Планирование"},
-	{"name": "user", "description": "Пользователи"},
-	{"name": "export", "description": "Выгрузка"}
+	{"name": SectionName.HOME, "description": "Главная", "show": false,  "new_front": true},
+	{"name": SectionName.PROJECT, "description": "Проекты", "show": true, "new_front": true},
+	{"name": "task", "description": "Задачи", "show": true},
+	{"name": "agile", "description": "Agile", "show": true},
+	{"name": "plan", "description": "Планирование", "show": true},
+	{"name": "user", "description": "Пользователи", "show": true},
+	{"name": "export", "description": "Выгрузка", "show": true}
 ]

@@ -27,7 +27,7 @@ export default function HomeSubscription(props: HomeSubscriptionProps) {
 
 	return (
 		<>
-			<h3>Мои задачи</h3>
+			<h3>Мои подписки</h3>
 			<table className="basic w-100">
 				<thead>
 					<tr className="fw-bold">
