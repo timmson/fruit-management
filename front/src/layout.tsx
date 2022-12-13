@@ -30,7 +30,7 @@ export default function Layout() {
 				</div>
 				<div className="row mt-2">
 					<div className="col text-end text-dark" style={{fontSize: "8pt"}}>
-                        loadTimes&nbsp;&copy;{COPYRIGHT}
+                        &copy;{COPYRIGHT}
 					</div>
 				</div>
 			</div>

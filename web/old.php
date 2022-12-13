@@ -113,7 +113,9 @@ try {
 
 /* * * End of Temprary debug ** */
 
-$VIEW->assign("sections", $CORE->getSections());
+$sections = $CORE->getSections();
+$shiftedSections = array_shift($sections);
+$VIEW->assign("sections", $sections);
 
 if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "async") {
     if ($_REQUEST["oper"] == 'xls') {

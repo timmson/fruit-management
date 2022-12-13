@@ -6,7 +6,7 @@ import Context from "../src/context"
 describe("Section should", () => {
 
 	test("return section", () => {
-		const entity = {name: "name", description: "descr"}
+		const entity = {name: "name", description: "descr", show: true}
 
 		const context = []
 

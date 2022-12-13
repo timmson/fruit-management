@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react"
+import React, {useContext, useEffect, useState} from "react"
 import {CORE_SERVICE} from "../constants"
+import Context from "../context"
 
 export default function Project() {
 
+	const [globalState, _] = useContext(Context)
 	const [state, setState] = useState({projects: []})
 
 	useEffect(() => {
@@ -27,7 +29,7 @@ export default function Project() {
                 Всего {p.fm_spent_hours} потрачено часов
 			</td>
 			<td>
-				<img className="topup" width="400" height="150" src={"?project=" + p.id + "&mode=async&oper=gif"} alt={p.name}/>
+				<img className="topup" width="400" height="150" src={CORE_SERVICE + "?section=" + globalState.section.name + "&project=" + p.id + "&mode=async&oper=gif"} alt={p.name}/>
 			</td>
 		</tr>
 	))
