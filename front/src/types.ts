@@ -26,7 +26,8 @@ export enum ActionName {
 
 export enum SectionName {
     HOME = "home",
-    PROJECT = "project"
+    PROJECT = "project",
+	PLAN = "plan",
 }
 
 export type SectionEntity = {
@@ -41,7 +42,7 @@ export const SECTIONS = [
 	{"name": SectionName.PROJECT, "description": "Проекты", "show": true, "new_front": true},
 	{"name": "task", "description": "Задачи", "show": true},
 	{"name": "agile", "description": "Agile", "show": true},
-	{"name": "plan", "description": "Планирование", "show": true},
+	{"name": SectionName.PLAN, "description": "Планирование", "show": true, "new_front": true},
 	{"name": "user", "description": "Пользователи", "show": true},
 	{"name": "export", "description": "Выгрузка", "show": true}
 ]
