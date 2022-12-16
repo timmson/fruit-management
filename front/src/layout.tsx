@@ -5,6 +5,7 @@ import {COPYRIGHT} from "./constants"
 import Context from "./context"
 import {SectionName} from "./types"
 import Project from "./project/project"
+import Plan from "./plan/plan"
 
 export default function Layout() {
 
@@ -15,6 +16,10 @@ export default function Layout() {
 	switch (state.section.name) {
 	case SectionName.PROJECT:
 		page = <Project/>
+		break
+
+	case SectionName.PLAN:
+		page = <Plan/>
 		break
 	}
 

@@ -17,11 +17,11 @@ export default function HomeActivity(props: HomeActivityProps) {
 	dayOfWeekFields.map((f) => initialValueOfSummary[f] = 0)
 
 	const summary = props.activities.reduce((c, a) => {
-			dayOfWeekFields.forEach((f) => {
-				c[f] += parseInt(a[f], 10)
-			})
-			return c
-		}, initialValueOfSummary
+		dayOfWeekFields.forEach((f) => {
+			c[f] += parseInt(a[f], 10)
+		})
+		return c
+	}, initialValueOfSummary
 	)
 
 	const toTable = (a: any) => dayOfWeekFields.map((f, i) => (<td key={i} className="text-center">{a[f]}</td>))
@@ -47,24 +47,24 @@ export default function HomeActivity(props: HomeActivityProps) {
 			<h3>Моя активность</h3>
 			<table className="basic w-100">
 				<thead>
-				<tr className="fw-bold">
-					<th>Задача</th>
-					<th>Статус</th>
-					<th>ПН</th>
-					<th>ВТ</th>
-					<th>СР</th>
-					<th>ЧТ</th>
-					<th>ПТ</th>
-				</tr>
+					<tr className="fw-bold">
+						<th>Задача</th>
+						<th>Статус</th>
+						<th>ПН</th>
+						<th>ВТ</th>
+						<th>СР</th>
+						<th>ЧТ</th>
+						<th>ПТ</th>
+					</tr>
 				</thead>
 				<tbody>
-				{activities}
-				<tr className="fw-bold">
-					<td colSpan="2" className="text-end">
+					{activities}
+					<tr className="fw-bold">
+						<td colSpan="2" className="text-end">
 						Итого
-					</td>
-					{toTable(summary)}
-				</tr>
+						</td>
+						{toTable(summary)}
+					</tr>
 				</tbody>
 			</table>
 		</>

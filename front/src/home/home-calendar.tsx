@@ -1,11 +1,11 @@
 import React from "react"
 
-type HomeCalendar = {
+type HomeCalendarProps = {
     month: any[]
     plans: any[]
 }
 
-export default function HomeCalendar(props: HomeCalendar) {
+export default function HomeCalendar(props: HomeCalendarProps) {
 
 	const getColor = (plan, day) => {
 		if (day.day >= plan.fm_plan_start && day.day <= plan.fm_plan_end) {

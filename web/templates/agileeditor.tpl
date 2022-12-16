@@ -10,7 +10,7 @@
 {assign var=plan_hour value=0}
 {assign var=all_hour value=0}
 {section name=i loop=$structtasks}
-	{if $structtasks[i].fm_state_name ne 'declie' and $structtasks[i].fm_state_name ne 'done'}
+	{if $structtasks[i].fm_state_name ne 'decline' and $structtasks[i].fm_state_name ne 'done'}
 		{assign var=plan_hour value=$structtasks[i].fm_plan_hour+$plan_hour}
 		{assign var=all_hour value=$structtasks[i].fm_all_hour+$all_hour}
 	{/if}
