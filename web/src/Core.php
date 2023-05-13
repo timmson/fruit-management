@@ -8,25 +8,20 @@ use Smarty;
 class Core
 {
 
-    public $admin_php = 'index.php';
-    public $admin_tpl = 'index.tpl';
-    public $default_tpl = 'homeeditor.tpl';
-    public $smarty_compile_dir = './smarty/templates_c/';
-    public $smarty_config_dir = './smarty/config/';
-    public $smarty_cache_dir = './smarty/cache/';
-    public $files_dir = './files/';
-    public $fotos_dir = './fotos/';
-    public $img_admin_dir = './img/';
-    public $inc_admin_dir = './include/';
-    public $js_dir = './js';
-    public $stylesheet_dir = './css/';
-    public $thumbs_dir = './fotos/thumbs/';
-    public $tpl_admin_dir = './templates/';
+    public $admin_tpl = "index.tpl";
+    public $default_tpl = "homeeditor.tpl";
+    public $smarty_compile_dir = "./smarty/templates_c/";
+    public $smarty_config_dir = "./smarty/config/";
+    public $smarty_cache_dir = "./smarty/cache/";
+    public $img_admin_dir = "./img/";
+    public $inc_admin_dir = "./include/";
+    public $js_dir = "./js";
+    public $stylesheet_dir = "./css/";
+    public $tpl_admin_dir = "./templates/";
     public $configuration = null;
-    public $zones = null;
     public $smarty = null;
     public $roles = null;
-    private $root_role = 'developer';
+    private $root_role = "developer";
     public $debugs = array();
     private $error = 0;
     private $connection = null;
@@ -36,18 +31,18 @@ class Core
         if ($conf != null) {
             $this->configuration = $conf;
             $this->init();
-            $this->initsmarty();
+            $this->initSmarty();
             $this->initSections();
         }
     }
 
     private function init()
     {
-        setlocale(LC_ALL, '');
-        ini_set('memory_limit', $this->configuration["memory_limit"]);
+        setlocale(LC_ALL, "");
+        ini_set("memory_limit", $this->configuration["memory_limit"]);
         date_default_timezone_set($this->configuration["timezone"]);
         $this->configuration["major"] = (date("y") - 7);
-        $this->configuration["minor"] = '.' . date("m");
+        $this->configuration["minor"] = "." . date("m");
         $this->configuration["copyright"] = $this->configuration["copyright"] . "-" . date("Y");
     }
 
@@ -70,12 +65,12 @@ class Core
         return $data;
     }
 
-    public function closeConnection($conn)
+    public function closeConnection($conn): void
     {
         $conn->close();
     }
 
-    private function debugTimeout($descr, $timeout, $limit)
+    private function debugTimeout($descr, $timeout, $limit): void
     {
         $tmp = explode(" ", microtime());
         $end = $tmp[0] + $tmp[1];
@@ -83,34 +78,34 @@ class Core
         $start = $tmp[0] + $tmp[1];
         $timeout = round($end - $start, 2);
         if ($timeout < $limit) {
-            $this->debugs[] = $descr . ' TIMEOUT: ' . $timeout . 's';
+            $this->debugs[] = $descr . " TIMEOUT: " . $timeout . "s";
         } else {
-            $this->debugs[] = '<span style="color:red;">' . $descr . ' TIMEOUT: ' . $timeout . 's</span>';
+            $this->debugs[] = "<span style=\"color:red;\">" . $descr . " TIMEOUT: " . $timeout . "s</span>";
         }
     }
 
-    private function debugQuery($query, $data, $debug)
+    private function debugQuery($query, $data, $debug): void
     {
         if (count($data) == 0) {
-            $data[0] = 'No rows found';
+            $data[0] = "No rows found";
         }
-        $trace = 'QUERY:<b>' . $query . '</b><br/>';
-        $trace .= 'FIRST ROW:';
-        $trace .= '<pre>';
+        $trace = "QUERY:<b>" . $query . "</b><br/>";
+        $trace .= "FIRST ROW:";
+        $trace .= "<pre>";
         $trace .= print_r($debug > 1 ? $data : $data[0], true);
-        $trace .= '</pre>';
+        $trace .= "</pre>";
         $this->debugs[] = $trace;
     }
 
-    private function initsmarty()
+    private function initSmarty(): void
     {
         $this->smarty = new Smarty();
         $this->smarty->setTemplateDir($this->tpl_admin_dir);
         $this->smarty->setConfigDir($this->smarty_config_dir);
         $this->smarty->setCompileDir($this->smarty_compile_dir);
         $this->smarty->setCacheDir($this->smarty_cache_dir);
-        $this->smarty->assign('const', $this->configuration);
-        $this->smarty->assign('factory', $this);
+        $this->smarty->assign("const", $this->configuration);
+        $this->smarty->assign("factory", $this);
     }
 
     private function initSections(): void
@@ -131,33 +126,33 @@ class Core
         $this->guest_role = $this->configuration["roles"]["guest"];
         $roles = $this->configuration["roles"]["role"];
         for ($i = 0; $i < count($roles); $i++) {
-            $this->roles[$roles[$i]]['name'] = $roles[$i];
-            $this->roles[$roles[$i]]['login'] = $this->configuration[$roles[$i]]['login'];
+            $this->roles[$roles[$i]]["name"] = $roles[$i];
+            $this->roles[$roles[$i]]["login"] = $this->configuration[$roles[$i]]["login"];
             $this->roles[$roles[$i]]["description"] = $this->configuration[$roles[$i]]["description"];
-            $this->roles[$roles[$i]]['email'] = 'XXXXXXX';
+            $this->roles[$roles[$i]]["email"] = "XXXXXXX";
         }
     }
 
 
-    public function customErrorHandler($errno, $errstr, $errfile, $errline)
+    public function customErrorHandler($errno, $errstr, $errfile, $errline): bool
     {
         global $CORE;
         $CORE->errorHandler($errno, $errstr, $errfile, $errline);
         return true;
     }
 
-    public function errorHandler($errno, $errstr, $errfile, $errline)
+    public function errorHandler($errno, $errstr, $errfile, $errline): void
     {
         if ($errno < $this->configuration["debug"]) {
-            echo '#' . $errno . ':' . $errstr . '<br/>[' . $errfile . '@' . $errline . '] E' . $this->error . '<br/>';
+            echo "#" . $errno . ":" . $errstr . "<br/>[" . $errfile . "@" . $errline . "] E" . $this->error . "<br/>";
         }
         switch ($errno) {
             case E_ERROR:
             case E_PARSE:
             case E_WARNING:
                 $this->error++;
-                $this->smarty->assign('mess', $errstr . '<br/>[' . $errfile . '@' . $errline . '] E' . $this->error);
-                $this->debugs[] = '#' . $errno . ':' . $errstr . '<br/>[' . $errfile . '@' . $errline . '] E' . $this->error . '<br/>';
+                $this->smarty->assign("mess", $errstr . "<br/>[" . $errfile . "@" . $errline . "] E" . $this->error);
+                $this->debugs[] = "#" . $errno . ":" . $errstr . "<br/>[" . $errfile . "@" . $errline . "] E" . $this->error . "<br/>";
                 break;
 
             case E_NOTICE:
@@ -171,76 +166,8 @@ class Core
         }
     }
 
-    public function debugRequestAndSession()
-    {
-        $trace = 'REQUEST:';
-        $trace .= '<pre>';
-        $trace .= print_r($_REQUEST, true);
-        $trace .= '</pre>';
-        $this->debugs[] = $trace;
-
-        $trace = 'SESSION:';
-        $trace .= '<pre>';
-        $trace .= print_r($_SESSION, true);
-        $trace .= '</pre>';
-        $this->debugs[] = $trace;
-    }
-
-    public function timestamp2date($time)
-    {
-        return date($this->configuration["global"]['dateformat'], $time);
-    }
-
-
-    function sendmail($sender, $email, $subject, $body)
-    {
-        $this->debugs[] = urlencode($email) . "&subject=" . urlencode($subject) . "&body=" . urlencode($body) . "&from=" . $sender;
-        /**
-         * TODO
-         * Create mail box
-         */
-
-        //$s = "http://s-msk-rcms01:8080/mail.php?email=".urlencode($email)."&subject=".urlencode($subject)."&body=".urlencode($body)."&from=".$sender;
-        //file_put_contents("1.txt", $body/*, FILE_APPEND*/);
-        //file_get_contents($s);
-    }
-
-    /*
-    function sendmail($sender, $email, $subject, $body) {
-        //TODO move to site.ini
-        $headers = "From: " . $sender . "\n" .
-                "Content-Type: text/html; charset=utf-8\n" .
-                "X-Mailer: PHP/" . phpversion();
-        echo mail($email, $subject, $body, $headers);
-    }
-    */
-
-    function fromutf($str)
-    {
-        return iconv('UTF-8', $this->configuration["global"]['encoding'], $str);
-    }
-
-    function toutf($str)
-    {
-        return iconv($this->configuration["global"]['encoding'], 'UTF-8', $str);
-    }
-
     function search($login)
     {
-        /**
-         * TODO
-         * Replace this
-         */
-        /*        $adauth = $this->configuration['adauth'];
-                $ldap = ldap_connect($adauth['adhost'], $adauth['adport']);
-                $ret = ldap_bind($ldap, 'srv-earlypay-tst01' . '@' . $adauth['addomain'], 'f4vC$50Fw');
-                if ($ret) {
-                   $filter = '(|('.$adauth['adfilter'] . '=' . $login . '*)(cn=' . $login . '*))';
-                   $sr = ldap_search($ldap, $adauth['adbasedn'], $filter);
-                   $ret = $this->parseAdInfoMulti(ldap_get_entries($ldap, $sr));
-                }
-                ldap_close($ldap);
-                return $ret;*/
         return [];
     }
 

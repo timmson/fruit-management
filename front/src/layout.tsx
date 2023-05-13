@@ -6,6 +6,7 @@ import Context from "./context"
 import {SectionName} from "./types"
 import Project from "./project/project"
 import Plan from "./plan/plan"
+import {User} from "./user/user"
 
 export default function Layout() {
 
@@ -21,6 +22,10 @@ export default function Layout() {
 	case SectionName.PLAN:
 		page = <Plan/>
 		break
+
+	case SectionName.USER:
+		page = <User/>
+		break
 	}
 
 	return (
@@ -28,14 +33,14 @@ export default function Layout() {
 			<div className="container mt-4">
 				<Header/>
 				<div className="row border-top border-bottom rounded p-5 mt-2"
-					style={{borderRight: "dashed 1px #ccc", borderLeft: "dashed 1px #ccc"}}>
+					 style={{borderRight: "dashed 1px #ccc", borderLeft: "dashed 1px #ccc"}}>
 					<div className="col">
 						{page}
 					</div>
 				</div>
 				<div className="row mt-2">
 					<div className="col text-end text-dark" style={{fontSize: "8pt"}}>
-                        &copy;{COPYRIGHT}
+						&copy;{COPYRIGHT}
 					</div>
 				</div>
 			</div>
