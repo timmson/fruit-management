@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Plan should return plan form 1`] = `
+[
+  <div
+    className="row"
+  >
+    <div
+      className="col-6"
+    >
+      <h3>
+        Моя активность
+      </h3>
+      <table
+        className="basic w-100"
+      >
+        <thead>
+          <tr
+            className="fw-bold"
+          >
+            <th>
+              Задача
+            </th>
+            <th>
+              Статус
+            </th>
+            <th>
+              ПН
+            </th>
+            <th>
+              ВТ
+            </th>
+            <th>
+              СР
+            </th>
+            <th>
+              ЧТ
+            </th>
+            <th>
+              ПТ
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            className="fw-bold"
+          >
+            <td
+              className="text-end"
+              colSpan="2"
+            >
+              Итого
+            </td>
+            <td
+              className="text-center"
+            >
+              0
+            </td>
+            <td
+              className="text-center"
+            >
+              0
+            </td>
+            <td
+              className="text-center"
+            >
+              0
+            </td>
+            <td
+              className="text-center"
+            >
+              0
+            </td>
+            <td
+              className="text-center"
+            >
+              0
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <h3>
+        Мои подписки
+      </h3>
+      <table
+        className="basic w-100"
+      >
+        <thead>
+          <tr
+            className="fw-bold"
+          >
+            <td>
+              Задача
+            </td>
+            <td>
+              Пользователь
+            </td>
+            <td>
+              %
+            </td>
+            <td>
+              Статус
+            </td>
+          </tr>
+        </thead>
+        <tbody />
+      </table>
+    </div>
+    <div
+      className="col-6"
+    >
+      <h3>
+        Мои задачи
+      </h3>
+      <table
+        className="basic w-100"
+      >
+        <thead>
+          <tr
+            className="fw-bold"
+          >
+            <td>
+              Задача
+            </td>
+            <td>
+              Состояние
+            </td>
+            <td>
+              %
+            </td>
+            <td>
+              Приоритет
+            </td>
+            <td>
+              Статус
+            </td>
+          </tr>
+        </thead>
+        <tbody />
+      </table>
+    </div>
+  </div>,
+  <div
+    className="row mt-3"
+  >
+    <div
+      className="col"
+    >
+      <h3>
+        Календарь
+      </h3>
+      <table
+        className="basic w-100"
+      >
+        <thead>
+          <tr>
+            <th
+              rowSpan="2"
+            >
+              Задача
+            </th>
+            <th
+              rowSpan="2"
+            >
+              Длина
+            </th>
+            <th
+              colSpan={0}
+            >
+              5
+            </th>
+          </tr>
+          <tr />
+        </thead>
+        <tbody />
+      </table>
+    </div>
+  </div>,
+  <div
+    className="row mt-3"
+  >
+    <div
+      className="col"
+    >
+      <h3>
+        Активность команды
+      </h3>
+      <table
+        className="basic"
+      >
+        <tbody>
+          <tr>
+            <td
+              className="text-start"
+            >
+              Пока здесь пусто;(
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>,
+]
+`;
