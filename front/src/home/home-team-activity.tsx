@@ -2,10 +2,7 @@ import React, {useEffect, useState} from "react"
 import {CORE_SERVICE} from "../constants"
 import HomeTeamActivityItem from "./home-team-activity-item"
 
-type HomeTeamActivityProps = {
-    /* teamActivities: any[]*/
-}
-export default function HomeTeamActivity(props: HomeTeamActivityProps) {
+export default function HomeTeamActivity() {
 
 	const [state, setState] = useState({teamActivities: []})
 

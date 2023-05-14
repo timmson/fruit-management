@@ -5,18 +5,18 @@ import Header from "../src/header"
 
 describe("Header should", () => {
 
-    test("return header", () => {
-        const context = [{user: {fio: "user"}}]
+	test("return header", () => {
+		const context = [{user: {fio: "user"}}]
 
-        const component = renderer.create(
-            <Context.Provider value={context}>
-                <Header/>
-            </Context.Provider>
-        )
+		const component = renderer.create(
+			<Context.Provider value={context}>
+				<Header/>
+			</Context.Provider>
+		)
 
-        expect(component.toJSON()).toMatchSnapshot()
+		expect(component.toJSON()).toMatchSnapshot()
 
-        component.unmount()
-    })
+		component.unmount()
+	})
 
 })

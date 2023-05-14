@@ -5,18 +5,18 @@ import Sections from "../src/sections"
 
 describe("Sections should", () => {
 
-    test("return sections", () => {
-        const context = []
+	test("return sections", () => {
+		const context = []
 
-        const component = renderer.create(
-            <Context.Provider value={context}>
-                <Sections/>
-            </Context.Provider>
-        )
+		const component = renderer.create(
+			<Context.Provider value={context}>
+				<Sections/>
+			</Context.Provider>
+		)
 
-        expect(component.toJSON()).toMatchSnapshot()
+		expect(component.toJSON()).toMatchSnapshot()
 
-        component.unmount()
-    })
+		component.unmount()
+	})
 
 })

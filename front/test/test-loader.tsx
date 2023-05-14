@@ -4,12 +4,12 @@ import Loader from "../src/loader"
 
 describe("Loader should", () => {
 
-    test("return loader", () => {
-        const component = renderer.create(<Loader/>)
+	test("return loader", () => {
+		const component = renderer.create(<Loader/>)
 
-        expect(component.toJSON()).toMatchSnapshot()
+		expect(component.toJSON()).toMatchSnapshot()
 
-        component.unmount()
-    })
+		component.unmount()
+	})
 
 })

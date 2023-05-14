@@ -8,18 +8,18 @@ global.fetch = jest.fn(() => okAndJson({}))
 
 describe("User should", () => {
 
-    test("return user form", () => {
-        const context = [{user: {samaccountname: "user"}}]
+	test("return user form", () => {
+		const context = [{user: {samaccountname: "user"}}]
 
-        const component = renderer.create(
-            <Context.Provider value={context}>
-                <User/>
-            </Context.Provider>
-        )
+		const component = renderer.create(
+			<Context.Provider value={context}>
+				<User/>
+			</Context.Provider>
+		)
 
-        expect(component.toJSON()).toMatchSnapshot()
+		expect(component.toJSON()).toMatchSnapshot()
 
-        component.unmount()
-    })
+		component.unmount()
+	})
 
 })

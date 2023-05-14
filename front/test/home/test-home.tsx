@@ -8,18 +8,18 @@ global.fetch = jest.fn(() => okAndJson({}))
 
 describe("Plan should", () => {
 
-    test("return plan form", () => {
-        const context = []
+	test("return plan form", () => {
+		const context = []
 
-        const component = renderer.create(
-            <Context.Provider value={context}>
-                <Home/>
-            </Context.Provider>
-        )
+		const component = renderer.create(
+			<Context.Provider value={context}>
+				<Home/>
+			</Context.Provider>
+		)
 
-        expect(component.toJSON()).toMatchSnapshot()
+		expect(component.toJSON()).toMatchSnapshot()
 
-        component.unmount()
-    })
+		component.unmount()
+	})
 
 })

@@ -5,7 +5,7 @@ import React from "react"
 import {createRoot} from "react-dom/client"
 
 import App from "./app"
-import {IMG_PATH, TITLE, VERSION} from "./constants"
+import {IMG_PATH} from "./constants"
 
 const favicon = document.createElement("link")
 favicon.rel = "shortcut icon"
