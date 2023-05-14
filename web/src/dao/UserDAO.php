@@ -17,7 +17,7 @@ interface UserDAO
      * @return array|null
      * @throws Exception
      */
-    public function getUserByName(string $name): ?array;
+    public function searchUsersByName(string $name): ?array;
 
     /**
      * @param string $name

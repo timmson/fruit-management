@@ -44,6 +44,6 @@ export const SECTIONS = [
 	{"name": "task", "description": "Задачи", "show": true},
 	{"name": "agile", "description": "Agile", "show": true},
 	{"name": SectionName.PLAN, "description": "Планирование", "show": true, "new_front": true},
-	{"name": SectionName.USER, "description": "Пользователи", "show": true, "new_front": false},
+	{"name": SectionName.USER, "description": "Пользователи", "show": true, "new_front": true},
 	{"name": "export", "description": "Выгрузка", "show": true}
 ]

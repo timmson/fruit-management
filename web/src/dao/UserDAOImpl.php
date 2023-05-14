@@ -14,9 +14,9 @@ class UserDAOImpl extends AbstractDAO implements UserDAO
     /**
      * @inheritDoc
      */
-    public function getUserByName(string $name): ?array
+    public function searchUsersByName(string $name): ?array
     {
-        return $this->executeQuery("select * from fm_user", ["fm_name" => $name], [])[0];
+        return $this->executeQuery("select * from fm_user where fm_name like '%$name%'", [], [])[0];
     }
 
     /**

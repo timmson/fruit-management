@@ -54,7 +54,7 @@ class UserServiceTest extends TestCase
         ];
         $user = "user";
 
-        $this->userDAO->method("getUserByName")->with($user)->willReturn($arrange);
+        $this->userDAO->method("searchUsersByName")->with($user)->willReturn($arrange);
         $result = $this->service->async($request, $user);
 
         $this->assertCount(1, $result);

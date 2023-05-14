@@ -49,7 +49,7 @@ class UserService implements Service
         $view = [];
 
         $data = [];
-        $data[] = $this->userDAO->getUserByName($request["user"]);
+        $data[] = $this->userDAO->searchUsersByName($request["user"]);
 
         $infos = [];
         for ($i = 0; $i < count($data); $i++) {
@@ -69,7 +69,7 @@ class UserService implements Service
      * @return array
      * @throws Exception
      */
-    public function login(string $login, string $password)
+    public function login(string $login, string $password): array
     {
 
         $root_name = "root";

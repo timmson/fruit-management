@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Plan should return plan form 1`] = `
+[
+  "Релизы: ",
+  <br />,
+  <div
+    style={
+      {
+        "float": "right",
+      }
+    }
+  >
+    <a
+      href="?section=agile"
+    >
+      Гибкое планирование
+    </a>
+  </div>,
+  <br />,
+  <h3>
+    Календарное планирование
+  </h3>,
+  <table
+    className="basic w-100"
+  >
+    <thead>
+      <tr>
+        <th
+          rowSpan="2"
+        >
+          Пользователь
+        </th>
+        <th
+          rowSpan="2"
+        >
+          Длина
+        </th>
+        <th
+          colSpan={0}
+        >
+          5
+        </th>
+      </tr>
+      <tr />
+    </thead>
+    <tbody />
+  </table>,
+  <br />,
+  <h3>
+    Структура
+  </h3>,
+  <table
+    className="basic w-100"
+  >
+    <thead>
+      <tr>
+        <th
+          style={
+            {
+              "width": "15%",
+            }
+          }
+        >
+          Запрос
+        </th>
+        <th
+          style={
+            {
+              "width": "40%",
+            }
+          }
+        >
+          Задача
+        </th>
+        <th>
+          Исполнитель
+        </th>
+        <th>
+          %
+        </th>
+        <th>
+          Приоритет
+        </th>
+        <th>
+          Статус
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>,
+]
+`;

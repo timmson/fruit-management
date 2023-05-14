@@ -35,7 +35,7 @@
     </div>
     <div style="display:table; border:1px solid #ccc; margin-bottom: 10px; width:100%;" class="ui-corner-all">
         <div class="ui-corner-left" style="display:table-cell; text-align:center; vertical-align:middle; min-width:350px; cursor:pointer"
-             onclick="window.location='?section=home';">
+             onclick="window.location='.?section=home';">
             <h2 style="margin-bottom: 0px;">{$const.name}&nbsp;{$const.major}{$const.minor}</h2>
             <p style="font-size:9pt; font-style:italic;">&quot;Walking on water and developing software from a specification are easy if both are
                 frozen&quot;</p>

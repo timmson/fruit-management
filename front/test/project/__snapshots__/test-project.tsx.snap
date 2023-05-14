@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Project should return project form 1`] = `
+[
+  <h2>
+    Проекты
+  </h2>,
+  <table
+    className="basic"
+  >
+    <thead>
+      <tr>
+        <th>
+          Проект
+        </th>
+        <th>
+          График
+        </th>
+      </tr>
+    </thead>
+    <tbody />
+  </table>,
+]
+`;

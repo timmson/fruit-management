@@ -20,14 +20,14 @@ class UserDAOTest extends TestCase
     }
 
 
-    public function testGetUserByName()
+    public function testSearchUsersByName()
     {
         $name = "fruit";
         $password = "p1ssword";
         $arrange = [["fm_password_enc" => "p1ssword"]];
 
-        $this->connection->addQueryAndResult("select * from fm_user where fm_name = '$name'", $arrange);
-        $result = $this->dao ->getUserByName($name);
+        $this->connection->addQueryAndResult("select * from fm_user where fm_name like '%$name%'", $arrange);
+        $result = $this->dao ->searchUsersByName($name);
 
         $this->assertEquals($password, $result["fm_password_enc"]);
     }

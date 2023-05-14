@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should return header 1`] = `
+[
+  <div
+    className="row"
+  >
+    <div
+      className="col-4 text-start"
+    >
+      Вы известны как
+       
+      <span
+        className="font-italic fw-bold"
+      >
+        user
+      </span>
+       
+      <a
+        className="av"
+        href="auth.php?logout"
+      >
+        [Выход]
+      </a>
+    </div>
+    <div
+      className="col-4"
+    />
+    <div
+      className="col-4 text-end"
+    >
+      <a
+        href="https://ru.wikipedia.org"
+      >
+        Информационный портал
+        <sup
+          className="text-danger"
+        >
+          new
+        </sup>
+      </a>
+    </div>
+  </div>,
+  <div
+    className="row"
+  >
+    <div
+      className="col-3 text-center border rounded-start pt-3"
+      onClick={[Function]}
+      style={
+        {
+          "cursor": "pointer",
+          "minWidth": "350px",
+        }
+      }
+    >
+      <h2
+        className="mb-1"
+      >
+        Fruit Management
+         
+        16.5
+      </h2>
+      <p
+        className="font-italic"
+        style={
+          {
+            "fontSize": "9pt",
+          }
+        }
+      >
+        "Walking on water and developing software from a specification are easy if both are frozen"
+      </p>
+    </div>
+    <div
+      className="col text-center border-top border-bottom border-end rounded-end"
+    >
+      <table
+        className="plain"
+      >
+        <tbody>
+          <tr>
+            <td
+              className="pt-2 text-center align-bottom"
+              onClick={[Function]}
+              style={
+                {
+                  "width": "15%",
+                }
+              }
+            >
+              <p
+                className="av"
+              >
+                <img
+                  alt="project"
+                  src="img/admin_project.gif"
+                />
+                <br />
+                Проекты
+              </p>
+            </td>
+            <td
+              className="pt-2 text-center align-bottom"
+              onClick={[Function]}
+              style={
+                {
+                  "width": "15%",
+                }
+              }
+            >
+              <p
+                className="av"
+              >
+                <img
+                  alt="task"
+                  src="img/admin_task.gif"
+                />
+                <br />
+                Задачи
+              </p>
+            </td>
+            <td
+              className="pt-2 text-center align-bottom"
+              onClick={[Function]}
+              style={
+                {
+                  "width": "15%",
+                }
+              }
+            >
+              <p
+                className="av"
+              >
+                <img
+                  alt="agile"
+                  src="img/admin_agile.gif"
+                />
+                <br />
+                Agile
+              </p>
+            </td>
+            <td
+              className="pt-2 text-center align-bottom"
+              onClick={[Function]}
+              style={
+                {
+                  "width": "15%",
+                }
+              }
+            >
+              <p
+                className="av"
+              >
+                <img
+                  alt="plan"
+                  src="img/admin_plan.gif"
+                />
+                <br />
+                Планирование
+              </p>
+            </td>
+            <td
+              className="pt-2 text-center align-bottom"
+              onClick={[Function]}
+              style={
+                {
+                  "width": "15%",
+                }
+              }
+            >
+              <p
+                className="av"
+              >
+                <img
+                  alt="user"
+                  src="img/admin_user.gif"
+                />
+                <br />
+                Пользователи
+              </p>
+            </td>
+            <td
+              className="pt-2 text-center align-bottom"
+              onClick={[Function]}
+              style={
+                {
+                  "width": "15%",
+                }
+              }
+            >
+              <p
+                className="av"
+              >
+                <img
+                  alt="export"
+                  src="img/admin_export.gif"
+                />
+                <br />
+                Выгрузка
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>,
+]
+`;
