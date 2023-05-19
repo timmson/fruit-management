@@ -1,6 +1,6 @@
 import React from "react"
 import renderer from "react-test-renderer"
-import {User} from "../../src/user/user"
+import User from "../../src/user/user"
 import Context from "../../src/context"
 import {okAndJson} from "../../utils/mockResponses"
 

@@ -26,9 +26,10 @@ export enum ActionName {
 
 export enum SectionName {
     HOME = "home",
-	PROJECT = "project",
-	PLAN = "plan",
-	USER = "user",
+    PROJECT = "project",
+    KANBAN = "kanban",
+    PLAN = "plan",
+    USER = "user",
 }
 
 export type SectionEntity = {
@@ -39,11 +40,12 @@ export type SectionEntity = {
 }
 
 export const SECTIONS = [
-	{"name": SectionName.HOME, "description": "Главная", "show": false, "new_front": true},
-	{"name": SectionName.PROJECT, "description": "Проекты", "show": true, "new_front": true},
-	{"name": "task", "description": "Задачи", "show": true},
-	{"name": "agile", "description": "Agile", "show": true},
-	{"name": SectionName.PLAN, "description": "Планирование", "show": true, "new_front": true},
-	{"name": SectionName.USER, "description": "Пользователи", "show": true, "new_front": true},
-	{"name": "export", "description": "Выгрузка", "show": true}
+    {"name": SectionName.HOME, "description": "Главная", "show": false, "new_front": true},
+    {"name": SectionName.PROJECT, "description": "Проекты", "show": true, "new_front": true},
+    {"name": "task", "description": "Задачи", "show": true},
+    {"name": "agile", "description": "Agile", "show": true},
+    {"name": SectionName.KANBAN, "description": "Канбан-доска", "show": false, "new_front": true},
+    {"name": SectionName.PLAN, "description": "Планирование", "show": true, "new_front": true},
+    {"name": SectionName.USER, "description": "Пользователи", "show": true, "new_front": true},
+    {"name": "export", "description": "Выгрузка", "show": true}
 ]

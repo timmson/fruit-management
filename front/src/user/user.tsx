@@ -4,7 +4,7 @@ import HomeActivity from "../home/home-activity"
 import {CORE_SERVICE} from "../constants"
 import Context from "../context"
 
-export function User() {
+export default function User() {
 
 	const [globalState] = useContext(Context)
 

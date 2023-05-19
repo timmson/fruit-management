@@ -5,7 +5,7 @@
 	</a>&nbsp;
 {/section}
 <div style="float:right;">
-	<a href="?section=plan">Классическое&nbsp;планирование</a>
+	<a href=".?section=plan">Классическое&nbsp;планирование</a>
 </div>
 {assign var=plan_hour value=0}
 {assign var=all_hour value=0}
@@ -101,8 +101,8 @@
 						{/if}
 					{/section}
 				{/section}
-	   			</div>
-			</td>									
+				</div>
+			</td>
 		</tr>
 	</table>
 </div>
@@ -111,41 +111,41 @@
 <script type="text/javascript">
 	$(function() {
 		var all_hour = {/literal}{$all_hour}{literal};
-	
+
 		var plan_hour = {/literal}{$plan_hour}{literal};
 
 		var release = {/literal}{$relid}{literal};
 
 		var tab = {/literal}{$smarty.request.tab|default:0}{literal};
-	
+
 		$("#tabs").tabs({
-			selected: tab 
+			selected: tab
 		});
 
 		$("#progressBar").progressbar({
-			value: (all_hour/plan_hour)*100
+			value: (all_hour / plan_hour) * 100
 		});
 
-		$("#release").change(function() {
+		$("#release").change(function () {
 			var reqdata = {
-					'mode':'async', 
-					'release': $(this).val()
-					};
-		
+				'mode': 'async',
+				'release': $(this).val()
+			};
+
 			reload(reqdata);
 		});
 
-		$(".rellink").click(function() {
+		$(".rellink").click(function () {
 			var reqdata = {
-					'mode':'async', 
-					'release': $(this).prop("id")
-					};
-		
+				'mode': 'async',
+				'release': $(this).prop("id")
+			};
+
 			reload(reqdata);
 		});
 
 		$(".draggable").draggable({
-			start: function( event, ui ) {
+			start: function (event, ui) {
 				$(this).css("z-index", 100);
 			}
 		});
