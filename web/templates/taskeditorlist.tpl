@@ -115,11 +115,12 @@
 
 	function collect() {
 		var reqdata = {
-				'mode':'async', 
-				'search': $("#search").val(),
-				'state': state,
-				'project': project
-				};  
+			'section': 'task',
+			'mode': 'async',
+			'search': $("#search").val(),
+			'state': state,
+			'project': project
+		};
 		return reqdata;
 	}
 </script>

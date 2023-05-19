@@ -54,22 +54,22 @@
 </div>
 {literal}
     <script type="text/javascript">
-		$(document).ready(function () {
-				$("#pagecontainer").css("display", "none").fadeIn(400);
-			}
-		);
+        $(document).ready(function () {
+                $("#pagecontainer").css("display", "none").fadeIn(400);
+            }
+        );
 
-		function reload(reqdata) {
-			reloadUrl(".", reqdata);
+        function reload(reqdata) {
+            reloadUrl("old.php", reqdata);
 
-		}
+        }
 
-		function reloadUrl(url, reqdata) {
-			$.get(url, reqdata, function (data) {
-					$("#pagecontainer").html(data).fadeIn(200);
-				}
-			);
-		}
+        function reloadUrl(url, reqdata) {
+            $.get(url, reqdata, function (data) {
+                    $("#pagecontainer").html(data).fadeIn(200);
+                }
+            );
+        }
     </script>
 {/literal}
 </body>
