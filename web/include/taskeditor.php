@@ -1,4 +1,4 @@
-<?
+<?php
 
 use ru\timmson\FruitManagement\dao\LogCategoryDAO;
 use ru\timmson\FruitManagement\dao\SubscriberDAO;
