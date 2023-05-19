@@ -19,8 +19,8 @@
     "files": []
   },
   "scripts": {
-    "test": "vendor/bin/phpunit test",
-    "coverage": "vendor/bin/phpunit --coverage-html ./tmp test"
+    "test": "vendor/bin/phpunit test --testdox",
+    "coverage": "vendor/bin/phpunit --coverage-html ./covearge test"
   },
   "require": {
     "smarty/smarty": "^v4.3.1",

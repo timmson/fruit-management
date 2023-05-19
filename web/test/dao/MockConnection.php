@@ -12,63 +12,51 @@ use Exception;
  */
 class MockConnection implements Connection
 {
-    /**
-     * @var array
-     */
     private array $queries = array();
 
-    /**
-     * @var int
-     */
+    private array $results = array();
+
     private int $insertedId;
 
-    public function __construct(string $host = null, string $port = null, string $user = null, string $password = null, string $database = null) {
+    public function __construct(string $host = null, string $port = null, string $user = null, string $password = null, string $database = null)
+    {
 
     }
 
-    /**
-     * @inheritDoc
-     */
     public function query($query): array
     {
-
-        if (!array_key_exists($query, $this->queries)) {
-            throw new Exception("Query [" . $query . "] is not expected. Expected queries: [" . json_encode($this->queries) . "]");
+        if (count($this->queries) > 0) {
+            if (!array_key_exists($query, $this->queries)) {
+                throw new Exception("Query [" . $query . "] is not expected. Expected queries: [" . json_encode($this->queries) . "]");
+            }
+            return $this->queries[$query];
         }
 
-        return $this->queries[$query];
+        return array_shift($this->results);
     }
 
-    /**
-     * @param string $query
-     * @param $result
-     * @return void
-     */
-    public function addQueryAndResult(string $query, array $result): void
+    public function addQueryAndResult(string $query, array $result): MockConnection
     {
         $this->queries[$query] = $result;
-
+        return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
+    public function addResult(array $result): MockConnection
+    {
+        $this->results[] = $result;
+        return $this;
+    }
+
     public function getInsertId(): int
     {
         return $this->insertedId;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function setInsertedId(int $insertedId): void
     {
         $this->insertedId = $insertedId;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function close(): void
     {
 
