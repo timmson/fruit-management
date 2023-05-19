@@ -23,7 +23,7 @@
     "coverage": "vendor/bin/phpunit --coverage-html ./tmp test"
   },
   "require": {
-    "smarty/smarty": "^v4.3.0",
+    "smarty/smarty": "^v4.3.1",
     "php-di/php-di": "^6.4.0",
     "ext-calendar": "^8.1",
     "ext-gd": "^8.1",
