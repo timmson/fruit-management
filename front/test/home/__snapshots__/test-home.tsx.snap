@@ -168,7 +168,7 @@ exports[`Plan should return plan form 1`] = `
             <th
               colSpan={0}
             >
-              5
+              7
             </th>
           </tr>
           <tr />
