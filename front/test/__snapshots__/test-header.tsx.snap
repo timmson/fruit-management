@@ -59,7 +59,7 @@ exports[`Header should return header 1`] = `
       >
         Fruit Management
          
-        16.7
+        19.9
       </h2>
       <p
         className="font-italic"
