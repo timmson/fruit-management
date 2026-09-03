@@ -1,20 +1,23 @@
 export function okAndJson(json: any): Promise<Response> {
-    return Promise.resolve({
+    const mock: Response = {
         arrayBuffer(): Promise<ArrayBuffer> {
-            return Promise.resolve(undefined);
+            return Promise.resolve(new ArrayBuffer(0));
         },
         blob(): Promise<Blob> {
-            return Promise.resolve(undefined);
+            return Promise.resolve(new Blob());
         },
-        body: undefined,
+        bytes(): Promise<Uint8Array> {
+            return Promise.resolve(new Uint8Array(0));
+        },
+        body: null,
         bodyUsed: false,
         clone(): Response {
-            return undefined;
+            return mock;
         },
         formData(): Promise<FormData> {
-            return Promise.resolve(undefined);
+            return Promise.resolve(new FormData());
         },
-        headers: undefined,
+        headers: new Headers(),
         json(): Promise<any> {
             return Promise.resolve(json);
         },
@@ -25,7 +28,8 @@ export function okAndJson(json: any): Promise<Response> {
         text(): Promise<string> {
             return Promise.resolve("");
         },
-        type: undefined,
+        type: "basic",
         url: ""
-    })
+    } as Response;
+    return Promise.resolve(mock);
 }
