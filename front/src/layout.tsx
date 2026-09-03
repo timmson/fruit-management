@@ -16,21 +16,21 @@ export default function Layout() {
 	let page = <Home/>
 
 	switch (state.section.name) {
-		case SectionName.PROJECT:
-			page = <Project/>
-			break
+	case SectionName.PROJECT:
+		page = <Project/>
+		break
 
-		case SectionName.KANBAN:
-			page = <Kanban/>
-			break
+	case SectionName.KANBAN:
+		page = <Kanban/>
+		break
 
-		case SectionName.PLAN:
-			page = <Plan/>
-			break
+	case SectionName.PLAN:
+		page = <Plan/>
+		break
 
-		case SectionName.USER:
-			page = <User/>
-			break
+	case SectionName.USER:
+		page = <User/>
+		break
 	}
 
 	return (
